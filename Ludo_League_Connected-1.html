@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b16"><title>Ludo League</title>
+<style>
+:root{--bg:#070a12;--card:#101827;--line:#ffffff14;--text:#f8fafc;--muted:#94a3b8;--blue:#6366f1;--green:#34d399;--red:#fb7185;--gold:#fbbf24}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#28205c 0,#090b14 42%,#05070d 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{position:sticky;top:0;z-index:10;padding:16px;background:#070a12e8;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}header div{max-width:900px;margin:auto;display:flex;justify-content:space-between;align-items:center}h1{font-size:20px;margin:0}.live{font-size:10px;color:var(--green)}
+nav{position:sticky;top:57px;z-index:9;display:flex;gap:7px;overflow:auto;padding:9px;background:#070a12e8;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}nav button{border:0;border-radius:12px;padding:10px 13px;background:#151d2e;color:#b9c3d4;font-weight:700;white-space:nowrap}nav button.active,.save{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff}
+main{max-width:900px;margin:auto;padding:14px 12px 80px}.page{display:none}.page.active{display:block}.hero{background:linear-gradient(135deg,#4c1d95aa,#1d4ed888);border-radius:24px;padding:20px;margin-bottom:12px}.hero h2{margin:4px 0;font-size:27px}.hero p{margin:0;color:#cbd5e1;font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.stat{background:#ffffff08;border:1px solid var(--line);border-radius:16px;padding:13px}.stat b{font-size:20px}.stat span{display:block;color:var(--muted);font-size:10px}
+.card{background:#0f172acc;border:1px solid var(--line);border-radius:20px;padding:15px;margin-bottom:12px}h3{font-size:15px;margin:0 0 12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field label{display:block;color:var(--muted);font-size:10px;margin-bottom:5px}.field input{width:100%;background:#090f1d;color:white;border:1px solid var(--line);border-radius:11px;padding:11px;outline:none}
+.player{padding:12px;border:1px solid var(--line);border-radius:15px;margin-bottom:8px;background:#ffffff04}.playerTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.playerTop b{font-size:12px}.row{display:grid;grid-template-columns:1fr 82px 92px;gap:7px}.row input,.row select{width:100%;background:#090f1d;color:white;border:1px solid var(--line);border-radius:11px;padding:11px;outline:none}.mistake{display:flex;align-items:center;gap:7px;margin-top:8px;color:#cbd5e1;font-size:11px}.mistake input{width:17px;height:17px}.finePreview{margin-left:auto;color:var(--gold);font-weight:800}.save{width:100%;padding:14px;border:0;border-radius:15px;margin-top:7px;font-weight:900}.msg{text-align:center;color:var(--muted);font-size:11px;margin-top:8px;min-height:16px}
+table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:#7f8da3;font-size:10px;padding:8px;border-bottom:1px solid var(--line)}td{padding:10px 8px;border-bottom:1px solid var(--line)}.badge{padding:4px 7px;border-radius:8px;font-size:10px;font-weight:800}.win{background:#34d3991c;color:#34d399}.loss{background:#fb71851c;color:#fb7185}.fine{color:#fbbf24}.search{width:100%;padding:11px;background:#090f1d;border:1px solid var(--line);border-radius:12px;color:white;margin-bottom:9px}.empty{text-align:center;color:var(--muted);padding:22px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:30;padding:18px;overflow:auto}.modal.show{display:block}.modalbox{max-width:600px;margin:25px auto;background:#0d1320;border:1px solid var(--line);border-radius:22px;padding:17px}.close{float:right;background:#1f2937;color:white;border:0;border-radius:9px;padding:7px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header><div><h1>🎲 LUDO LEAGUE</h1><span class="live">● LIVE</span></div></header>
+<nav>
+<button class="active" onclick="page('home',this)">🏆 Home</button>
+<button onclick="page('add',this)">➕ Add Match</button>
+<button onclick="page('rank',this)">📊 Ranking</button>
+<button onclick="page('history',this)">📜 History</button>
+<button onclick="page('players',this)">👤 Players</button>
+</nav>
+<main>
+<section id="home" class="page active">
+<div class="hero"><small>CURRENT LEAGUE</small><h2>বন্ধুদের Ludo League</h2><p>১ম/২য় = ৳0 • ৩য়/৪র্থ = ৳20 • ভুল = ৳10</p></div>
+<div class="grid"><div class="stat"><b id="matches">0</b><span>Total Matches</span></div><div class="stat"><b id="players">0</b><span>Players</span></div><div class="stat"><b id="losses">0</b><span>Total Loss</span></div><div class="stat"><b id="fines">৳0</b><span>Total Fine</span></div></div>
+<div class="card"><h3>👑 Top 3</h3><div id="top"></div></div>
+</section>
+
+<section id="add" class="page">
+<div class="card"><h3>➕ নতুন ম্যাচ যোগ করো</h3>
+<div class="formgrid"><div class="field"><label>DATE</label><input id="date" type="date"></div><div class="field"><label>TIME</label><input id="time" type="time"></div></div>
+<p style="color:#94a3b8;font-size:11px">৪ জনের নাম ও position দাও। ৩য়/৪র্থ হলে ৳20 auto যোগ হবে। ভুল করলে শুধু ☑️ টিক দাও—৳10 Fine auto হবে।</p>
+<div id="slots"></div><button class="save" onclick="saveMatch()">💾 SAVE MATCH</button><div id="msg" class="msg"></div>
+</div></section>
+
+<section id="rank" class="page"><div class="card"><h3>🏆 Ranking</h3><input class="search" id="search" placeholder="🔍 Player search..." oninput="renderRank"><div style="overflow:auto"><table><thead><tr><th>#</th><th>Player</th><th>Matches</th><th>Win</th><th>Loss</th><th>Fine</th><th>Total Paid</th></tr></thead><tbody id="rankBody"></tbody></table></div></div></section>
+
+<section id="history" class="page"><div class="card"><h3>📜 Match History</h3><div style="overflow:auto"><table><thead><tr><th>Date</th><th>Time</th><th>Match details</th></tr></thead><tbody id="historyBody"></tbody></table></div></div></section>
+
+<section id="players" class="page"><div class="card"><h3>👤 Players</h3><input class="search" id="psearch" placeholder="🔍 Search..." oninput="renderPlayers"><div id="playerBody"></div></div></section>
+</main>
+<div class="modal" id="modal"><div class="modalbox"><button class="close" onclick="closeModal()">✕</button><h2 id="mn"></h2><div id="md"></div></div></div>
+
+<script>
+const API_URL="https://script.google.com/macros/s/AKfycbx1JzpYjv8w0kD2aBGGRTe6UrA63S9fBFI-B0oIU9QUjKySbYzHpKFnQMWAyF9c3F_Btw/exec";
+const LOSS_FEE=20, ERROR_FINE=10;
+let data=[],summary=[];
+
+function page(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function money(n){return "৳"+Number(n||0).toLocaleString("en-US")}
+function today(){return new Date().toISOString().slice(0,10)}
+function buildSlots(){
+ let h="";
+ for(let i=1;i<=4;i++)h+=`<div class="player"><div class="playerTop"><b>PLAYER ${i}</b><span class="finePreview" id="fp${i}">Fine ৳0</span></div><div class="row"><input id="n${i}" list="names" placeholder="নাম"><select id="p${i}"><option value="1">🥇 1st</option><option value="2">🥈 2nd</option><option value="3">🥉 3rd</option><option value="4">4️⃣ 4th</option></select><div></div></div><label class="mistake"><input id="m${i}" type="checkbox" onchange="previewFine(${i})"> খেলার ভুল করেছে <span class="finePreview" id="x${i}">+৳0</span></label></div>`;
+ document.getElementById("slots").innerHTML=h;
+ const dl=document.createElement("datalist");dl.id="names";document.body.appendChild(dl);
+}
+function previewFine(i){document.getElementById("x"+i).textContent="+"+money(document.getElementById("m"+i).checked?ERROR_FINE:0);document.getElementById("fp"+i).textContent="Fine "+money(document.getElementById("m"+i).checked?ERROR_FINE:0)}
+function buildSummary(){
+ const map={};
+ data.forEach(m=>m.players.forEach(x=>{let k=x.name.toLowerCase();if(!map[k])map[k]={name:x.name,matches:0,win:0,loss:0,fine:0,due:0,h:[]};let p=map[k];p.matches++;p.fine+=x.fine;p.due+=(x.pos>=3?LOSS_FEE:0)+x.fine;x.pos>=3?p.loss++:p.win++;p.h.push({...x,date:m.date,time:m.time})}));
+ summary=Object.values(map).sort((a,b)=>b.loss-a.loss||b.fine-a.fine||b.matches-a.matches);
+}
+function renderAll(){
+ buildSummary();
+ document.getElementById("matches").textContent=data.length;document.getElementById("players").textContent=summary.length;document.getElementById("losses").textContent=summary.reduce((a,p)=>a+p.loss,0);document.getElementById("fines").textContent=money(summary.reduce((a,p)=>a+p.fine,0));
+ document.getElementById("top").innerHTML=summary.slice(0,3).map((p,i)=>`<div class="player"><b>${["👑","🥈","🥉"][i]} ${esc(p.name)}</b><div style="font-size:11px;color:#94a3b8">${p.loss} Loss • ${p.win} Win • ${money(p.fine)} Fine • Paid ${money(p.due)}</div></div>`).join("")||'<div class="empty">No data</div>';
+ renderRank();renderHistory();renderPlayers();
+ const dl=document.getElementById("names"); if(dl)dl.innerHTML=summary.map(p=>`<option value="${esc(p.name)}">`).join("");
+}
+function renderRank(){let q=(document.getElementById("search")?.value||"").toLowerCase();let a=summary.filter(p=>p.name.toLowerCase().includes(q));document.getElementById("rankBody").innerHTML=a.map((p,i)=>`<tr><td>${i===0?"👑":i+1}</td><td><button style="background:none;border:0;color:white;font-weight:800" onclick="profile('${esc(p.name).replace(/'/g,"\\'")}')">${esc(p.name)}</button></td><td>${p.matches}</td><td><span class="badge win">${p.win}</span></td><td><span class="badge loss">${p.loss}</span></td><td class="fine">${money(p.fine)}</td><td>${money(p.due)}</td></tr>`).join("")||'<tr><td colspan="7" class="empty">No data</td></tr>'}
+function renderHistory(){document.getElementById("historyBody").innerHTML=data.slice().reverse().map(m=>`<tr><td>${esc(m.date)}</td><td>${esc(m.time)}</td><td>${m.players.map(x=>`${esc(x.name)} #${x.pos} — ${x.pos>=3?"Loss":"Win"}${x.fine?` <span class="fine">+${money(x.fine)} Fine</span>`:""}`).join("<br>")}</td></tr>`).join("")||'<tr><td colspan="3" class="empty">No history</td></tr>'}
+function renderPlayers(){let q=(document.getElementById("psearch")?.value||"").toLowerCase();document.getElementById("playerBody").innerHTML=summary.filter(p=>p.name.toLowerCase().includes(q)).map(p=>`<div class="player" onclick="profile('${esc(p.name).replace(/'/g,"\\'")}')" style="cursor:pointer"><b>${esc(p.name)}</b><div style="font-size:11px;color:#94a3b8">${p.matches} Matches • ${p.win} Win • ${p.loss} Loss • ${money(p.fine)} Fine • Total Paid ${money(p.due)}</div></div>`).join("")||'<div class="empty">No player</div>'}
+function profile(name){let p=summary.find(x=>x.name===name);if(!p)return;document.getElementById("mn").textContent="👤 "+p.name;document.getElementById("md").innerHTML=`<div class="grid"><div class="stat"><b>${p.matches}</b><span>Matches</span></div><div class="stat"><b>${p.win}</b><span>Win</span></div><div class="stat"><b>${p.loss}</b><span>Loss</span></div><div class="stat"><b>${money(p.fine)}</b><span>Fine</span></div></div><div class="card"><h3>Last Matches</h3>${p.h.slice().reverse().slice(0,10).map(x=>`<div style="padding:9px;border-bottom:1px solid #ffffff12">${x.date} ${x.time} — #${x.pos} — ${x.pos>=3?"Loss":"Win"} — ${x.fine?money(x.fine)+" Fine":"No Fine"}</div>`).join("")}</div>`;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+async function load(){if(!API_URL.startsWith("http"))return;try{let r=await fetch(API_URL+"?action=list&t="+Date.now());let j=await r.json();if(!j.ok)throw 0;data=j.matches||[];renderAll()}catch(e){console.error(e)}}
+async function saveMatch(){
+ const players=[];
+ for(let i=1;i<=4;i++){let name=document.getElementById("n"+i).value.trim(),pos=Number(document.getElementById("p"+i).value),fine=document.getElementById("m"+i).checked?ERROR_FINE:0;if(!name){document.getElementById("msg").textContent="Player "+i+" এর নাম দাও";return}players.push({name,pos,fine})}
+ if(new Set(players.map(x=>x.name.toLowerCase())).size<4){document.getElementById("msg").textContent="একই player দুইবার দেওয়া যাবে না";return}
+ if(new Set(players.map(x=>x.pos)).size<4){document.getElementById("msg").textContent="1st, 2nd, 3rd, 4th একবার করে দিতে হবে";return}
+ const payload={action:"add",date:document.getElementById("date").value,time:document.getElementById("time").value,players};
+ document.getElementById("msg").textContent="Saving...";
+ try{let r=await fetch(API_URL+"?"+new URLSearchParams({action:"add",data:JSON.stringify(payload)}));let j=await r.json();if(!j.ok)throw 0;document.getElementById("msg").textContent="✅ Match saved";for(let i=1;i<=4;i++){document.getElementById("n"+i).value="";document.getElementById("m"+i).checked=false;previewFine(i)}document.getElementById("date").value=today();document.getElementById("time").value=new Date().toTimeString().slice(0,5);await load();setTimeout(()=>document.getElementById("msg").textContent="",1800)}catch(e){document.getElementById("msg").textContent="⚠️ Save হয়নি—Apps Script URL/permission check করো"}}
+document.getElementById("date").value=today();document.getElementById("time").value=new Date().toTimeString().slice(0,5);buildSlots();load();setInterval(load,15000);
+</script></body></html>
