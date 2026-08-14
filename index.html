@@ -10,17 +10,17 @@
 :root{
  --bg:#070a12;
  --card:#101827;
- --card2:#0c1322;
  --line:#ffffff14;
  --text:#f8fafc;
  --muted:#94a3b8;
- --blue:#6366f1;
  --green:#34d399;
  --red:#fb7185;
  --gold:#fbbf24;
 }
 
-*{box-sizing:border-box}
+*{
+ box-sizing:border-box;
+}
 
 html{
  scroll-behavior:smooth;
@@ -35,8 +35,14 @@ body{
  min-height:100vh;
 }
 
-button,input,select{
+button,
+input,
+select{
  font:inherit;
+}
+
+button{
+ cursor:pointer;
 }
 
 header{
@@ -89,7 +95,7 @@ nav::-webkit-scrollbar{
 nav button{
  border:0;
  border-radius:13px;
- padding:10px 14px;
+ padding:11px 14px;
  background:#151d2e;
  color:#b9c3d4;
  font-weight:800;
@@ -137,6 +143,7 @@ main{
  margin:0;
  color:#cbd5e1;
  font-size:12px;
+ line-height:1.6;
 }
 
 .card{
@@ -195,7 +202,7 @@ h3{
  border:1px solid var(--line);
  background:#111827;
  color:#aeb9ca;
- padding:10px 5px;
+ padding:11px 5px;
  border-radius:12px;
  font-weight:800;
 }
@@ -228,6 +235,12 @@ h3{
  border-radius:11px;
  padding:11px;
  outline:none;
+}
+
+.field input:focus,
+.field select:focus,
+.search:focus{
+ border-color:#6366f1;
 }
 
 .player{
@@ -347,6 +360,7 @@ h3{
 
 .save:disabled{
  opacity:.6;
+ cursor:not-allowed;
 }
 
 .msg{
@@ -355,6 +369,7 @@ h3{
  font-size:11px;
  margin-top:9px;
  min-height:18px;
+ line-height:1.5;
 }
 
 .msg.ok{
@@ -463,6 +478,11 @@ h3{
  margin-bottom:8px;
  background:#ffffff04;
  cursor:pointer;
+ transition:.15s;
+}
+
+.matchCard:active{
+ transform:scale(.99);
 }
 
 .matchTop{
@@ -486,7 +506,7 @@ h3{
 
 .matchPlayers{
  font-size:12px;
- line-height:1.7;
+ line-height:1.8;
 }
 
 .clickHint{
@@ -631,13 +651,18 @@ td{
  padding:7px 10px;
 }
 
-.statusDot{
- display:inline-block;
- width:7px;
- height:7px;
- border-radius:50%;
- background:var(--green);
- margin-right:5px;
+.loading{
+ text-align:center;
+ color:#94a3b8;
+ padding:20px;
+ font-size:12px;
+}
+
+.status{
+ text-align:center;
+ padding:8px;
+ font-size:10px;
+ color:#94a3b8;
 }
 
 @media(min-width:700px){
@@ -687,25 +712,42 @@ td{
  <div class="hero">
   <small>CURRENT LEAGUE</small>
   <h2>বন্ধুদের Ludo League</h2>
-  <p>🥇 1st / 🥈 2nd = ৳0 • 🥉 3rd / 4th = ৳20 • প্রতি ভুল = ৳10</p>
+  <p>
+   🥇 1st / 🥈 2nd = ৳0 •
+   🥉 3rd / 4th = ৳20 •
+   প্রতি ভুল = ৳10
+  </p>
  </div>
 
  <div class="leagueTabs">
-  <button class="active" onclick="setLeague('24h',this)">🕐 24 HOURS</button>
-  <button onclick="setLeague('week',this)">📅 WEEKLY</button>
-  <button onclick="setLeague('month',this)">📆 MONTHLY</button>
+  <button class="active" onclick="setLeague('24h',this)">
+   🕐 24 HOURS
+  </button>
+
+  <button onclick="setLeague('week',this)">
+   📅 WEEKLY
+  </button>
+
+  <button onclick="setLeague('month',this)">
+   📆 MONTHLY
+  </button>
  </div>
 
  <div class="card">
+
   <div class="sectionTitle">
    <h3 id="leagueTitle">🕐 Last 24 Hours</h3>
    <span id="leagueCount" style="font-size:10px;color:#94a3b8"></span>
   </div>
 
-  <div id="leagueResult"></div>
+  <div id="leagueResult">
+   <div class="loading">Loading...</div>
+  </div>
+
  </div>
 
  <div class="card">
+
   <div class="sectionTitle">
    <h3>📊 League Overview</h3>
   </div>
@@ -733,24 +775,31 @@ td{
    </div>
 
   </div>
+
  </div>
 
  <div class="card">
+
   <div class="sectionTitle">
    <h3>🏆 Top 3</h3>
    <span style="font-size:9px;color:#64748b">Overall</span>
   </div>
 
-  <div id="top"></div>
+  <div id="top">
+   <div class="empty">Loading...</div>
+  </div>
+
  </div>
 
  <div class="card">
+
   <div class="sectionTitle">
    <h3>🎮 Today's Matches</h3>
    <span id="todayCount" style="font-size:10px;color:#94a3b8"></span>
   </div>
 
   <div id="todayMatches"></div>
+
  </div>
 
 </section>
@@ -778,10 +827,19 @@ td{
   </div>
 
   <p style="color:#94a3b8;font-size:11px;line-height:1.6">
-   ৪ জনের নাম ও position দাও। ৩য়/৪র্থ হলে ৳20 Loss Fee।
-   ভুলের সংখ্যা যত হবে, Fine তত হবে।
+
+   ৪ জনের নাম ও position দাও।
+   ৩য়/৪র্থ হলে ৳20 Loss Fee।
+   ভুলের সংখ্যা যত হবে Fine তত হবে।
+
    <br>
-   <b style="color:#fbbf24">১ ভুল = ৳10 • ২ ভুল = ৳20 • ৩ ভুল = ৳30</b>
+
+   <b style="color:#fbbf24">
+    ১ ভুল = ৳10 •
+    ২ ভুল = ৳20 •
+    ৩ ভুল = ৳30
+   </b>
+
   </p>
 
   <div id="slots"></div>
@@ -814,7 +872,9 @@ td{
   <div style="overflow:auto">
 
    <table>
+
     <thead>
+
      <tr>
       <th>#</th>
       <th>Player</th>
@@ -824,9 +884,11 @@ td{
       <th>Fine</th>
       <th>Total Paid</th>
      </tr>
+
     </thead>
 
     <tbody id="rankBody"></tbody>
+
    </table>
 
   </div>
@@ -851,8 +913,11 @@ td{
    </div>
 
    <div class="field">
+
     <label>DAY</label>
+
     <select id="filterDay">
+
      <option value="">All Days</option>
      <option value="0">Sunday</option>
      <option value="1">Monday</option>
@@ -861,29 +926,42 @@ td{
      <option value="4">Thursday</option>
      <option value="5">Friday</option>
      <option value="6">Saturday</option>
+
     </select>
+
    </div>
 
    <div class="field">
+
     <label>TIME</label>
+
     <select id="filterTime">
+
      <option value="">All Time</option>
      <option value="morning">Morning (06–11)</option>
      <option value="afternoon">Afternoon (12–17)</option>
      <option value="evening">Evening (18–23)</option>
      <option value="night">Night (00–05)</option>
+
     </select>
+
    </div>
 
   </div>
 
   <div class="filterActions">
 
-   <button class="filterBtn primary" onclick="applyHistoryFilter()">
+   <button
+    class="filterBtn primary"
+    onclick="applyHistoryFilter()"
+   >
     🔍 SEARCH
    </button>
 
-   <button class="filterBtn" onclick="clearHistoryFilter()">
+   <button
+    class="filterBtn"
+    onclick="clearHistoryFilter()"
+   >
     ✕ CLEAR
    </button>
 
@@ -891,11 +969,18 @@ td{
 
  </div>
 
+
  <div class="card">
 
   <div class="sectionTitle">
+
    <h3>📜 Match History</h3>
-   <span id="historyCount" style="font-size:10px;color:#94a3b8"></span>
+
+   <span
+    id="historyCount"
+    style="font-size:10px;color:#94a3b8"
+   ></span>
+
   </div>
 
   <div style="overflow:auto">
@@ -903,11 +988,13 @@ td{
    <table>
 
     <thead>
+
      <tr>
       <th>Date</th>
       <th>Time</th>
       <th>Match Details</th>
      </tr>
+
     </thead>
 
     <tbody id="historyBody"></tbody>
@@ -949,7 +1036,12 @@ td{
 
  <div class="modalbox">
 
-  <button class="close" onclick="closeModal()">✕</button>
+  <button
+   class="close"
+   onclick="closeModal()"
+  >
+   ✕
+  </button>
 
   <h2 id="mn"></h2>
 
@@ -971,7 +1063,6 @@ const API_URL =
 
 const LOSS_FEE = 20;
 const ERROR_FINE = 10;
-
 const BD_TIMEZONE = "Asia/Dhaka";
 
 let data = [];
@@ -991,17 +1082,22 @@ function page(id,btn){
 
  const target=document.getElementById(id);
 
- if(target) target.classList.add("active");
+ if(target){
+  target.classList.add("active");
+ }
 
  document.querySelectorAll("nav button")
  .forEach(x=>x.classList.remove("active"));
 
- if(btn) btn.classList.add("active");
+ if(btn){
+  btn.classList.add("active");
+ }
 
  window.scrollTo({
   top:0,
   behavior:"smooth"
  });
+
 }
 
 
@@ -1021,10 +1117,16 @@ function esc(s){
 
 function money(n){
 
- return "৳"+Number(n||0).toLocaleString("en-US");
+ const v=Number(n||0);
+
+ return "৳"+v.toLocaleString("en-US");
 
 }
 
+
+/* =====================================================
+   DATE / TIME
+===================================================== */
 
 function bdParts(){
 
@@ -1045,7 +1147,9 @@ function bdParts(){
  const o={};
 
  parts.forEach(p=>{
-  if(p.type!=="literal") o[p.type]=p.value;
+  if(p.type!=="literal"){
+   o[p.type]=p.value;
+  }
  });
 
  return o;
@@ -1073,31 +1177,40 @@ function currentTime(){
 
 function parseBD(date,time){
 
- if(!date) return null;
+ if(!date){
+  return null;
+ }
 
  const t=time || "00:00";
 
- const parts=date.split("-").map(Number);
- const tp=t.split(":").map(Number);
+ const parts=String(date).split("-").map(Number);
+ const tp=String(t).split(":").map(Number);
 
- if(parts.length!==3) return null;
+ if(parts.length!==3){
+  return null;
+ }
 
  const y=parts[0];
  const mo=parts[1];
  const d=parts[2];
+
  const h=Number(tp[0]||0);
  const mi=Number(tp[1]||0);
 
- /*
-   Convert Bangladesh local time to UTC.
-   Bangladesh = UTC + 6 hours.
- */
-
- const utc=Date.UTC(y,mo-1,d,h-6,mi,0);
+ const utc=Date.UTC(
+  y,
+  mo-1,
+  d,
+  h-6,
+  mi,
+  0
+ );
 
  const result=new Date(utc);
 
- if(isNaN(result.getTime())) return null;
+ if(isNaN(result.getTime())){
+  return null;
+ }
 
  return result;
 
@@ -1116,7 +1229,9 @@ function matchDate(m){
 
 function formatDate(date){
 
- if(!date) return "";
+ if(!date){
+  return "";
+ }
 
  return new Intl.DateTimeFormat(
   "en-GB",
@@ -1135,7 +1250,9 @@ function getBDHour(m){
 
  const d=matchDate(m);
 
- if(!d) return -1;
+ if(!d){
+  return -1;
+ }
 
  return Number(
   new Intl.DateTimeFormat(
@@ -1157,86 +1274,106 @@ function getBDHour(m){
 
 function buildSlots(){
 
- let h="";
+ let html="";
 
  for(let i=1;i<=4;i++){
 
-  h+=`
+  html+=`
 
-  <div class="player">
+   <div class="player">
 
-   <div class="playerTop">
+    <div class="playerTop">
 
-    <b>PLAYER ${i}</b>
+     <b>PLAYER ${i}</b>
 
-    <span class="finePreview" id="fp${i}">
-     No Fine
-    </span>
+     <span
+      class="finePreview"
+      id="fp${i}"
+     >
+      No Fine
+     </span>
 
-   </div>
-
-   <div class="row">
-
-    <input
-     id="n${i}"
-     list="names"
-     autocomplete="off"
-     placeholder="নাম"
-    >
-
-    <select id="p${i}">
-     <option value="1">🥇 1st</option>
-     <option value="2">🥈 2nd</option>
-     <option value="3">🥉 3rd</option>
-     <option value="4">4️⃣ 4th</option>
-    </select>
-
-   </div>
-
-   <div class="mistakeBox">
-
-    <div class="mistakeTitle">
-     <span>❌</span>
-     <span>ভুলের সংখ্যা</span>
     </div>
 
-    <div class="counter">
+    <div class="row">
 
-     <button
-      type="button"
-      onclick="changeMistakes(${i},-1)"
-     >−</button>
+     <input
+      id="n${i}"
+      list="names"
+      autocomplete="off"
+      placeholder="নাম"
+     >
+
+     <select id="p${i}">
+
+      <option value="1">🥇 1st</option>
+      <option value="2">🥈 2nd</option>
+      <option value="3">🥉 3rd</option>
+      <option value="4">4️⃣ 4th</option>
+
+     </select>
+
+    </div>
+
+    <div class="mistakeBox">
+
+     <div class="mistakeTitle">
+      <span>❌</span>
+      <span>ভুলের সংখ্যা</span>
+     </div>
+
+     <div class="counter">
+
+      <button
+       type="button"
+       onclick="changeMistakes(${i},-1)"
+      >
+       −
+      </button>
+
+      <div
+       class="counterValue"
+       id="mistake${i}"
+      >
+       0
+      </div>
+
+      <button
+       type="button"
+       class="plus"
+       onclick="changeMistakes(${i},1)"
+      >
+       +
+      </button>
+
+     </div>
 
      <div
-      class="counterValue"
-      id="mistake${i}"
-     >0</div>
+      class="counterHelp"
+      id="mh${i}"
+     >
+      0 ভুল = ৳0
+     </div>
 
-     <button
-      type="button"
-      class="plus"
-      onclick="changeMistakes(${i},1)"
-     >+</button>
-
-    </div>
-
-    <div class="counterHelp" id="mh${i}">
-     0 ভুল = ৳0
     </div>
 
    </div>
-
-  </div>
 
   `;
 
  }
 
- document.getElementById("slots").innerHTML=h;
+ const slots=document.getElementById("slots");
+
+ if(slots){
+  slots.innerHTML=html;
+ }
 
  let old=document.getElementById("names");
 
- if(old) old.remove();
+ if(old){
+  old.remove();
+ }
 
  const dl=document.createElement("datalist");
 
@@ -1251,26 +1388,42 @@ function buildSlots(){
 
 function getMistakes(i){
 
- const el=document.getElementById("mistake"+i);
+ const el=document.getElementById(
+  "mistake"+i
+ );
 
- return el ? Number(el.textContent||0) : 0;
+ if(!el){
+  return 0;
+ }
+
+ return Number(el.textContent||0);
 
 }
 
 
 function changeMistakes(i,amount){
 
- const el=document.getElementById("mistake"+i);
+ const el=document.getElementById(
+  "mistake"+i
+ );
 
- if(!el) return;
+ if(!el){
+  return;
+ }
 
- let value=Number(el.textContent||0);
+ let value=Number(
+  el.textContent||0
+ );
 
  value+=amount;
 
- if(value<0) value=0;
+ if(value<0){
+  value=0;
+ }
 
- if(value>99) value=99;
+ if(value>99){
+  value=99;
+ }
 
  el.textContent=value;
 
@@ -1282,7 +1435,6 @@ function changeMistakes(i,amount){
 function updateFinePreview(i){
 
  const mistakes=getMistakes(i);
-
  const fine=mistakes*ERROR_FINE;
 
  const fp=document.getElementById("fp"+i);
@@ -1328,11 +1480,19 @@ function buildSummary(){
 
  data.forEach(m=>{
 
-  (m.players||[]).forEach(x=>{
+  const players=
+   Array.isArray(m.players)
+   ? m.players
+   : [];
 
-   const name=String(x.name||"").trim();
+  players.forEach(x=>{
 
-   if(!name) return;
+   const name=
+    String(x.name||"").trim();
+
+   if(!name){
+    return;
+   }
 
    const key=name.toLowerCase();
 
@@ -1355,27 +1515,26 @@ function buildSummary(){
 
    const pos=Number(x.pos||0);
 
-   /*
-      Backend may return mistakes.
-      If old data only has fine, calculate from fine.
-   */
+   let mistakes=
+    Number(x.mistakes||0);
 
-   let mistakes=Number(x.mistakes||0);
-
-   let fine=Number(x.fine||0);
+   let fine=
+    Number(x.fine||0);
 
    if(!mistakes && fine>0){
-    mistakes=Math.round(fine/ERROR_FINE);
+    mistakes=
+     Math.round(
+      fine/ERROR_FINE
+     );
    }
 
    if(!fine && mistakes>0){
-    fine=mistakes*ERROR_FINE;
+    fine=
+     mistakes*ERROR_FINE;
    }
 
    p.matches++;
-
    p.mistakes+=mistakes;
-
    p.fine+=fine;
 
    if(pos>=3){
@@ -1403,16 +1562,8 @@ function buildSummary(){
 
  });
 
-
- /*
-   Ranking:
-   1. বেশি Win
-   2. কম Loss
-   3. কম Fine
-   4. বেশি Matches
- */
-
- summary=Object.values(map).sort((a,b)=>
+ summary=Object.values(map).sort(
+  (a,b)=>
    b.win-a.win ||
    a.loss-b.loss ||
    a.fine-b.fine ||
@@ -1430,15 +1581,31 @@ function renderAll(){
 
  buildSummary();
 
- document.getElementById("matches").textContent=data.length;
+ document.getElementById(
+  "matches"
+ ).textContent=data.length;
 
- document.getElementById("players").textContent=summary.length;
+ document.getElementById(
+  "players"
+ ).textContent=summary.length;
 
- document.getElementById("losses").textContent=
-  summary.reduce((a,p)=>a+p.loss,0);
+ document.getElementById(
+  "losses"
+ ).textContent=
+  summary.reduce(
+   (a,p)=>a+p.loss,
+   0
+  );
 
- document.getElementById("fines").textContent=
-  money(summary.reduce((a,p)=>a+p.fine,0));
+ document.getElementById(
+  "fines"
+ ).textContent=
+  money(
+   summary.reduce(
+    (a,p)=>a+p.fine,
+    0
+   )
+  );
 
  renderTop();
  renderRank();
@@ -1453,7 +1620,9 @@ function renderAll(){
 
   dl.innerHTML=
    summary
-   .map(p=>`<option value="${esc(p.name)}">`)
+   .map(p=>
+    `<option value="${esc(p.name)}">`
+   )
    .join("");
 
  }
@@ -1467,55 +1636,62 @@ function renderAll(){
 
 function renderTop(){
 
- const medals=["🥇","🥈","🥉"];
+ const medals=[
+  "🥇",
+  "🥈",
+  "🥉"
+ ];
 
  const top=summary.slice(0,3);
 
+ const html=top.map(
+  (p,i)=>`
+
+   <div class="topCard">
+
+    <div class="topMedal">
+     ${medals[i]}
+    </div>
+
+    <div class="topInfo">
+
+     <b>${esc(p.name)}</b>
+
+     <span>
+      ${p.win} Win •
+      ${p.loss} Loss •
+      ${p.matches} Matches •
+      ${money(p.fine)} Fine
+     </span>
+
+    </div>
+
+    <div class="topPaid">
+
+     <b>${money(p.paid)}</b>
+
+     <span>Total Paid</span>
+
+    </div>
+
+   </div>
+
+  `
+ ).join("");
+
  document.getElementById("top").innerHTML=
-
- top.map((p,i)=>`
-
-  <div class="topCard">
-
-   <div class="topMedal">
-    ${medals[i]}
+  html ||
+  `
+   <div class="empty">
+    এখনও কোনো ম্যাচ হয়নি
    </div>
-
-   <div class="topInfo">
-
-    <b>${esc(p.name)}</b>
-
-    <span>
-     ${p.win} Win •
-     ${p.loss} Loss •
-     ${p.matches} Matches •
-     ${money(p.fine)} Fine
-    </span>
-
-   </div>
-
-   <div class="topPaid">
-
-    <b>${money(p.paid)}</b>
-
-    <span>Total Paid</span>
-
-   </div>
-
-  </div>
-
- `).join("")
-
- ||
- `<div class="empty">
-   এখনও কোনো ম্যাচ হয়নি
-  </div>`;
+  `;
 
 }
 
 
 /* =====================================================
-   MATCH MONEY
+   MONEY
 ===================================================== */
 
 function getPlayerFine(p){
@@ -1524,9 +1700,11 @@ function getPlayerFine(p){
 
  if(!fine){
 
-  const mistakes=Number(p.mistakes||0);
+  const mistakes=
+   Number(p.mistakes||0);
 
-  fine=mistakes*ERROR_FINE;
+  fine=
+   mistakes*ERROR_FINE;
 
  }
 
@@ -1537,10 +1715,19 @@ function getPlayerFine(p){
 
 function matchMoney(m){
 
- return (m.players||[]).reduce(
+ const players=
+  Array.isArray(m.players)
+  ? m.players
+  : [];
+
+ return players.reduce(
   (total,p)=>
    total+
-   (Number(p.pos)>=3?LOSS_FEE:0)+
+   (
+    Number(p.pos)>=3
+    ? LOSS_FEE
+    : 0
+   )+
    getPlayerFine(p),
   0
  );
@@ -1557,11 +1744,17 @@ function getTodayMatches(){
  const t=today();
 
  return data
- .filter(m=>String(m.date||"").slice(0,10)===t)
- .sort((a,b)=>
-  String(b.time||"").localeCompare(
-   String(a.time||"")
-  )
+ .filter(
+  m=>
+   String(m.date||"")
+   .slice(0,10)===t
+ )
+ .sort(
+  (a,b)=>
+   String(b.time||"")
+   .localeCompare(
+    String(a.time||"")
+   )
  );
 
 }
@@ -1571,13 +1764,16 @@ function renderTodayMatches(){
 
  const arr=getTodayMatches();
 
- document.getElementById("todayCount")
- .textContent=
- arr.length+
- " match"+
- (arr.length===1?"":"es");
+ document.getElementById(
+  "todayCount"
+ ).textContent=
+  arr.length+
+  " match"+
+  (arr.length===1?"":"es");
 
- const box=document.getElementById("todayMatches");
+ const box=document.getElementById(
+  "todayMatches"
+ );
 
  if(!arr.length){
 
@@ -1593,110 +1789,115 @@ function renderTodayMatches(){
 
  }
 
- box.innerHTML=arr.map((m,i)=>`
+ box.innerHTML=
+  arr.map(
+   (m,i)=>`
 
-  <div
-   class="matchCard"
-   onclick="openMatch(${data.indexOf(m)})"
-  >
+    <div
+     class="matchCard"
+     onclick="openMatch(${data.indexOf(m)})"
+    >
 
-   <div class="matchTop">
+     <div class="matchTop">
 
-    <span class="matchDate">
-     🎮 Match #${arr.length-i}
-     • ${esc(m.time||"--:--")}
-    </span>
+      <span class="matchDate">
+       🎮 Match #${arr.length-i}
+       • ${esc(m.time||"--:--")}
+      </span>
 
-    <span class="matchMoney">
-     ${money(matchMoney(m))}
-    </span>
+      <span class="matchMoney">
+       ${money(matchMoney(m))}
+      </span>
 
-   </div>
+     </div>
 
-   <div class="matchPlayers">
+     <div class="matchPlayers">
 
-    ${(m.players||[]).map(p=>`
+      ${(m.players||[]).map(
+       p=>`
 
-     ${Number(p.pos)<=2?"🏆":"❌"}
-     ${esc(p.name)}
-     — ${Number(p.pos)<=2?"Win":"Loss"}
-     ${
-      getPlayerFine(p)
-      ?` <span class="fine">+${money(getPlayerFine(p))} Fine</span>`
-      :""
-     }
+        ${Number(p.pos)<=2?"🏆":"❌"}
+        ${esc(p.name)}
+        —
+        ${Number(p.pos)<=2?"Win":"Loss"}
 
-    `).join("<br>")}
+        ${
+         getPlayerFine(p)
+         ?
+         `<span class="fine">
+          +${money(getPlayerFine(p))} Fine
+         </span>`
+         :
+         ""
+        }
 
-   </div>
+       `
+      ).join("<br>")}
 
-   <div class="clickHint">
-    👆 বিস্তারিত দেখতে ক্লিক করো
-   </div>
+     </div>
 
-  </div>
+     <div class="clickHint">
+      👆 বিস্তারিত দেখতে ক্লিক করো
+     </div>
 
- `).join("");
+    </div>
+
+   `
+  ).join("");
 
 }
 
 
 /* =====================================================
    WEEKLY
-   THURSDAY → WEDNESDAY
 ===================================================== */
 
 function getWeekStartBD(){
 
  const now=new Date();
 
- const parts=new Intl.DateTimeFormat(
-  "en-GB",
-  {
-   timeZone:BD_TIMEZONE,
-   year:"numeric",
-   month:"2-digit",
-   day:"2-digit",
-   weekday:"short"
-  }
- ).formatToParts(now);
+ const parts=
+  new Intl.DateTimeFormat(
+   "en-GB",
+   {
+    timeZone:BD_TIMEZONE,
+    year:"numeric",
+    month:"2-digit",
+    day:"2-digit"
+   }
+  ).formatToParts(now);
 
  const obj={};
 
  parts.forEach(p=>{
-  if(p.type!=="literal") obj[p.type]=p.value;
+  if(p.type!=="literal"){
+   obj[p.type]=p.value;
+  }
  });
 
  const y=Number(obj.year);
  const mo=Number(obj.month);
  const d=Number(obj.day);
 
- /*
-   Create a UTC date representing Bangladesh date.
- */
-
- const base=new Date(
-  Date.UTC(y,mo-1,d,0,0,0)
- );
-
- /*
-   JS:
-   Sunday=0
-   Monday=1
-   Tuesday=2
-   Wednesday=3
-   Thursday=4
-   Friday=5
-   Saturday=6
-
-   Thursday is week start.
- */
+ const base=
+  new Date(
+   Date.UTC(
+    y,
+    mo-1,
+    d,
+    0,
+    0,
+    0
+   )
+  );
 
  const day=base.getUTCDay();
 
  let diff=day-4;
 
- if(diff<0) diff+=7;
+ if(diff<0){
+  diff+=7;
+ }
 
  base.setUTCDate(
   base.getUTCDate()-diff
@@ -1713,13 +1914,17 @@ function getWeekMatches(){
 
  const end=new Date(start);
 
- end.setUTCDate(end.getUTCDate()+7);
+ end.setUTCDate(
+  end.getUTCDate()+7
+ );
 
  return data.filter(m=>{
 
   const d=matchDate(m);
 
-  return d && d>=start && d<end;
+  return d &&
+   d>=start &&
+   d<end;
 
  });
 
@@ -1734,19 +1939,22 @@ function getMonthMatches(){
 
  const now=new Date();
 
- const parts=new Intl.DateTimeFormat(
-  "en-GB",
-  {
-   timeZone:BD_TIMEZONE,
-   year:"numeric",
-   month:"2-digit"
-  }
- ).formatToParts(now);
+ const parts=
+  new Intl.DateTimeFormat(
+   "en-GB",
+   {
+    timeZone:BD_TIMEZONE,
+    year:"numeric",
+    month:"2-digit"
+   }
+  ).formatToParts(now);
 
  const o={};
 
  parts.forEach(p=>{
-  if(p.type!=="literal") o[p.type]=p.value;
+  if(p.type!=="literal"){
+   o[p.type]=p.value;
+  }
  });
 
  const y=Number(o.year);
@@ -1756,25 +1964,30 @@ function getMonthMatches(){
 
   const d=matchDate(m);
 
-  if(!d)return false;
+  if(!d){
+   return false;
+  }
 
-  const bd=new Intl.DateTimeFormat(
-   "en-GB",
-   {
-    timeZone:BD_TIMEZONE,
-    year:"numeric",
-    month:"numeric"
-   }
-  ).formatToParts(d);
+  const bd=
+   new Intl.DateTimeFormat(
+    "en-GB",
+    {
+     timeZone:BD_TIMEZONE,
+     year:"numeric",
+     month:"numeric"
+    }
+   ).formatToParts(d);
 
   const z={};
 
   bd.forEach(p=>{
-   if(p.type!=="literal") z[p.type]=p.value;
+   if(p.type!=="literal"){
+    z[p.type]=p.value;
+   }
   });
 
   return Number(z.year)===y &&
-         Number(z.month)===mo;
+   Number(z.month)===mo;
 
  });
 
@@ -1789,16 +2002,19 @@ function get24hMatches(){
 
  const now=new Date();
 
- const start=new Date(
-  now.getTime()-
-  24*60*60*1000
- );
+ const start=
+  new Date(
+   now.getTime()-
+   24*60*60*1000
+  );
 
  return data.filter(m=>{
 
   const d=matchDate(m);
 
-  return d && d>=start && d<=now;
+  return d &&
+   d>=start &&
+   d<=now;
 
  });
 
@@ -1813,10 +2029,15 @@ function setLeague(type,btn){
 
  currentLeague=type;
 
- document.querySelectorAll(".leagueTabs button")
- .forEach(x=>x.classList.remove("active"));
+ document.querySelectorAll(
+  ".leagueTabs button"
+ ).forEach(
+  x=>x.classList.remove("active")
+ );
 
- if(btn)btn.classList.add("active");
+ if(btn){
+  btn.classList.add("active");
+ }
 
  renderLeague();
 
@@ -1845,20 +2066,26 @@ function renderLeague(){
 
  }
 
- arr.sort((a,b)=>
-  (matchDate(b)||0)-(matchDate(a)||0)
+ arr.sort(
+  (a,b)=>
+   (matchDate(b)||0)-
+   (matchDate(a)||0)
  );
 
- document.getElementById("leagueTitle")
- .textContent=title;
+ document.getElementById(
+  "leagueTitle"
+ ).textContent=title;
 
- document.getElementById("leagueCount")
- .textContent=
+ document.getElementById(
+  "leagueCount"
+ ).textContent=
   arr.length+
   " match"+
   (arr.length===1?"":"es");
 
- const box=document.getElementById("leagueResult");
+ const box=document.getElementById(
+  "leagueResult"
+ );
 
  if(!arr.length){
 
@@ -1878,9 +2105,12 @@ function renderLeague(){
 
   (m.players||[]).forEach(p=>{
 
-   const name=String(p.name||"").trim();
+   const name=
+    String(p.name||"").trim();
 
-   if(!name)return;
+   if(!name){
+    return;
+   }
 
    const key=name.toLowerCase();
 
@@ -1898,7 +2128,9 @@ function renderLeague(){
    }
 
    const fine=getPlayerFine(p);
-   const mistakes=Number(p.mistakes||0);
+
+   const mistakes=
+    Number(p.mistakes||0);
 
    if(Number(p.pos)<=2){
 
@@ -1919,11 +2151,13 @@ function renderLeague(){
 
  });
 
- const ranked=Object.values(players).sort((a,b)=>
-  b.win-a.win ||
-  a.loss-b.loss ||
-  a.fine-b.fine
- );
+ const ranked=
+  Object.values(players).sort(
+   (a,b)=>
+    b.win-a.win ||
+    a.loss-b.loss ||
+    a.fine-b.fine
+  );
 
  const winner=ranked[0];
 
@@ -1936,7 +2170,11 @@ function renderLeague(){
    <div style="
     padding:15px;
     border-radius:17px;
-    background:linear-gradient(135deg,#312e8155,#4c1d9555);
+    background:linear-gradient(
+     135deg,
+     #312e8155,
+     #4c1d9555
+    );
     border:1px solid #ffffff14;
    ">
 
@@ -1978,41 +2216,46 @@ function renderLeague(){
 
   <div style="margin-top:12px">
 
-   ${arr.slice(0,5).map(m=>`
+   ${arr.slice(0,5).map(
+    m=>`
 
-    <div
-     class="matchCard"
-     onclick="openMatch(${data.indexOf(m)})"
-    >
+     <div
+      class="matchCard"
+      onclick="openMatch(${data.indexOf(m)})"
+     >
 
-     <div class="matchTop">
+      <div class="matchTop">
 
-      <span class="matchDate">
-       ${formatDate(matchDate(m))}
-       • ${esc(m.time||"")}
-      </span>
+       <span class="matchDate">
+        ${formatDate(matchDate(m))}
+        • ${esc(m.time||"")}
+       </span>
 
-      <span class="matchMoney">
-       ${money(matchMoney(m))}
-      </span>
+       <span class="matchMoney">
+        ${money(matchMoney(m))}
+       </span>
+
+      </div>
+
+      <div class="matchPlayers">
+
+       ${(m.players||[]).map(
+        p=>`
+
+         ${Number(p.pos)<=2?"🏆":"❌"}
+         ${esc(p.name)}
+         —
+         ${Number(p.pos)<=2?"Win":"Loss"}
+
+        `
+       ).join("<br>")}
+
+      </div>
 
      </div>
 
-     <div class="matchPlayers">
-
-      ${(m.players||[]).map(p=>`
-
-       ${Number(p.pos)<=2?"🏆":"❌"}
-       ${esc(p.name)}
-       — ${Number(p.pos)<=2?"Win":"Loss"}
-
-      `).join("<br>")}
-
-     </div>
-
-    </div>
-
-   `).join("")}
+    `
+   ).join("")}
 
   </div>
 
@@ -2022,7 +2265,8 @@ function renderLeague(){
 
   html+=`
    <div class="clickHint" style="text-align:center">
-    আরও ${arr.length-5} টি ম্যাচ History-তে দেখা যাবে।
+    আরও ${arr.length-5}
+    টি ম্যাচ History-তে দেখা যাবে।
    </div>
   `;
 
@@ -2040,68 +2284,82 @@ function renderLeague(){
 function renderRank(){
 
  const q=
-  (document.getElementById("search")?.value||"")
-  .toLowerCase();
+  (
+   document.getElementById(
+    "search"
+   )?.value||""
+  ).toLowerCase();
 
- const a=summary.filter(p=>
-  p.name.toLowerCase().includes(q)
- );
+ const a=
+  summary.filter(
+   p=>
+    p.name.toLowerCase().includes(q)
+  );
 
- document.getElementById("rankBody").innerHTML=
+ document.getElementById(
+  "rankBody"
+ ).innerHTML=
 
- a.map((p,i)=>`
+ a.map(
+  (p,i)=>`
 
-  <tr>
+   <tr>
 
-   <td>
-    ${i===0&&!q?"👑":i+1}
-   </td>
+    <td>
+     ${i===0&&!q?"👑":i+1}
+    </td>
 
-   <td>
+    <td>
 
-    <button
-     style="
-      background:none;
-      border:0;
-      color:white;
-      font-weight:800;
-      padding:0;
-     "
-     onclick="profile('${esc(p.name).replace(/'/g,"\\'")}')"
-    >
-     ${esc(p.name)}
-    </button>
+     <button
+      style="
+       background:none;
+       border:0;
+       color:white;
+       font-weight:800;
+       padding:0;
+      "
+      onclick="profileByIndex(${summary.indexOf(p)})"
+     >
+      ${esc(p.name)}
+     </button>
 
-   </td>
+    </td>
 
-   <td>${p.matches}</td>
+    <td>${p.matches}</td>
 
-   <td>
-    <span class="badge win">${p.win}</span>
-   </td>
+    <td>
+     <span class="badge win">
+      ${p.win}
+     </span>
+    </td>
 
-   <td>
-    <span class="badge loss">${p.loss}</span>
-   </td>
+    <td>
+     <span class="badge loss">
+      ${p.loss}
+     </span>
+    </td>
 
-   <td class="fine">
-    ${money(p.fine)}
-   </td>
+    <td class="fine">
+     ${money(p.fine)}
+    </td>
 
-   <td>
-    ${money(p.paid)}
-   </td>
+    <td>
+     ${money(p.paid)}
+    </td>
 
-  </tr>
+   </tr>
 
- `).join("")
+  `
+ ).join("")
 
  ||
+
  `<tr>
-   <td colspan="7" class="empty">
-    No data
-   </td>
-  </tr>`;
+  <td colspan="7" class="empty">
+   No data
+  </td>
+ </tr>`;
 
 }
 
@@ -2113,36 +2371,46 @@ function renderRank(){
 function getFilteredHistory(){
 
  const date=
-  document.getElementById("filterDate").value;
+  document.getElementById(
+   "filterDate"
+  ).value;
 
  const day=
-  document.getElementById("filterDay").value;
+  document.getElementById(
+   "filterDay"
+  ).value;
 
  const time=
-  document.getElementById("filterTime").value;
+  document.getElementById(
+   "filterTime"
+  ).value;
 
  return data.filter(m=>{
 
   const d=matchDate(m);
 
-  if(!d)return false;
+  if(!d){
+   return false;
+  }
 
   if(
    date &&
-   String(m.date||"").slice(0,10)!==date
+   String(m.date||"")
+   .slice(0,10)!==date
   ){
    return false;
   }
 
   if(day!==""){
 
-   const weekday=new Intl.DateTimeFormat(
-    "en-US",
-    {
-     timeZone:BD_TIMEZONE,
-     weekday:"short"
-    }
-   ).format(d);
+   const weekday=
+    new Intl.DateTimeFormat(
+     "en-US",
+     {
+      timeZone:BD_TIMEZONE,
+      weekday:"short"
+     }
+    ).format(d);
 
    const map={
     Sun:"0",
@@ -2154,7 +2422,9 @@ function getFilteredHistory(){
     Sat:"6"
    };
 
-   if(map[weekday]!==String(day)){
+   if(
+    map[weekday]!==String(day)
+   ){
     return false;
    }
 
@@ -2166,30 +2436,40 @@ function getFilteredHistory(){
 
    if(
     time==="morning" &&
-    !(h>=6 && h<=11)
-   )return false;
+    !(h>=6&&h<=11)
+   ){
+    return false;
+   }
 
    if(
     time==="afternoon" &&
-    !(h>=12 && h<=17)
-   )return false;
+    !(h>=12&&h<=17)
+   ){
+    return false;
+   }
 
    if(
     time==="evening" &&
-    !(h>=18 && h<=23)
-   )return false;
+    !(h>=18&&h<=23)
+   ){
+    return false;
+   }
 
    if(
     time==="night" &&
-    !(h>=0 && h<=5)
-   )return false;
+    !(h>=0&&h<=5)
+   ){
+    return false;
+   }
 
   }
 
   return true;
 
- }).sort((a,b)=>
-  (matchDate(b)||0)-(matchDate(a)||0)
+ }).sort(
+  (a,b)=>
+   (matchDate(b)||0)-
+   (matchDate(a)||0)
  );
 
 }
@@ -2197,48 +2477,73 @@ function getFilteredHistory(){
 
 function applyHistoryFilter(){
 
- filteredHistory=getFilteredHistory();
+ filteredHistory=
+  getFilteredHistory();
 
- renderHistoryList(filteredHistory);
+ renderHistoryList(
+  filteredHistory
+ );
 
 }
 
 
 function clearHistoryFilter(){
 
- document.getElementById("filterDate").value="";
- document.getElementById("filterDay").value="";
- document.getElementById("filterTime").value="";
+ document.getElementById(
+  "filterDate"
+ ).value="";
 
- filteredHistory=data.slice().sort((a,b)=>
-  (matchDate(b)||0)-(matchDate(a)||0)
+ document.getElementById(
+  "filterDay"
+ ).value="";
+
+ document.getElementById(
+  "filterTime"
+ ).value="";
+
+ filteredHistory=
+  data.slice().sort(
+   (a,b)=>
+    (matchDate(b)||0)-
+    (matchDate(a)||0)
+  );
+
+ renderHistoryList(
+  filteredHistory
  );
-
- renderHistoryList(filteredHistory);
 
 }
 
 
 function renderHistory(){
 
- filteredHistory=data.slice().sort((a,b)=>
-  (matchDate(b)||0)-(matchDate(a)||0)
- );
+ filteredHistory=
+  data.slice().sort(
+   (a,b)=>
+    (matchDate(b)||0)-
+    (matchDate(a)||0)
+  );
 
- renderHistoryList(filteredHistory);
+ renderHistoryList(
+  filteredHistory
+ );
 
 }
 
 
 function renderHistoryList(arr){
 
- document.getElementById("historyCount")
- .textContent=
+ document.getElementById(
+  "historyCount"
+ ).textContent=
   arr.length+
   " match"+
   (arr.length===1?"":"es");
 
- const body=document.getElementById("historyBody");
+ const body=
+  document.getElementById(
+   "historyBody"
+  );
 
  if(!arr.length){
 
@@ -2254,51 +2559,60 @@ function renderHistoryList(arr){
 
  }
 
- body.innerHTML=arr.map(m=>`
+ body.innerHTML=
+  arr.map(
+   m=>`
 
-  <tr
-   onclick="openMatch(${data.indexOf(m)})"
-   style="cursor:pointer"
-  >
+    <tr
+     onclick="openMatch(${data.indexOf(m)})"
+     style="cursor:pointer"
+    >
 
-   <td>
-    ${esc(String(m.date||"").slice(0,10))}
-   </td>
+     <td>
+      ${esc(
+       String(m.date||"")
+       .slice(0,10)
+      )}
+     </td>
 
-   <td>
-    ${esc(m.time||"--:--")}
-   </td>
+     <td>
+      ${esc(m.time||"--:--")}
+     </td>
 
-   <td>
+     <td>
 
-    ${(m.players||[]).map(x=>`
+      ${(m.players||[]).map(
+       x=>`
 
-     ${Number(x.pos)<=2?"🏆":"❌"}
-     ${esc(x.name)}
-     #${x.pos}
-     — ${Number(x.pos)<=2?"Win":"Loss"}
+        ${Number(x.pos)<=2?"🏆":"❌"}
+        ${esc(x.name)}
+        #${x.pos}
+        —
+        ${Number(x.pos)<=2?"Win":"Loss"}
 
-     ${
-      getPlayerFine(x)
-      ?
-      ` <span class="fine">
-        +${money(getPlayerFine(x))} Fine
-       </span>`
-      :
-      ""
-     }
+        ${
+         getPlayerFine(x)
+         ?
+         `<span class="fine">
+          +${money(getPlayerFine(x))} Fine
+         </span>`
+         :
+         ""
+        }
 
-    `).join("<br>")}
+       `
+      ).join("<br>")}
 
-    <div class="clickHint">
-     Tap for details
-    </div>
+      <div class="clickHint">
+       👆 বিস্তারিত দেখতে ক্লিক করো
+      </div>
 
-   </td>
+     </td>
 
-  </tr>
+    </tr>
 
- `).join("");
+   `
+  ).join("");
 
 }
 
@@ -2310,44 +2624,53 @@ function renderHistoryList(arr){
 function renderPlayers(){
 
  const q=
-  (document.getElementById("psearch")?.value||"")
-  .toLowerCase();
+  (
+   document.getElementById(
+    "psearch"
+   )?.value||""
+  ).toLowerCase();
 
- document.getElementById("playerBody").innerHTML=
+ document.getElementById(
+  "playerBody"
+ ).innerHTML=
 
  summary
- .filter(p=>
-  p.name.toLowerCase().includes(q)
+ .filter(
+  p=>
+   p.name.toLowerCase().includes(q)
  )
- .map(p=>`
+ .map(
+  p=>`
 
-  <div
-   class="player"
-   onclick="profile('${esc(p.name).replace(/'/g,"\\'")}')"
-   style="cursor:pointer"
-  >
+   <div
+    class="player"
+    onclick="profileByIndex(${summary.indexOf(p)})"
+    style="cursor:pointer"
+   >
 
-   <b>${esc(p.name)}</b>
+    <b>${esc(p.name)}</b>
 
-   <div style="
-    font-size:11px;
-    color:#94a3b8;
-    margin-top:5px
-   ">
+    <div style="
+     font-size:11px;
+     color:#94a3b8;
+     margin-top:5px
+    ">
 
-    ${p.matches} Matches •
-    ${p.win} Win •
-    ${p.loss} Loss •
-    ${money(p.fine)} Fine •
-    Total Paid ${money(p.paid)}
+     ${p.matches} Matches •
+     ${p.win} Win •
+     ${p.loss} Loss •
+     ${money(p.fine)} Fine •
+     Total Paid ${money(p.paid)}
+
+    </div>
 
    </div>
 
-  </div>
-
- `).join("")
+  `
+ ).join("")
 
  ||
+
  `<div class="empty">
    No player
   </div>`;
@@ -2359,16 +2682,38 @@ function renderPlayers(){
    PROFILE
 ===================================================== */
 
+function profileByIndex(index){
+
+ const p=summary[index];
+
+ if(!p){
+  return;
+ }
+
+ profile(p.name);
+
+}
+
+
 function profile(name){
 
- const p=summary.find(x=>x.name===name);
+ const p=
+  summary.find(
+   x=>x.name===name
+  );
 
- if(!p)return;
+ if(!p){
+  return;
+ }
 
- document.getElementById("mn")
- .textContent="👤 "+p.name;
+ document.getElementById(
+  "mn"
+ ).textContent=
+  "👤 "+p.name;
 
- document.getElementById("md").innerHTML=`
+ document.getElementById(
+  "md"
+ ).innerHTML=`
 
   <div class="grid">
 
@@ -2417,47 +2762,57 @@ function profile(name){
     .slice()
     .reverse()
     .slice(0,10)
-    .map(x=>`
+    .map(
+     x=>`
 
-     <div class="detailPlayer">
+      <div class="detailPlayer">
 
-      <b>
-       ${esc(x.date||"")}
-       ${esc(x.time||"")}
-      </b>
+       <b>
+        ${esc(x.date||"")}
+        ${esc(x.time||"")}
+       </b>
 
-      <span>
-       #${x.pos}
-       —
-       ${Number(x.pos)>=3?"Loss":"Win"}
-       ${
-        getPlayerFine(x)
-        ?
-        " • "+money(getPlayerFine(x))+" Fine"
-        :
-        ""
-       }
-      </span>
+       <span>
+        #${x.pos}
+        —
+        ${Number(x.pos)>=3?"Loss":"Win"}
 
-     </div>
+        ${
+         getPlayerFine(x)
+         ?
+         " • "+
+         money(
+          getPlayerFine(x)
+         )+
+         " Fine"
+         :
+         ""
+        }
 
-    `).join("")
+       </span>
+
+      </div>
+
+     `
+    ).join("")
    }
 
   </div>
 
  `;
 
- document.getElementById("modal")
- .classList.add("show");
+ document.getElementById(
+  "modal"
+ ).classList.add("show");
 
 }
 
 
 function closeModal(){
 
- document.getElementById("modal")
- .classList.remove("show");
+ document.getElementById(
+  "modal"
+ ).classList.remove("show");
 
 }
 
@@ -2470,14 +2825,18 @@ function openMatch(index){
 
  const m=data[index];
 
- if(!m)return;
+ if(!m){
+  return;
+ }
 
- document.getElementById("mn")
- .textContent=
- "🎮 Match • "+
- String(m.date||"").slice(0,10)+
- " "+
- String(m.time||"");
+ document.getElementById(
+  "mn"
+ ).textContent=
+  "🎮 Match • "+
+  String(m.date||"")
+  .slice(0,10)+
+  " "+
+  String(m.time||"");
 
  const total=matchMoney(m);
 
@@ -2505,17 +2864,24 @@ function openMatch(index){
 
  (m.players||[])
  .slice()
- .sort((a,b)=>Number(a.pos)-Number(b.pos))
+ .sort(
+  (a,b)=>
+   Number(a.pos)-Number(b.pos)
+ )
  .forEach(p=>{
 
   const mistakes=
    Number(
     p.mistakes||
-    Math.round(Number(p.fine||0)/ERROR_FINE)||
+    Math.round(
+     Number(p.fine||0)/
+     ERROR_FINE
+    )||
     0
    );
 
-  const fine=getPlayerFine(p);
+  const fine=
+   getPlayerFine(p);
 
   html+=`
 
@@ -2524,9 +2890,16 @@ function openMatch(index){
     <b>
 
      ${
-      Number(p.pos)===1?"🥇":
-      Number(p.pos)===2?"🥈":
-      Number(p.pos)===3?"🥉":"4️⃣"
+      Number(p.pos)===1
+      ?"🥇"
+      :
+      Number(p.pos)===2
+      ?"🥈"
+      :
+      Number(p.pos)===3
+      ?"🥉"
+      :
+      "4️⃣"
      }
 
      ${esc(p.name)}
@@ -2538,12 +2911,20 @@ function openMatch(index){
      ${Number(p.pos)<=2?"WIN":"LOSS"}
 
      •
-     ${Number(p.pos)>=3?money(LOSS_FEE):"৳0"}
+     ${
+      Number(p.pos)>=3
+      ?money(LOSS_FEE)
+      :"৳0"
+     }
 
      ${
       mistakes>0
       ?
-      " • "+mistakes+" ভুল • "+money(fine)+" Fine"
+      " • "+
+      mistakes+
+      " ভুল • "+
+      money(fine)+
+      " Fine"
       :
       ""
      }
@@ -2558,10 +2939,13 @@ function openMatch(index){
 
  html+=`</div>`;
 
- document.getElementById("md").innerHTML=html;
+ document.getElementById(
+  "md"
+ ).innerHTML=html;
 
- document.getElementById("modal")
- .classList.add("show");
+ document.getElementById(
+  "modal"
+ ).classList.add("show");
 
 }
 
@@ -2572,6 +2956,11 @@ function openMatch(index){
 
 async function load(){
 
+ const leagueResult=
+  document.getElementById(
+   "leagueResult"
+  );
+
  try{
 
   const url=
@@ -2579,43 +2968,54 @@ async function load(){
    "?action=list&t="+
    Date.now();
 
-  const r=await fetch(
-   url,
-   {
-    method:"GET",
-    cache:"no-store"
-   }
-  );
+  const r=
+   await fetch(
+    url,
+    {
+     method:"GET",
+     cache:"no-store"
+    }
+   );
 
   if(!r.ok){
+
    throw new Error(
     "HTTP "+r.status
    );
+
   }
 
-  const text=await r.text();
+  const text=
+   await r.text();
 
   let j;
 
   try{
+
    j=JSON.parse(text);
+
   }catch(e){
+
    throw new Error(
     "API JSON response পাওয়া যায়নি"
    );
+
   }
 
   if(!j.ok){
+
    throw new Error(
     j.error||
     j.message||
     "API error"
    );
+
   }
 
-  data=Array.isArray(j.matches)
-   ? j.matches
-   : [];
+  data=
+   Array.isArray(j.matches)
+   ?j.matches
+   :[];
 
   renderAll();
 
@@ -2623,13 +3023,22 @@ async function load(){
 
   console.error(e);
 
-  /*
-    Don't destroy old data if refresh fails.
-  */
+  if(leagueResult){
 
-  const msg=document.getElementById("msg");
+   leagueResult.innerHTML=`
+    <div class="empty">
+     ⚠️ Google Sheet data load হয়নি।
+     <br><br>
+     API connection check করো।
+    </div>
+   `;
 
-  if(msg && !data.length){
+  }
+
+  const msg=
+   document.getElementById("msg");
+
+  if(msg){
 
    msg.className="msg error";
 
@@ -2649,22 +3058,31 @@ async function load(){
 
 async function saveMatch(){
 
- const msg=document.getElementById("msg");
- const saveBtn=document.getElementById("saveBtn");
+ const msg=
+  document.getElementById("msg");
+
+ const saveBtn=
+  document.getElementById("saveBtn");
 
  msg.className="msg";
  msg.textContent="";
 
  const date=
-  document.getElementById("date").value;
+  document.getElementById(
+   "date"
+  ).value;
 
  const time=
-  document.getElementById("time").value;
+  document.getElementById(
+   "time"
+  ).value;
 
  if(!date){
 
   msg.className="msg error";
-  msg.textContent="Date নির্বাচন করো";
+  msg.textContent=
+   "Date নির্বাচন করো";
+
   return;
 
  }
@@ -2672,9 +3090,430 @@ async function saveMatch(){
  if(!time){
 
   msg.className="msg error";
-  msg.textContent="Time নির্বাচন করো";
+  msg.textContent=
+   "Time নির্বাচন করো";
+
   return;
 
  }
 
- const
+
+ /* -------------------------------
+    READ 4 PLAYERS
+ -------------------------------- */
+
+ const players=[];
+
+ const names={};
+
+ for(let i=1;i<=4;i++){
+
+  const name=
+   document.getElementById(
+    "n"+i
+   ).value.trim();
+
+  const pos=
+   Number(
+    document.getElementById(
+     "p"+i
+    ).value
+   );
+
+  const mistakes=
+   getMistakes(i);
+
+  if(!name){
+
+   msg.className="msg error";
+
+   msg.textContent=
+    "Player "+i+
+    " এর নাম দাও";
+
+   return;
+
+  }
+
+  const key=
+   name.toLowerCase();
+
+  if(names[key]){
+
+   msg.className="msg error";
+
+   msg.textContent=
+    "একই player দুইবার দেওয়া যাবে না";
+
+   return;
+
+  }
+
+  names[key]=true;
+
+  players.push({
+   name:name,
+   pos:pos,
+   mistakes:mistakes,
+   fine:mistakes*ERROR_FINE
+  });
+
+ }
+
+
+ /* -------------------------------
+    CHECK POSITIONS
+ -------------------------------- */
+
+ const positions=
+  players.map(
+   p=>p.pos
+  );
+
+ const uniquePositions=
+  new Set(positions);
+
+ if(
+  uniquePositions.size!==4 ||
+  !positions.includes(1) ||
+  !positions.includes(2) ||
+  !positions.includes(3) ||
+  !positions.includes(4)
+ ){
+
+  msg.className="msg error";
+
+  msg.textContent=
+   "1st, 2nd, 3rd এবং 4th—প্রতিটি position একবার করে দিতে হবে";
+
+  return;
+
+ }
+
+
+ /* -------------------------------
+    LOCK BUTTON
+ -------------------------------- */
+
+ saveBtn.disabled=true;
+
+ saveBtn.textContent=
+  "⏳ SAVING...";
+
+ msg.className="msg";
+
+ msg.textContent=
+  "Google Sheet-এ save হচ্ছে...";
+
+
+ /* -------------------------------
+    PAYLOAD
+ -------------------------------- */
+
+ const payload={
+  action:"add",
+  date:date,
+  time:time,
+  players:players
+ };
+
+
+ try{
+
+  /*
+    First try POST.
+    Backend যদি doPost() support করে,
+    এখানেই save হবে.
+  */
+
+  const response=
+   await fetch(
+    API_URL,
+    {
+     method:"POST",
+     headers:{
+      "Content-Type":
+       "text/plain;charset=utf-8"
+     },
+     body:JSON.stringify(payload)
+    }
+   );
+
+  const text=
+   await response.text();
+
+  let result=null;
+
+  try{
+   result=JSON.parse(text);
+  }catch(e){}
+
+
+  if(
+   result &&
+   result.ok===false
+  ){
+
+   throw new Error(
+    result.error||
+    result.message||
+    "Save failed"
+   );
+
+  }
+
+
+  /*
+    যদি backend response JSON দেয়,
+    তাহলে success ধরা হবে।
+  */
+
+  if(
+   result &&
+   result.ok===true
+  ){
+
+   saveSuccess();
+   return;
+
+  }
+
+
+  /*
+    POST response যদি পরিষ্কার না হয়,
+    GET fallback চেষ্টা করা হবে।
+  */
+
+  await saveMatchGET(payload);
+
+
+ }catch(e){
+
+  console.error(
+   "POST ERROR:",
+   e
+  );
+
+  try{
+
+   await saveMatchGET(payload);
+
+  }catch(error){
+
+   console.error(
+    "GET ERROR:",
+    error
+   );
+
+   msg.className="msg error";
+
+   msg.textContent=
+    "❌ Match save হয়নি। Backend-এর add API check করতে হবে।";
+
+   saveBtn.disabled=false;
+
+   saveBtn.textContent=
+    "💾 SAVE MATCH";
+
+  }
+
+ }
+
+}
+
+
+/* =====================================================
+   GET SAVE FALLBACK
+===================================================== */
+
+async function saveMatchGET(payload){
+
+ const encoded=
+  encodeURIComponent(
+   JSON.stringify(payload.players)
+  );
+
+ const url=
+  API_URL+
+  "?action=add"+
+  "&date="+
+  encodeURIComponent(payload.date)+
+  "&time="+
+  encodeURIComponent(payload.time)+
+  "&players="+
+  encoded+
+  "&t="+
+  Date.now();
+
+ const response=
+  await fetch(
+   url,
+   {
+    method:"GET",
+    cache:"no-store"
+   }
+  );
+
+ if(!response.ok){
+
+  throw new Error(
+   "HTTP "+response.status
+  );
+
+ }
+
+ const text=
+  await response.text();
+
+ let result=null;
+
+ try{
+  result=JSON.parse(text);
+ }catch(e){}
+
+ if(
+  result &&
+  result.ok===false
+ ){
+
+  throw new Error(
+   result.error||
+   result.message||
+   "Save failed"
+  );
+
+ }
+
+ saveSuccess();
+
+}
+
+
+/* =====================================================
+   SAVE SUCCESS
+===================================================== */
+
+function saveSuccess(){
+
+ const msg=
+  document.getElementById("msg");
+
+ const saveBtn=
+  document.getElementById("saveBtn");
+
+ msg.className="msg ok";
+
+ msg.textContent=
+  "✅ Match successfully saved!";
+
+ saveBtn.disabled=false;
+
+ saveBtn.textContent=
+  "💾 SAVE MATCH";
+
+ /*
+   Clear player fields
+ */
+
+ for(let i=1;i<=4;i++){
+
+  const name=
+   document.getElementById(
+    "n"+i
+   );
+
+  const mistake=
+   document.getElementById(
+    "mistake"+i
+   );
+
+  if(name){
+   name.value="";
+  }
+
+  if(mistake){
+   mistake.textContent="0";
+  }
+
+  updateFinePreview(i);
+
+ }
+
+ /*
+   Reload Sheet data
+ */
+
+ setTimeout(
+  ()=>{
+   load();
+  },
+  800
+ );
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+function init(){
+
+ const date=
+  document.getElementById(
+   "date"
+  );
+
+ const time=
+  document.getElementById(
+   "time"
+  );
+
+ if(date){
+  date.value=today();
+ }
+
+ if(time){
+  time.value=currentTime();
+ }
+
+ buildSlots();
+
+ renderAll();
+
+ load();
+
+}
+
+
+/* =====================================================
+   MODAL CLICK OUTSIDE
+===================================================== */
+
+document.getElementById(
+ "modal"
+).addEventListener(
+ "click",
+ function(e){
+
+  if(e.target===this){
+   closeModal();
+  }
+
+ }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+ "DOMContentLoaded",
+ init
+);
+
+</script>
+
+</body>
+ </html>
