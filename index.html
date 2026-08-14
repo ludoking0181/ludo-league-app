@@ -36,7 +36,7 @@ header{
  padding:16px;
  background:#070a12e8;
  backdrop-filter:blur(16px);
- border-bottom:1px solid var(--line)
+ border-bottom:1px solid var(--line);
 }
 
 header div{
@@ -44,14 +44,14 @@ header div{
  margin:auto;
  display:flex;
  justify-content:space-between;
- align-items:center
+ align-items:center;
 }
 
 h1{font-size:20px;margin:0}
 
 .live{
  font-size:10px;
- color:var(--green)
+ color:var(--green);
 }
 
 nav{
@@ -64,7 +64,7 @@ nav{
  padding:9px;
  background:#070a12e8;
  backdrop-filter:blur(16px);
- border-bottom:1px solid var(--line)
+ border-bottom:1px solid var(--line);
 }
 
 nav button{
@@ -74,19 +74,20 @@ nav button{
  background:#151d2e;
  color:#b9c3d4;
  font-weight:700;
- white-space:nowrap
+ white-space:nowrap;
 }
 
 nav button.active,
-.save{
+.save,
+.primary{
  background:linear-gradient(135deg,#7c3aed,#2563eb);
- color:#fff
+ color:#fff;
 }
 
 main{
  max-width:900px;
  margin:auto;
- padding:14px 12px 80px
+ padding:14px 12px 80px;
 }
 
 .page{display:none}
@@ -96,31 +97,31 @@ main{
  background:linear-gradient(135deg,#4c1d95aa,#1d4ed888);
  border-radius:24px;
  padding:20px;
- margin-bottom:12px
+ margin-bottom:12px;
 }
 
 .hero h2{
  margin:4px 0;
- font-size:27px
+ font-size:27px;
 }
 
 .hero p{
  margin:0;
  color:#cbd5e1;
- font-size:12px
+ font-size:12px;
 }
 
 .grid{
  display:grid;
  grid-template-columns:repeat(2,1fr);
- gap:9px
+ gap:9px;
 }
 
 .stat{
  background:#ffffff08;
  border:1px solid var(--line);
  border-radius:16px;
- padding:13px
+ padding:13px;
 }
 
 .stat b{font-size:20px}
@@ -128,7 +129,7 @@ main{
 .stat span{
  display:block;
  color:var(--muted);
- font-size:10px
+ font-size:10px;
 }
 
 .card{
@@ -136,12 +137,12 @@ main{
  border:1px solid var(--line);
  border-radius:20px;
  padding:15px;
- margin-bottom:12px
+ margin-bottom:12px;
 }
 
 h3{
  font-size:15px;
- margin:0 0 12px
+ margin:0 0 12px;
 }
 
 .sectionTitle{
@@ -149,20 +150,20 @@ h3{
  justify-content:space-between;
  align-items:center;
  gap:8px;
- margin-bottom:10px
+ margin-bottom:10px;
 }
 
 .formgrid{
  display:grid;
  grid-template-columns:1fr 1fr;
- gap:9px
+ gap:9px;
 }
 
 .field label{
  display:block;
  color:var(--muted);
  font-size:10px;
- margin-bottom:5px
+ margin-bottom:5px;
 }
 
 .field input,
@@ -173,7 +174,7 @@ h3{
  border:1px solid var(--line);
  border-radius:11px;
  padding:11px;
- outline:none
+ outline:none;
 }
 
 .player{
@@ -181,22 +182,22 @@ h3{
  border:1px solid var(--line);
  border-radius:15px;
  margin-bottom:8px;
- background:#ffffff04
+ background:#ffffff04;
 }
 
 .playerTop{
  display:flex;
  justify-content:space-between;
  align-items:center;
- margin-bottom:8px
+ margin-bottom:8px;
 }
 
 .playerTop b{font-size:12px}
 
 .row{
  display:grid;
- grid-template-columns:1fr 82px;
- gap:7px
+ grid-template-columns:1fr 100px;
+ gap:7px;
 }
 
 .row input,
@@ -207,26 +208,58 @@ h3{
  border:1px solid var(--line);
  border-radius:11px;
  padding:11px;
- outline:none
+ outline:none;
 }
 
-.mistake{
+.mistakeBox{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+ margin-top:9px;
+ padding:9px;
+ background:#ffffff05;
+ border:1px solid var(--line);
+ border-radius:12px;
+}
+
+.mistakeLabel{
+ color:#cbd5e1;
+ font-size:11px;
+}
+
+.stepper{
  display:flex;
  align-items:center;
  gap:7px;
- margin-top:8px;
- color:#cbd5e1;
- font-size:11px
 }
 
-.mistake input{
- width:17px;
- height:17px
+.stepper button{
+ width:32px;
+ height:32px;
+ border:0;
+ border-radius:9px;
+ background:#1f2937;
+ color:#fff;
+ font-size:18px;
+ font-weight:900;
+}
+
+.stepper input{
+ width:42px;
+ height:32px;
+ text-align:center;
+ background:#090f1d;
+ color:#fff;
+ border:1px solid var(--line);
+ border-radius:8px;
+ font-weight:800;
 }
 
 .finePreview{
  color:var(--gold);
- font-weight:800
+ font-weight:800;
+ white-space:nowrap;
 }
 
 .save{
@@ -235,7 +268,7 @@ h3{
  border:0;
  border-radius:15px;
  margin-top:7px;
- font-weight:900
+ font-weight:900;
 }
 
 .msg{
@@ -243,14 +276,14 @@ h3{
  color:var(--muted);
  font-size:11px;
  margin-top:8px;
- min-height:16px
+ min-height:16px;
 }
 
 .leagueTabs{
  display:grid;
  grid-template-columns:repeat(3,1fr);
  gap:7px;
- margin-bottom:12px
+ margin-bottom:12px;
 }
 
 .leagueTabs button{
@@ -259,53 +292,53 @@ h3{
  color:#aeb9ca;
  padding:10px 5px;
  border-radius:12px;
- font-weight:800
+ font-weight:800;
 }
 
 .leagueTabs button.active{
  background:linear-gradient(135deg,#7c3aed,#2563eb);
  color:white;
- border-color:transparent
+ border-color:transparent;
 }
 
 .leagueLabel{
  font-size:10px;
  color:#94a3b8;
- margin-bottom:3px
+ margin-bottom:3px;
 }
 
 .leagueWinner{
  font-size:19px;
- font-weight:900
+ font-weight:900;
 }
 
 .leagueSub{
  font-size:11px;
- color:#94a3b8
+ color:#94a3b8;
 }
 
 .moneyBox{
  display:grid;
  grid-template-columns:1fr 1fr;
  gap:8px;
- margin-top:10px
+ margin-top:10px;
 }
 
 .moneyMini{
  background:#ffffff06;
  border:1px solid var(--line);
  border-radius:13px;
- padding:10px
+ padding:10px;
 }
 
 .moneyMini b{
  display:block;
- font-size:16px
+ font-size:16px;
 }
 
 .moneyMini span{
  color:#94a3b8;
- font-size:9px
+ font-size:9px;
 }
 
 .topCard{
@@ -316,43 +349,39 @@ h3{
  border:1px solid var(--line);
  border-radius:16px;
  margin-bottom:8px;
- background:#ffffff05
+ background:#ffffff05;
 }
 
 .topMedal{
  font-size:25px;
  width:38px;
- text-align:center
+ text-align:center;
 }
 
-.topInfo{
- flex:1
-}
+.topInfo{flex:1}
 
 .topInfo b{
  display:block;
- font-size:14px
+ font-size:14px;
 }
 
 .topInfo span{
  display:block;
  font-size:10px;
  color:#94a3b8;
- margin-top:3px
+ margin-top:3px;
 }
 
-.topPaid{
- text-align:right
-}
+.topPaid{text-align:right}
 
 .topPaid b{
  display:block;
- color:var(--gold)
+ color:var(--gold);
 }
 
 .topPaid span{
  color:#64748b;
- font-size:9px
+ font-size:9px;
 }
 
 .matchCard{
@@ -361,47 +390,43 @@ h3{
  border-radius:16px;
  margin-bottom:8px;
  background:#ffffff04;
- cursor:pointer
+ cursor:pointer;
 }
 
 .matchTop{
  display:flex;
  justify-content:space-between;
  align-items:center;
- margin-bottom:8px
+ margin-bottom:8px;
 }
 
 .matchDate{
  font-size:10px;
- color:#94a3b8
+ color:#94a3b8;
 }
 
 .matchMoney{
  font-size:11px;
  color:var(--gold);
- font-weight:800
+ font-weight:800;
 }
 
 .matchPlayers{
  font-size:12px;
- line-height:1.7
+ line-height:1.7;
 }
 
 .filterGrid{
  display:grid;
  grid-template-columns:1fr 1fr 1fr;
- gap:7px
-}
-
-.filterGrid .field:nth-child(1){
- grid-column:span 1
+ gap:7px;
 }
 
 .filterActions{
  display:grid;
  grid-template-columns:1fr 1fr;
  gap:7px;
- margin-top:8px
+ margin-top:8px;
 }
 
 .filterBtn{
@@ -410,17 +435,17 @@ h3{
  padding:11px;
  font-weight:800;
  background:#1f2937;
- color:white
+ color:white;
 }
 
 .filterBtn.primary{
- background:linear-gradient(135deg,#7c3aed,#2563eb)
+ background:linear-gradient(135deg,#7c3aed,#2563eb);
 }
 
 table{
  width:100%;
  border-collapse:collapse;
- font-size:12px
+ font-size:12px;
 }
 
 th{
@@ -428,33 +453,33 @@ th{
  color:#7f8da3;
  font-size:10px;
  padding:8px;
- border-bottom:1px solid var(--line)
+ border-bottom:1px solid var(--line);
 }
 
 td{
  padding:10px 8px;
- border-bottom:1px solid var(--line)
+ border-bottom:1px solid var(--line);
 }
 
 .badge{
  padding:4px 7px;
  border-radius:8px;
  font-size:10px;
- font-weight:800
+ font-weight:800;
 }
 
 .win{
  background:#34d3991c;
- color:#34d399
+ color:#34d399;
 }
 
 .loss{
  background:#fb71851c;
- color:#fb7185
+ color:#fb7185;
 }
 
 .fine{
- color:#fbbf24
+ color:#fbbf24;
 }
 
 .search{
@@ -464,19 +489,19 @@ td{
  border:1px solid var(--line);
  border-radius:12px;
  color:white;
- margin-bottom:9px
+ margin-bottom:9px;
 }
 
 .empty{
  text-align:center;
  color:var(--muted);
- padding:22px
+ padding:22px;
 }
 
 .clickHint{
  color:#64748b;
  font-size:9px;
- margin-top:6px
+ margin-top:6px;
 }
 
 .modal{
@@ -486,7 +511,7 @@ td{
  background:#000b;
  z-index:30;
  padding:18px;
- overflow:auto
+ overflow:auto;
 }
 
 .modal.show{display:block}
@@ -497,7 +522,7 @@ td{
  background:#0d1320;
  border:1px solid var(--line);
  border-radius:22px;
- padding:17px
+ padding:17px;
 }
 
 .close{
@@ -506,22 +531,24 @@ td{
  color:white;
  border:0;
  border-radius:9px;
- padding:7px
+ padding:7px;
 }
 
 .detailPlayer{
  display:flex;
  justify-content:space-between;
  align-items:center;
+ gap:10px;
  padding:11px;
- border-bottom:1px solid var(--line)
+ border-bottom:1px solid var(--line);
 }
 
 .detailPlayer b{font-size:13px}
 
 .detailPlayer span{
  color:#94a3b8;
- font-size:11px
+ font-size:11px;
+ text-align:right;
 }
 
 @media(min-width:700px){
@@ -530,10 +557,10 @@ td{
 
 @media(max-width:600px){
  .filterGrid{
-  grid-template-columns:1fr 1fr
+  grid-template-columns:1fr 1fr;
  }
  .filterGrid .field:nth-child(3){
-  grid-column:span 2
+  grid-column:span 2;
  }
 }
 </style>
@@ -565,7 +592,7 @@ td{
  <div class="hero">
   <small>CURRENT LEAGUE</small>
   <h2>বন্ধুদের Ludo League</h2>
-  <p>🥇 1st / 🥈 2nd = ৳0 • 🥉 3rd / 4th = ৳20 • ভুল = ৳10</p>
+  <p>🥇 1st / 🥈 2nd = ৳0 • 🥉 3rd / 4th = ৳20 • প্রতি ভুল = ৳10</p>
  </div>
 
  <div class="leagueTabs">
@@ -584,11 +611,10 @@ td{
  </div>
 
  <div class="card">
-  <div class="sectionTitle">
-   <h3>📊 League Overview</h3>
-  </div>
+  <h3>📊 League Overview</h3>
 
   <div class="grid">
+
    <div class="stat">
     <b id="matches">0</b>
     <span>Total Matches</span>
@@ -608,6 +634,7 @@ td{
     <b id="fines">৳0</b>
     <span>Total Fine</span>
    </div>
+
   </div>
  </div>
 
@@ -655,8 +682,8 @@ td{
   </div>
 
   <p style="color:#94a3b8;font-size:11px">
-   ৪ জনের নাম ও position দাও। ৩য়/৪র্থ হলে ৳20 auto যোগ হবে।
-   ভুল করলে ☑️ টিক দাও — ৳10 Fine auto হবে।
+   ৪ জনের নাম ও position দাও। ৩য়/৪র্থ হলে ৳20 Loss Fee।
+   প্রতিটি ভুলের জন্য ৳10 Fine।
   </p>
 
   <div id="slots"></div>
@@ -729,6 +756,7 @@ td{
 
    <div class="field">
     <label>DAY</label>
+
     <select id="filterDay">
      <option value="">All Days</option>
      <option value="0">Sunday</option>
@@ -739,10 +767,12 @@ td{
      <option value="5">Friday</option>
      <option value="6">Saturday</option>
     </select>
+
    </div>
 
    <div class="field">
     <label>TIME</label>
+
     <select id="filterTime">
      <option value="">All Time</option>
      <option value="morning">Morning (06–11)</option>
@@ -750,17 +780,20 @@ td{
      <option value="evening">Evening (18–23)</option>
      <option value="night">Night (00–05)</option>
     </select>
+
    </div>
 
   </div>
 
   <div class="filterActions">
 
-   <button class="filterBtn primary" onclick="applyHistoryFilter()">
+   <button class="filterBtn primary"
+           onclick="applyHistoryFilter()">
     🔍 SEARCH
    </button>
 
-   <button class="filterBtn" onclick="clearHistoryFilter()">
+   <button class="filterBtn"
+           onclick="clearHistoryFilter()">
     ✕ CLEAR
    </button>
 
@@ -773,7 +806,9 @@ td{
 
   <div class="sectionTitle">
    <h3>📜 Match History</h3>
-   <span id="historyCount" style="font-size:10px;color:#94a3b8"></span>
+   <span id="historyCount"
+         style="font-size:10px;color:#94a3b8">
+   </span>
   </div>
 
   <div style="overflow:auto">
@@ -829,7 +864,8 @@ td{
 
  <div class="modalbox">
 
-  <button class="close" onclick="closeModal()">✕</button>
+  <button class="close"
+          onclick="closeModal()">✕</button>
 
   <h2 id="mn"></h2>
 
@@ -855,7 +891,7 @@ let filteredHistory = [];
 
 
 /* =========================
-   BASIC FUNCTIONS
+   BASIC
 ========================= */
 
 function page(id,btn){
@@ -870,6 +906,7 @@ function page(id,btn){
  .forEach(x=>x.classList.remove("active"));
 
  btn.classList.add("active");
+
 }
 
 
@@ -889,48 +926,171 @@ function esc(s){
 
 function money(n){
 
- return "৳"+Number(n||0).toLocaleString("en-US");
+ return "৳"+Number(n||0)
+ .toLocaleString("en-US");
 
 }
 
 
 function today(){
 
- const d = new Date();
+ const d=new Date();
 
- const y = d.getFullYear();
- const m = String(d.getMonth()+1).padStart(2,"0");
- const day = String(d.getDate()).padStart(2,"0");
+ const y=d.getFullYear();
+ const m=String(d.getMonth()+1).padStart(2,"0");
+ const day=String(d.getDate()).padStart(2,"0");
 
  return `${y}-${m}-${day}`;
 
 }
 
 
-function matchDate(m){
+function nowTime(){
 
- if(!m.date) return null;
+ const d=new Date();
 
- const time = m.time || "00:00";
-
- const d = new Date(`${m.date}T${time}:00`);
-
- if(isNaN(d.getTime())) return null;
-
- return d;
+ return String(d.getHours()).padStart(2,"0")
+ +":"
+ +String(d.getMinutes()).padStart(2,"0");
 
 }
 
 
-function formatDate(date){
+function matchDate(m){
 
- if(!date) return "";
+ if(!m || !m.date) return null;
 
- return date.toLocaleDateString("en-GB",{
+ let date=String(m.date).slice(0,10);
+ let time=String(m.time||"00:00").slice(0,5);
+
+ const d=new Date(date+"T"+time+":00");
+
+ return isNaN(d.getTime()) ? null : d;
+
+}
+
+
+function formatDate(d){
+
+ if(!d) return "";
+
+ return d.toLocaleDateString("en-GB",{
   day:"2-digit",
   month:"short",
   year:"numeric"
  });
+
+}
+
+
+/* =========================
+   FINE / MISTAKE
+========================= */
+
+function getMistakes(p){
+
+ /*
+  নতুন data:
+  mistakes থাকবে।
+
+  পুরোনো data:
+  mistakes না থাকলে
+  fine ÷ 10 থেকে বের করা হবে।
+ */
+
+ if(p && p.mistakes !== undefined &&
+    p.mistakes !== null &&
+    p.mistakes !== ""){
+
+  const n=Number(p.mistakes);
+
+  if(Number.isFinite(n))
+   return Math.max(0,Math.floor(n));
+
+ }
+
+ const fine=Number(p?.fine||0);
+
+ return Math.max(
+  0,
+  Math.floor(fine/ERROR_FINE)
+ );
+
+}
+
+
+function getFine(p){
+
+ /*
+  mistakes থাকলে mistakes × 10।
+  না থাকলে পুরোনো fine ব্যবহার।
+ */
+
+ if(p && p.mistakes !== undefined &&
+    p.mistakes !== null &&
+    p.mistakes !== ""){
+
+  return getMistakes(p)*ERROR_FINE;
+
+ }
+
+ return Number(p?.fine||0);
+
+}
+
+
+function updateMistake(i,change){
+
+ const input=
+ document.getElementById("m"+i);
+
+ let n=Number(input.value||0);
+
+ n+=change;
+
+ if(n<0)n=0;
+
+ if(n>99)n=99;
+
+ input.value=n;
+
+ previewFine(i);
+
+}
+
+
+function previewFine(i){
+
+ const n=
+ Number(
+  document.getElementById("m"+i)?.value||0
+ );
+
+ const fine=n*ERROR_FINE;
+
+ const fineEl=
+ document.getElementById("fp"+i);
+
+ const hintEl=
+ document.getElementById("x"+i);
+
+ if(fineEl){
+
+  fineEl.textContent=
+   fine>0
+   ? "Fine "+money(fine)
+   : "No Fine";
+
+ }
+
+ if(hintEl){
+
+  hintEl.textContent=
+   n>0
+   ? n+" ভুল = "+money(fine)
+   : "0 ভুল";
+
+ }
 
 }
 
@@ -945,15 +1105,17 @@ function buildSlots(){
 
  for(let i=1;i<=4;i++){
 
-  h += `
+  h+=`
+
   <div class="player">
 
    <div class="playerTop">
 
     <b>PLAYER ${i}</b>
 
-    <span class="finePreview" id="fp${i}">
-     Fine ৳0
+    <span class="finePreview"
+          id="fp${i}">
+     No Fine
     </span>
 
    </div>
@@ -964,39 +1126,73 @@ function buildSlots(){
      id="n${i}"
      list="names"
      placeholder="নাম"
+     autocomplete="off"
     >
 
     <select id="p${i}">
+
      <option value="1">🥇 1st</option>
      <option value="2">🥈 2nd</option>
      <option value="3">🥉 3rd</option>
      <option value="4">4️⃣ 4th</option>
+
     </select>
 
    </div>
 
-   <label class="mistake">
+   <div class="mistakeBox">
 
-    <input
-     id="m${i}"
-     type="checkbox"
-     onchange="previewFine(${i})"
-    >
-
-    খেলার ভুল করেছে
-
-    <span class="finePreview" id="x${i}">
-     +৳0
+    <span class="mistakeLabel">
+     ❌ ভুলের সংখ্যা
     </span>
 
-   </label>
+    <div class="stepper">
+
+     <button
+      type="button"
+      onclick="updateMistake(${i},-1)">
+      −
+     </button>
+
+     <input
+      id="m${i}"
+      type="number"
+      min="0"
+      max="99"
+      value="0"
+      onchange="previewFine(${i})"
+     >
+
+     <button
+      type="button"
+      onclick="updateMistake(${i},1)">
+      +
+     </button>
+
+    </div>
+
+   </div>
+
+   <div style="
+    margin-top:6px;
+    text-align:right;
+    font-size:10px;
+    color:#94a3b8;
+   " id="x${i}">
+    0 ভুল
+   </div>
 
   </div>
+
   `;
 
  }
 
  document.getElementById("slots").innerHTML=h;
+
+ let old=document.getElementById("names");
+
+ if(old)old.remove();
 
  let dl=document.createElement("datalist");
 
@@ -1007,18 +1203,21 @@ function buildSlots(){
 }
 
 
-function previewFine(i){
+function resetSlots(){
 
- const fine =
- document.getElementById("m"+i).checked
- ? ERROR_FINE
- : 0;
+ for(let i=1;i<=4;i++){
 
- document.getElementById("x"+i)
- .textContent="+"+money(fine);
+  const n=document.getElementById("n"+i);
+  const m=document.getElementById("m"+i);
+  const p=document.getElementById("p"+i);
 
- document.getElementById("fp"+i)
- .textContent="Fine "+money(fine);
+  if(n)n.value="";
+  if(m)m.value=0;
+  if(p)p.value="1";
+
+  previewFine(i);
+
+ }
 
 }
 
@@ -1035,17 +1234,21 @@ function buildSummary(){
 
   (m.players||[]).forEach(x=>{
 
-   const key=x.name.toLowerCase();
+   if(!x || !x.name)return;
+
+   const key=
+    String(x.name).trim().toLowerCase();
 
    if(!map[key]){
 
     map[key]={
-     name:x.name,
+     name:String(x.name).trim(),
      matches:0,
      win:0,
      loss:0,
      fine:0,
      paid:0,
+     mistakes:0,
      h:[]
     };
 
@@ -1053,15 +1256,18 @@ function buildSummary(){
 
    const p=map[key];
 
+   const pos=Number(x.pos||0);
+   const mistakes=getMistakes(x);
+   const fine=getFine(x);
+
    p.matches++;
+   p.mistakes+=mistakes;
+   p.fine+=fine;
 
-   p.fine += Number(x.fine||0);
-
-   if(Number(x.pos)>=3){
+   if(pos>=3){
 
     p.loss++;
-
-    p.paid += LOSS_FEE;
+    p.paid+=LOSS_FEE;
 
    }else{
 
@@ -1069,12 +1275,16 @@ function buildSummary(){
 
    }
 
-   p.paid += Number(x.fine||0);
+   p.paid+=fine;
 
    p.h.push({
+
     ...x,
+    mistakes,
+    fine,
     date:m.date,
     time:m.time
+
    });
 
   });
@@ -1083,18 +1293,19 @@ function buildSummary(){
 
 
  /*
-   Ranking:
-   1. বেশি Win
-   2. কম Loss
-   3. কম Fine
-   4. বেশি Matches
+  Ranking:
+  1. বেশি Win
+  2. কম Loss
+  3. কম Fine
+  4. বেশি Matches
  */
 
- summary=Object.values(map).sort((a,b)=>
-   b.win-a.win ||
-   a.loss-b.loss ||
-   a.fine-b.fine ||
-   b.matches-a.matches
+ summary=
+ Object.values(map).sort((a,b)=>
+  b.win-a.win ||
+  a.loss-b.loss ||
+  a.fine-b.fine ||
+  b.matches-a.matches
  );
 
 }
@@ -1120,18 +1331,15 @@ function renderAll(){
 
  document.getElementById("fines")
  .textContent=
- money(summary.reduce((a,p)=>a+p.fine,0));
+ money(
+  summary.reduce((a,p)=>a+p.fine,0)
+ );
 
  renderTop();
-
  renderRank();
-
  renderHistory();
-
  renderPlayers();
-
  renderTodayMatches();
-
  renderLeague();
 
  const dl=document.getElementById("names");
@@ -1139,9 +1347,9 @@ function renderAll(){
  if(dl){
 
   dl.innerHTML=
-  summary
-  .map(p=>`<option value="${esc(p.name)}">`)
-  .join("");
+   summary
+   .map(p=>`<option value="${esc(p.name)}">`)
+   .join("");
 
  }
 
@@ -1149,7 +1357,7 @@ function renderAll(){
 
 
 /* =========================
-   TOP 3
+   TOP
 ========================= */
 
 function renderTop(){
@@ -1176,6 +1384,7 @@ function renderTop(){
      ${p.win} Win •
      ${p.loss} Loss •
      ${p.matches} Matches •
+     ${p.mistakes} ভুল •
      ${money(p.fine)} Fine
     </span>
 
@@ -1193,15 +1402,33 @@ function renderTop(){
 
  `).join("")
 
- || `<div class="empty">
-      এখনও কোনো ম্যাচ হয়নি
-    </div>`;
+ ||
+ `<div class="empty">
+  এখনও কোনো ম্যাচ হয়নি
+ </div>`;
 
 }
 
 
 /* =========================
-   TODAY'S MATCHES
+   MATCH MONEY
+========================= */
+
+function matchMoney(m){
+
+ return (m.players||[]).reduce(
+  (total,p)=>
+   total+
+   (Number(p.pos)>=3 ? LOSS_FEE : 0)+
+   getFine(p),
+ 0
+ );
+
+}
+
+
+/* =========================
+   TODAY
 ========================= */
 
 function getTodayMatches(){
@@ -1209,21 +1436,10 @@ function getTodayMatches(){
  const t=today();
 
  return data
- .filter(m=>m.date===t)
+ .filter(m=>String(m.date).slice(0,10)===t)
  .sort((a,b)=>
-  String(b.time||"").localeCompare(String(a.time||""))
- );
-
-}
-
-
-function matchMoney(m){
-
- return (m.players||[]).reduce((total,p)=>
-  total +
-  (Number(p.pos)>=3 ? LOSS_FEE : 0) +
-  Number(p.fine||0),
- 0
+  String(b.time||"")
+  .localeCompare(String(a.time||""))
  );
 
 }
@@ -1234,9 +1450,11 @@ function renderTodayMatches(){
  const arr=getTodayMatches();
 
  document.getElementById("todayCount")
- .textContent=arr.length+" match"+(arr.length===1?"":"es");
+ .textContent=
+ arr.length+" match"+(arr.length===1?"":"es");
 
- const box=document.getElementById("todayMatches");
+ const box=
+ document.getElementById("todayMatches");
 
  if(!arr.length){
 
@@ -1252,10 +1470,11 @@ function renderTodayMatches(){
 
  }
 
- box.innerHTML=arr.map((m,i)=>`
+ box.innerHTML=
+ arr.map((m,i)=>`
 
   <div class="matchCard"
-   onclick="openMatch(${data.indexOf(m)})">
+       onclick="openMatch(${data.indexOf(m)})">
 
    <div class="matchTop">
 
@@ -1272,14 +1491,25 @@ function renderTodayMatches(){
 
    <div class="matchPlayers">
 
-    ${(m.players||[]).map(p=>`
+    ${(m.players||[]).map(p=>{
 
-     ${Number(p.pos)<=2?"🏆":"❌"}
-     ${esc(p.name)}
-     — ${Number(p.pos)<=2?"Win":"Loss"}
-     ${p.fine?` <span class="fine">+${money(p.fine)} Fine</span>`:""}
+     const fine=getFine(p);
+     const mistakes=getMistakes(p);
 
-    `).join("<br>")}
+     return `
+
+      ${Number(p.pos)<=2?"🏆":"❌"}
+      ${esc(p.name)}
+      — ${Number(p.pos)<=2?"Win":"Loss"}
+
+      ${mistakes?
+       ` • ${mistakes} ভুল • <span class="fine">${money(fine)} Fine</span>`
+       :""
+      }
+
+     `;
+
+    }).join("<br>")}
 
    </div>
 
@@ -1295,7 +1525,7 @@ function renderTodayMatches(){
 
 
 /* =========================
-   CURRENT LEAGUE
+   LEAGUE
 ========================= */
 
 function setLeague(type,btn){
@@ -1314,17 +1544,18 @@ function setLeague(type,btn){
 
 function getWeekStart(d){
 
- const x=new Date(d);
-
  /*
-  Thursday = 4
+  বৃহস্পতিবার = 4
+  Thursday 00:00
  */
+
+ const x=new Date(d);
 
  const day=x.getDay();
 
  let diff=day-4;
 
- if(diff<0) diff+=7;
+ if(diff<0)diff+=7;
 
  x.setDate(x.getDate()-diff);
 
@@ -1360,16 +1591,13 @@ function getMonthMatches(){
 
  const now=new Date();
 
- const y=now.getFullYear();
- const mo=now.getMonth();
-
  return data.filter(m=>{
 
   const d=matchDate(m);
 
   return d &&
-   d.getFullYear()===y &&
-   d.getMonth()===mo;
+   d.getFullYear()===now.getFullYear() &&
+   d.getMonth()===now.getMonth();
 
  });
 
@@ -1380,9 +1608,8 @@ function get24hMatches(){
 
  const now=new Date();
 
- const start=new Date(
-  now.getTime()-24*60*60*1000
- );
+ const start=
+  new Date(now.getTime()-86400000);
 
  return data.filter(m=>{
 
@@ -1391,6 +1618,66 @@ function get24hMatches(){
   return d && d>=start && d<=now;
 
  });
+
+}
+
+
+function periodRanking(arr){
+
+ const players={};
+
+ arr.forEach(m=>{
+
+  (m.players||[]).forEach(p=>{
+
+   if(!p.name)return;
+
+   const key=
+    String(p.name).trim().toLowerCase();
+
+   if(!players[key]){
+
+    players[key]={
+     name:String(p.name).trim(),
+     win:0,
+     loss:0,
+     fine:0,
+     paid:0,
+     mistakes:0
+    };
+
+   }
+
+   const q=players[key];
+
+   const pos=Number(p.pos||0);
+   const mistakes=getMistakes(p);
+   const fine=getFine(p);
+
+   if(pos<=2){
+
+    q.win++;
+
+   }else{
+
+    q.loss++;
+    q.paid+=LOSS_FEE;
+
+   }
+
+   q.mistakes+=mistakes;
+   q.fine+=fine;
+   q.paid+=fine;
+
+  });
+
+ });
+
+ return Object.values(players).sort((a,b)=>
+  b.win-a.win ||
+  a.loss-b.loss ||
+  a.fine-b.fine
+ );
 
 }
 
@@ -1428,7 +1715,8 @@ function renderLeague(){
  .textContent=
  arr.length+" match"+(arr.length===1?"":"es");
 
- const box=document.getElementById("leagueResult");
+ const box=
+ document.getElementById("leagueResult");
 
  if(!arr.length){
 
@@ -1444,53 +1732,7 @@ function renderLeague(){
 
  }
 
- /*
-  Period summary
- */
-
- const players={};
-
- arr.forEach(m=>{
-
-  (m.players||[]).forEach(p=>{
-
-   const key=p.name.toLowerCase();
-
-   if(!players[key]){
-
-    players[key]={
-     name:p.name,
-     win:0,
-     loss:0,
-     fine:0,
-     paid:0
-    };
-
-   }
-
-   if(Number(p.pos)<=2){
-
-    players[key].win++;
-
-   }else{
-
-    players[key].loss++;
-    players[key].paid+=LOSS_FEE;
-
-   }
-
-   players[key].fine+=Number(p.fine||0);
-   players[key].paid+=Number(p.fine||0);
-
-  });
-
- });
-
- const ranked=Object.values(players).sort((a,b)=>
-  b.win-a.win ||
-  a.loss-b.loss ||
-  a.fine-b.fine
- );
+ const ranked=periodRanking(arr);
 
  const winner=ranked[0];
 
@@ -1518,6 +1760,7 @@ function renderLeague(){
     <div class="leagueSub">
      ${winner.win} Win •
      ${winner.loss} Loss •
+     ${winner.mistakes} ভুল •
      ${money(winner.fine)} Fine
     </div>
 
@@ -1548,7 +1791,7 @@ function renderLeague(){
    ${arr.slice(0,5).map(m=>`
 
     <div class="matchCard"
-     onclick="openMatch(${data.indexOf(m)})">
+         onclick="openMatch(${data.indexOf(m)})">
 
      <div class="matchTop">
 
@@ -1586,8 +1829,10 @@ function renderLeague(){
  if(arr.length>5){
 
   html+=`
-   <div class="clickHint" style="text-align:center">
-    আরও ${arr.length-5} টি ম্যাচ History-তে দেখা যাবে।
+   <div class="clickHint"
+        style="text-align:center">
+    আরও ${arr.length-5}
+    টি ম্যাচ History-তে দেখা যাবে।
    </div>
   `;
 
@@ -1604,13 +1849,15 @@ function renderLeague(){
 
 function renderRank(){
 
- let q=
- (document.getElementById("search")?.value||"")
- .toLowerCase();
+ const q=
+  (document.getElementById("search")?.value||"")
+  .trim()
+  .toLowerCase();
 
- let a=summary.filter(p=>
-  p.name.toLowerCase().includes(q)
- );
+ const a=
+  summary.filter(p=>
+   p.name.toLowerCase().includes(q)
+  );
 
  document.getElementById("rankBody").innerHTML=
 
@@ -1625,8 +1872,14 @@ function renderRank(){
    <td>
 
     <button
-     style="background:none;border:0;color:white;font-weight:800"
-     onclick="profile('${esc(p.name).replace(/'/g,"\\'")}')">
+     style="
+      background:none;
+      border:0;
+      color:white;
+      font-weight:800;
+      padding:0;
+     "
+     onclick="profileByKey('${encodeURIComponent(p.name)}')">
 
      ${esc(p.name)}
 
@@ -1637,11 +1890,15 @@ function renderRank(){
    <td>${p.matches}</td>
 
    <td>
-    <span class="badge win">${p.win}</span>
+    <span class="badge win">
+     ${p.win}
+    </span>
    </td>
 
    <td>
-    <span class="badge loss">${p.loss}</span>
+    <span class="badge loss">
+     ${p.loss}
+    </span>
    </td>
 
    <td class="fine">
@@ -1658,10 +1915,11 @@ function renderRank(){
 
  ||
  `<tr>
-   <td colspan="7" class="empty">
-    No data
-   </td>
-  </tr>`;
+  <td colspan="7"
+      class="empty">
+   No data
+  </td>
+ </tr>`;
 
 }
 
@@ -1673,13 +1931,13 @@ function renderRank(){
 function getFilteredHistory(){
 
  const date=
- document.getElementById("filterDate").value;
+  document.getElementById("filterDate").value;
 
  const day=
- document.getElementById("filterDay").value;
+  document.getElementById("filterDay").value;
 
  const time=
- document.getElementById("filterTime").value;
+  document.getElementById("filterTime").value;
 
  return data.filter(m=>{
 
@@ -1687,7 +1945,8 @@ function getFilteredHistory(){
 
   if(!d)return false;
 
-  if(date && m.date!==date)
+  if(date &&
+     String(m.date).slice(0,10)!==date)
    return false;
 
   if(day!=="" &&
@@ -1699,19 +1958,19 @@ function getFilteredHistory(){
    const h=d.getHours();
 
    if(time==="morning" &&
-      !(h>=6 && h<=11))
+      !(h>=6&&h<=11))
     return false;
 
    if(time==="afternoon" &&
-      !(h>=12 && h<=17))
+      !(h>=12&&h<=17))
     return false;
 
    if(time==="evening" &&
-      !(h>=18 && h<=23))
+      !(h>=18&&h<=23))
     return false;
 
    if(time==="night" &&
-      !(h>=0 && h<=5))
+      !(h>=0&&h<=5))
     return false;
 
   }
@@ -1727,7 +1986,8 @@ function getFilteredHistory(){
 
 function applyHistoryFilter(){
 
- filteredHistory=getFilteredHistory();
+ filteredHistory=
+  getFilteredHistory();
 
  renderHistoryList(filteredHistory);
 
@@ -1740,9 +2000,10 @@ function clearHistoryFilter(){
  document.getElementById("filterDay").value="";
  document.getElementById("filterTime").value="";
 
- filteredHistory=data.slice().sort((a,b)=>
-  (matchDate(b)||0)-(matchDate(a)||0)
- );
+ filteredHistory=
+  data.slice().sort((a,b)=>
+   (matchDate(b)||0)-(matchDate(a)||0)
+  );
 
  renderHistoryList(filteredHistory);
 
@@ -1751,9 +2012,10 @@ function clearHistoryFilter(){
 
 function renderHistory(){
 
- filteredHistory=data.slice().sort((a,b)=>
-  (matchDate(b)||0)-(matchDate(a)||0)
- );
+ filteredHistory=
+  data.slice().sort((a,b)=>
+   (matchDate(b)||0)-(matchDate(a)||0)
+  );
 
  renderHistoryList(filteredHistory);
 
@@ -1764,15 +2026,19 @@ function renderHistoryList(arr){
 
  document.getElementById("historyCount")
  .textContent=
- arr.length+" match"+(arr.length===1?"":"es");
+ arr.length+
+ " match"+
+ (arr.length===1?"":"es");
 
- const body=document.getElementById("historyBody");
+ const body=
+ document.getElementById("historyBody");
 
  if(!arr.length){
 
   body.innerHTML=`
    <tr>
-    <td colspan="3" class="empty">
+    <td colspan="3"
+        class="empty">
      🔍 কোনো ম্যাচ পাওয়া যায়নি
     </td>
    </tr>
@@ -1782,36 +2048,41 @@ function renderHistoryList(arr){
 
  }
 
- body.innerHTML=arr.map(m=>`
+ body.innerHTML=
+ arr.map(m=>`
 
   <tr
    onclick="openMatch(${data.indexOf(m)})"
-   style="cursor:pointer"
-  >
+   style="cursor:pointer">
 
-   <td>
-    ${esc(m.date)}
-   </td>
+   <td>${esc(m.date)}</td>
 
-   <td>
-    ${esc(m.time||"--:--")}
-   </td>
+   <td>${esc(m.time||"--:--")}</td>
 
    <td>
 
-    ${(m.players||[]).map(x=>`
+    ${(m.players||[]).map(x=>{
 
-     ${Number(x.pos)<=2?"🏆":"❌"}
-     ${esc(x.name)}
-     #${x.pos}
-     — ${Number(x.pos)<=2?"Win":"Loss"}
+     const mistakes=getMistakes(x);
+     const fine=getFine(x);
 
-     ${x.fine?
-      ` <span class="fine">
-       +${money(x.fine)} Fine
-      </span>`:""}
+     return `
 
-    `).join("<br>")}
+      ${Number(x.pos)<=2?"🏆":"❌"}
+      ${esc(x.name)}
+      #${x.pos}
+      — ${Number(x.pos)<=2?"Win":"Loss"}
+
+      ${mistakes?
+       `<span class="fine">
+        • ${mistakes} ভুল • ${money(fine)} Fine
+       </span>`
+       :""
+      }
+
+     `;
+
+    }).join("<br>")}
 
     <div class="clickHint">
      Tap for details
@@ -1832,21 +2103,23 @@ function renderHistoryList(arr){
 
 function renderPlayers(){
 
- let q=
- (document.getElementById("psearch")?.value||"")
- .toLowerCase();
+ const q=
+  (document.getElementById("psearch")?.value||"")
+  .trim()
+  .toLowerCase();
 
  document.getElementById("playerBody").innerHTML=
 
  summary
- .filter(p=>p.name.toLowerCase().includes(q))
+ .filter(p=>
+  p.name.toLowerCase().includes(q)
+ )
  .map(p=>`
 
   <div
    class="player"
-   onclick="profile('${esc(p.name).replace(/'/g,"\\'")}' )"
-   style="cursor:pointer"
-  >
+   onclick="profileByKey('${encodeURIComponent(p.name)}')"
+   style="cursor:pointer">
 
    <b>${esc(p.name)}</b>
 
@@ -1859,6 +2132,7 @@ function renderPlayers(){
     ${p.matches} Matches •
     ${p.win} Win •
     ${p.loss} Loss •
+    ${p.mistakes} ভুল •
     ${money(p.fine)} Fine •
     Total Paid ${money(p.paid)}
 
@@ -1880,9 +2154,19 @@ function renderPlayers(){
    PROFILE
 ========================= */
 
+function profileByKey(encoded){
+
+ profile(
+  decodeURIComponent(encoded)
+ );
+
+}
+
+
 function profile(name){
 
- let p=summary.find(x=>x.name===name);
+ const p=
+  summary.find(x=>x.name===name);
 
  if(!p)return;
 
@@ -1923,13 +2207,14 @@ function profile(name){
    </div>
 
    <div class="moneyMini">
-    <b>${p.win+p.loss}</b>
-    <span>Results</span>
+    <b>${p.mistakes}</b>
+    <span>Total Mistakes</span>
    </div>
 
   </div>
 
-  <div class="card" style="margin-top:12px">
+  <div class="card"
+       style="margin-top:12px">
 
    <h3>Last Matches</h3>
 
@@ -1943,17 +2228,25 @@ function profile(name){
      <div class="detailPlayer">
 
       <b>
-       ${x.date}
-       ${x.time||""}
+       ${esc(x.date)}
+       ${esc(x.time||"")}
       </b>
 
       <span>
        #${x.pos}
        —
-       ${x.pos>=3?"Loss":"Win"}
-       ${x.fine?
-        " • "+money(x.fine)+" Fine":
-        ""}
+       ${Number(x.pos)>=3?"Loss":"Win"}
+
+       ${
+        getMistakes(x)
+        ? " • "+
+          getMistakes(x)+
+          " ভুল • "+
+          money(getFine(x))+
+          " Fine"
+        : ""
+       }
+
       </span>
 
      </div>
@@ -1971,14 +2264,6 @@ function profile(name){
 }
 
 
-function closeModal(){
-
- document.getElementById("modal")
- .classList.remove("show");
-
-}
-
-
 /* =========================
    MATCH DETAILS
 ========================= */
@@ -1991,9 +2276,12 @@ function openMatch(index){
 
  document.getElementById("mn")
  .textContent=
- "🎮 Match • "+m.date+" "+(m.time||"");
+ "🎮 Match • "+
+ m.date+
+ " "+
+ (m.time||"");
 
- let total=matchMoney(m);
+ const total=matchMoney(m);
 
  let html=`
 
@@ -2011,7 +2299,8 @@ function openMatch(index){
 
   </div>
 
-  <div class="card" style="margin-top:12px">
+  <div class="card"
+       style="margin-top:12px">
 
    <h3>Match Result</h3>
 
@@ -2019,31 +2308,47 @@ function openMatch(index){
 
  (m.players||[])
  .slice()
- .sort((a,b)=>Number(a.pos)-Number(b.pos))
+ .sort((a,b)=>
+  Number(a.pos)-Number(b.pos)
+ )
  .forEach(p=>{
+
+  const mistakes=getMistakes(p);
+  const fine=getFine(p);
 
   html+=`
 
    <div class="detailPlayer">
 
     <b>
+
      ${
       Number(p.pos)===1?"🥇":
       Number(p.pos)===2?"🥈":
       Number(p.pos)===3?"🥉":"4️⃣"
      }
+
      ${esc(p.name)}
+
     </b>
 
     <span>
 
      ${Number(p.pos)<=2?"WIN":"LOSS"}
 
-     • ${Number(p.pos)>=3?money(LOSS_FEE):"৳0"}
+     •
+     ${Number(p.pos)>=3
+       ?money(LOSS_FEE)
+       :"৳0"}
 
-     ${p.fine?
-      " + "+money(p.fine)+" Fine":
-      ""}
+     ${
+      mistakes
+      ? " • "+mistakes+
+        " ভুল • "+
+        money(fine)+
+        " Fine"
+      : ""
+     }
 
     </span>
 
@@ -2055,10 +2360,19 @@ function openMatch(index){
 
  html+=`</div>`;
 
- document.getElementById("md").innerHTML=html;
+ document.getElementById("md")
+ .innerHTML=html;
 
  document.getElementById("modal")
  .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+ document.getElementById("modal")
+ .classList.remove("show");
 
 }
 
@@ -2071,17 +2385,21 @@ async function load(){
 
  try{
 
-  let r=await fetch(
-   API_URL+
-   "?action=list&t="+Date.now()
-  );
+  const r=
+   await fetch(
+    API_URL+
+    "?action=list&t="+Date.now()
+   );
 
-  let j=await r.json();
+  const j=await r.json();
 
   if(!j.ok)
    throw new Error("API error");
 
-  data=j.matches||[];
+  data=
+   Array.isArray(j.matches)
+   ?j.matches
+   :[];
 
   renderAll();
 
@@ -2102,38 +2420,80 @@ async function saveMatch(){
 
  const players=[];
 
+ const date=
+  document.getElementById("date").value;
+
+ const time=
+  document.getElementById("time").value;
+
+ if(!date){
+
+  document.getElementById("msg")
+  .textContent=
+  "Date নির্বাচন করো";
+
+  return;
+
+ }
+
+ if(!time){
+
+  document.getElementById("msg")
+  .textContent=
+  "Time নির্বাচন করো";
+
+  return;
+
+ }
+
+
  for(let i=1;i<=4;i++){
 
-  let name=
+  const name=
    document.getElementById("n"+i)
-   .value.trim();
+   .value
+   .trim();
 
-  let pos=
+  const pos=
    Number(
-    document.getElementById("p"+i)
-    .value
+    document.getElementById("p"+i).value
    );
 
-  let fine=
-   document.getElementById("m"+i)
-   .checked
-   ? ERROR_FINE
-   : 0;
+  const mistakes=
+   Math.max(
+    0,
+    Number(
+     document.getElementById("m"+i).value||0
+    )
+   );
+
+  const fine=
+   mistakes*ERROR_FINE;
 
   if(!name){
 
    document.getElementById("msg")
    .textContent=
-   "Player "+i+" এর নাম দাও";
+   "Player "+i+
+   " এর নাম দাও";
 
    return;
 
   }
 
   players.push({
+
    name,
    pos,
+
+   /*
+    Apps Script-এর পুরোনো code
+    fine ব্যবহার করলেও কাজ করবে।
+   */
+
+   mistakes,
    fine
+
   });
 
  }
@@ -2141,7 +2501,9 @@ async function saveMatch(){
 
  if(
   new Set(
-   players.map(x=>x.name.toLowerCase())
+   players.map(x=>
+    x.name.toLowerCase()
+   )
   ).size<4
  ){
 
@@ -2155,7 +2517,9 @@ async function saveMatch(){
 
 
  if(
-  new Set(players.map(x=>x.pos)).size<4
+  new Set(
+   players.map(x=>x.pos)
+  ).size<4
  ){
 
   document.getElementById("msg")
@@ -2168,10 +2532,12 @@ async function saveMatch(){
 
 
  const payload={
+
   action:"add",
-  date:document.getElementById("date").value,
-  time:document.getElementById("time").value,
+  date,
+  time,
   players
+
  };
 
 
@@ -2181,16 +2547,21 @@ async function saveMatch(){
 
  try{
 
-  let r=await fetch(
-   API_URL+
-   "?"+
-   new URLSearchParams({
-    action:"add",
-    data:JSON.stringify(payload)
-   })
-  );
+  const r=
+   await fetch(
+    API_URL+
+    "?"+
+    new URLSearchParams({
 
-  let j=await r.json();
+     action:"add",
+
+     data:
+      JSON.stringify(payload)
+
+    })
+   );
+
+  const j=await r.json();
 
   if(!j.ok)
    throw new Error("Save error");
@@ -2201,27 +2572,13 @@ async function saveMatch(){
   "✅ Match saved successfully";
 
 
-  for(let i=1;i<=4;i++){
-
-   document.getElementById("n"+i)
-   .value="";
-
-   document.getElementById("m"+i)
-   .checked=false;
-
-   previewFine(i);
-
-  }
-
+  resetSlots();
 
   document.getElementById("date")
   .value=today();
 
   document.getElementById("time")
-  .value=
-   new Date()
-   .toTimeString()
-   .slice(0,5);
+  .value=nowTime();
 
 
   await load();
@@ -2256,10 +2613,7 @@ document.getElementById("date")
 .value=today();
 
 document.getElementById("time")
-.value=
- new Date()
- .toTimeString()
- .slice(0,5);
+.value=nowTime();
 
 buildSlots();
 
@@ -2270,4 +2624,4 @@ setInterval(load,15000);
 </script>
 
 </body>
-   </html>
+ </html>
