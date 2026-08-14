@@ -1,93 +1,2273 @@
 <!doctype html>
 <html lang="bn">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080b16"><title>Ludo League</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b16">
+<title>Ludo League</title>
+
 <style>
-:root{--bg:#070a12;--card:#101827;--line:#ffffff14;--text:#f8fafc;--muted:#94a3b8;--blue:#6366f1;--green:#34d399;--red:#fb7185;--gold:#fbbf24}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#28205c 0,#090b14 42%,#05070d 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{position:sticky;top:0;z-index:10;padding:16px;background:#070a12e8;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}header div{max-width:900px;margin:auto;display:flex;justify-content:space-between;align-items:center}h1{font-size:20px;margin:0}.live{font-size:10px;color:var(--green)}
-nav{position:sticky;top:57px;z-index:9;display:flex;gap:7px;overflow:auto;padding:9px;background:#070a12e8;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}nav button{border:0;border-radius:12px;padding:10px 13px;background:#151d2e;color:#b9c3d4;font-weight:700;white-space:nowrap}nav button.active,.save{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff}
-main{max-width:900px;margin:auto;padding:14px 12px 80px}.page{display:none}.page.active{display:block}.hero{background:linear-gradient(135deg,#4c1d95aa,#1d4ed888);border-radius:24px;padding:20px;margin-bottom:12px}.hero h2{margin:4px 0;font-size:27px}.hero p{margin:0;color:#cbd5e1;font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.stat{background:#ffffff08;border:1px solid var(--line);border-radius:16px;padding:13px}.stat b{font-size:20px}.stat span{display:block;color:var(--muted);font-size:10px}
-.card{background:#0f172acc;border:1px solid var(--line);border-radius:20px;padding:15px;margin-bottom:12px}h3{font-size:15px;margin:0 0 12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field label{display:block;color:var(--muted);font-size:10px;margin-bottom:5px}.field input{width:100%;background:#090f1d;color:white;border:1px solid var(--line);border-radius:11px;padding:11px;outline:none}
-.player{padding:12px;border:1px solid var(--line);border-radius:15px;margin-bottom:8px;background:#ffffff04}.playerTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.playerTop b{font-size:12px}.row{display:grid;grid-template-columns:1fr 82px 92px;gap:7px}.row input,.row select{width:100%;background:#090f1d;color:white;border:1px solid var(--line);border-radius:11px;padding:11px;outline:none}.mistake{display:flex;align-items:center;gap:7px;margin-top:8px;color:#cbd5e1;font-size:11px}.mistake input{width:17px;height:17px}.finePreview{margin-left:auto;color:var(--gold);font-weight:800}.save{width:100%;padding:14px;border:0;border-radius:15px;margin-top:7px;font-weight:900}.msg{text-align:center;color:var(--muted);font-size:11px;margin-top:8px;min-height:16px}
-table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:#7f8da3;font-size:10px;padding:8px;border-bottom:1px solid var(--line)}td{padding:10px 8px;border-bottom:1px solid var(--line)}.badge{padding:4px 7px;border-radius:8px;font-size:10px;font-weight:800}.win{background:#34d3991c;color:#34d399}.loss{background:#fb71851c;color:#fb7185}.fine{color:#fbbf24}.search{width:100%;padding:11px;background:#090f1d;border:1px solid var(--line);border-radius:12px;color:white;margin-bottom:9px}.empty{text-align:center;color:var(--muted);padding:22px}
-.modal{display:none;position:fixed;inset:0;background:#000b;z-index:30;padding:18px;overflow:auto}.modal.show{display:block}.modalbox{max-width:600px;margin:25px auto;background:#0d1320;border:1px solid var(--line);border-radius:22px;padding:17px}.close{float:right;background:#1f2937;color:white;border:0;border-radius:9px;padding:7px}
-@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+:root{
+ --bg:#070a12;
+ --card:#101827;
+ --line:#ffffff14;
+ --text:#f8fafc;
+ --muted:#94a3b8;
+ --blue:#6366f1;
+ --green:#34d399;
+ --red:#fb7185;
+ --gold:#fbbf24;
+}
+
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ background:
+ radial-gradient(circle at 20% 0,#28205c 0,#090b14 42%,#05070d 100%);
+ color:var(--text);
+ font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+
+header{
+ position:sticky;
+ top:0;
+ z-index:10;
+ padding:16px;
+ background:#070a12e8;
+ backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)
+}
+
+header div{
+ max-width:900px;
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+
+h1{font-size:20px;margin:0}
+
+.live{
+ font-size:10px;
+ color:var(--green)
+}
+
+nav{
+ position:sticky;
+ top:57px;
+ z-index:9;
+ display:flex;
+ gap:7px;
+ overflow:auto;
+ padding:9px;
+ background:#070a12e8;
+ backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)
+}
+
+nav button{
+ border:0;
+ border-radius:12px;
+ padding:10px 13px;
+ background:#151d2e;
+ color:#b9c3d4;
+ font-weight:700;
+ white-space:nowrap
+}
+
+nav button.active,
+.save{
+ background:linear-gradient(135deg,#7c3aed,#2563eb);
+ color:#fff
+}
+
+main{
+ max-width:900px;
+ margin:auto;
+ padding:14px 12px 80px
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.hero{
+ background:linear-gradient(135deg,#4c1d95aa,#1d4ed888);
+ border-radius:24px;
+ padding:20px;
+ margin-bottom:12px
+}
+
+.hero h2{
+ margin:4px 0;
+ font-size:27px
+}
+
+.hero p{
+ margin:0;
+ color:#cbd5e1;
+ font-size:12px
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:9px
+}
+
+.stat{
+ background:#ffffff08;
+ border:1px solid var(--line);
+ border-radius:16px;
+ padding:13px
+}
+
+.stat b{font-size:20px}
+
+.stat span{
+ display:block;
+ color:var(--muted);
+ font-size:10px
+}
+
+.card{
+ background:#0f172acc;
+ border:1px solid var(--line);
+ border-radius:20px;
+ padding:15px;
+ margin-bottom:12px
+}
+
+h3{
+ font-size:15px;
+ margin:0 0 12px
+}
+
+.sectionTitle{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:8px;
+ margin-bottom:10px
+}
+
+.formgrid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:9px
+}
+
+.field label{
+ display:block;
+ color:var(--muted);
+ font-size:10px;
+ margin-bottom:5px
+}
+
+.field input,
+.field select{
+ width:100%;
+ background:#090f1d;
+ color:white;
+ border:1px solid var(--line);
+ border-radius:11px;
+ padding:11px;
+ outline:none
+}
+
+.player{
+ padding:12px;
+ border:1px solid var(--line);
+ border-radius:15px;
+ margin-bottom:8px;
+ background:#ffffff04
+}
+
+.playerTop{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:8px
+}
+
+.playerTop b{font-size:12px}
+
+.row{
+ display:grid;
+ grid-template-columns:1fr 82px;
+ gap:7px
+}
+
+.row input,
+.row select{
+ width:100%;
+ background:#090f1d;
+ color:white;
+ border:1px solid var(--line);
+ border-radius:11px;
+ padding:11px;
+ outline:none
+}
+
+.mistake{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ margin-top:8px;
+ color:#cbd5e1;
+ font-size:11px
+}
+
+.mistake input{
+ width:17px;
+ height:17px
+}
+
+.finePreview{
+ color:var(--gold);
+ font-weight:800
+}
+
+.save{
+ width:100%;
+ padding:14px;
+ border:0;
+ border-radius:15px;
+ margin-top:7px;
+ font-weight:900
+}
+
+.msg{
+ text-align:center;
+ color:var(--muted);
+ font-size:11px;
+ margin-top:8px;
+ min-height:16px
+}
+
+.leagueTabs{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:7px;
+ margin-bottom:12px
+}
+
+.leagueTabs button{
+ border:1px solid var(--line);
+ background:#111827;
+ color:#aeb9ca;
+ padding:10px 5px;
+ border-radius:12px;
+ font-weight:800
+}
+
+.leagueTabs button.active{
+ background:linear-gradient(135deg,#7c3aed,#2563eb);
+ color:white;
+ border-color:transparent
+}
+
+.leagueLabel{
+ font-size:10px;
+ color:#94a3b8;
+ margin-bottom:3px
+}
+
+.leagueWinner{
+ font-size:19px;
+ font-weight:900
+}
+
+.leagueSub{
+ font-size:11px;
+ color:#94a3b8
+}
+
+.moneyBox{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:8px;
+ margin-top:10px
+}
+
+.moneyMini{
+ background:#ffffff06;
+ border:1px solid var(--line);
+ border-radius:13px;
+ padding:10px
+}
+
+.moneyMini b{
+ display:block;
+ font-size:16px
+}
+
+.moneyMini span{
+ color:#94a3b8;
+ font-size:9px
+}
+
+.topCard{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ padding:12px;
+ border:1px solid var(--line);
+ border-radius:16px;
+ margin-bottom:8px;
+ background:#ffffff05
+}
+
+.topMedal{
+ font-size:25px;
+ width:38px;
+ text-align:center
+}
+
+.topInfo{
+ flex:1
+}
+
+.topInfo b{
+ display:block;
+ font-size:14px
+}
+
+.topInfo span{
+ display:block;
+ font-size:10px;
+ color:#94a3b8;
+ margin-top:3px
+}
+
+.topPaid{
+ text-align:right
+}
+
+.topPaid b{
+ display:block;
+ color:var(--gold)
+}
+
+.topPaid span{
+ color:#64748b;
+ font-size:9px
+}
+
+.matchCard{
+ padding:13px;
+ border:1px solid var(--line);
+ border-radius:16px;
+ margin-bottom:8px;
+ background:#ffffff04;
+ cursor:pointer
+}
+
+.matchTop{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:8px
+}
+
+.matchDate{
+ font-size:10px;
+ color:#94a3b8
+}
+
+.matchMoney{
+ font-size:11px;
+ color:var(--gold);
+ font-weight:800
+}
+
+.matchPlayers{
+ font-size:12px;
+ line-height:1.7
+}
+
+.filterGrid{
+ display:grid;
+ grid-template-columns:1fr 1fr 1fr;
+ gap:7px
+}
+
+.filterGrid .field:nth-child(1){
+ grid-column:span 1
+}
+
+.filterActions{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:7px;
+ margin-top:8px
+}
+
+.filterBtn{
+ border:0;
+ border-radius:12px;
+ padding:11px;
+ font-weight:800;
+ background:#1f2937;
+ color:white
+}
+
+.filterBtn.primary{
+ background:linear-gradient(135deg,#7c3aed,#2563eb)
+}
+
+table{
+ width:100%;
+ border-collapse:collapse;
+ font-size:12px
+}
+
+th{
+ text-align:left;
+ color:#7f8da3;
+ font-size:10px;
+ padding:8px;
+ border-bottom:1px solid var(--line)
+}
+
+td{
+ padding:10px 8px;
+ border-bottom:1px solid var(--line)
+}
+
+.badge{
+ padding:4px 7px;
+ border-radius:8px;
+ font-size:10px;
+ font-weight:800
+}
+
+.win{
+ background:#34d3991c;
+ color:#34d399
+}
+
+.loss{
+ background:#fb71851c;
+ color:#fb7185
+}
+
+.fine{
+ color:#fbbf24
+}
+
+.search{
+ width:100%;
+ padding:11px;
+ background:#090f1d;
+ border:1px solid var(--line);
+ border-radius:12px;
+ color:white;
+ margin-bottom:9px
+}
+
+.empty{
+ text-align:center;
+ color:var(--muted);
+ padding:22px
+}
+
+.clickHint{
+ color:#64748b;
+ font-size:9px;
+ margin-top:6px
+}
+
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#000b;
+ z-index:30;
+ padding:18px;
+ overflow:auto
+}
+
+.modal.show{display:block}
+
+.modalbox{
+ max-width:600px;
+ margin:25px auto;
+ background:#0d1320;
+ border:1px solid var(--line);
+ border-radius:22px;
+ padding:17px
+}
+
+.close{
+ float:right;
+ background:#1f2937;
+ color:white;
+ border:0;
+ border-radius:9px;
+ padding:7px
+}
+
+.detailPlayer{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:11px;
+ border-bottom:1px solid var(--line)
+}
+
+.detailPlayer b{font-size:13px}
+
+.detailPlayer span{
+ color:#94a3b8;
+ font-size:11px
+}
+
+@media(min-width:700px){
+ .grid{grid-template-columns:repeat(4,1fr)}
+}
+
+@media(max-width:600px){
+ .filterGrid{
+  grid-template-columns:1fr 1fr
+ }
+ .filterGrid .field:nth-child(3){
+  grid-column:span 2
+ }
+}
 </style>
 </head>
+
 <body>
-<header><div><h1>🎲 LUDO LEAGUE</h1><span class="live">● LIVE</span></div></header>
+
+<header>
+ <div>
+  <h1>🎲 LUDO LEAGUE</h1>
+  <span class="live">● LIVE</span>
+ </div>
+</header>
+
 <nav>
-<button class="active" onclick="page('home',this)">🏆 Home</button>
-<button onclick="page('add',this)">➕ Add Match</button>
-<button onclick="page('rank',this)">📊 Ranking</button>
-<button onclick="page('history',this)">📜 History</button>
-<button onclick="page('players',this)">👤 Players</button>
+ <button class="active" onclick="page('home',this)">🏆 Home</button>
+ <button onclick="page('add',this)">➕ Add Match</button>
+ <button onclick="page('rank',this)">📊 Ranking</button>
+ <button onclick="page('history',this)">📜 History</button>
+ <button onclick="page('players',this)">👤 Players</button>
 </nav>
+
 <main>
+
+<!-- HOME -->
+
 <section id="home" class="page active">
-<div class="hero"><small>CURRENT LEAGUE</small><h2>বন্ধুদের Ludo League</h2><p>১ম/২য় = ৳0 • ৩য়/৪র্থ = ৳20 • ভুল = ৳10</p></div>
-<div class="grid"><div class="stat"><b id="matches">0</b><span>Total Matches</span></div><div class="stat"><b id="players">0</b><span>Players</span></div><div class="stat"><b id="losses">0</b><span>Total Loss</span></div><div class="stat"><b id="fines">৳0</b><span>Total Fine</span></div></div>
-<div class="card"><h3>👑 Top 3</h3><div id="top"></div></div>
+
+ <div class="hero">
+  <small>CURRENT LEAGUE</small>
+  <h2>বন্ধুদের Ludo League</h2>
+  <p>🥇 1st / 🥈 2nd = ৳0 • 🥉 3rd / 4th = ৳20 • ভুল = ৳10</p>
+ </div>
+
+ <div class="leagueTabs">
+  <button class="active" onclick="setLeague('24h',this)">🕐 24 HOURS</button>
+  <button onclick="setLeague('week',this)">📅 WEEKLY</button>
+  <button onclick="setLeague('month',this)">📆 MONTHLY</button>
+ </div>
+
+ <div class="card">
+  <div class="sectionTitle">
+   <h3 id="leagueTitle">🕐 Last 24 Hours</h3>
+   <span id="leagueCount" style="font-size:10px;color:#94a3b8"></span>
+  </div>
+
+  <div id="leagueResult"></div>
+ </div>
+
+ <div class="card">
+  <div class="sectionTitle">
+   <h3>📊 League Overview</h3>
+  </div>
+
+  <div class="grid">
+   <div class="stat">
+    <b id="matches">0</b>
+    <span>Total Matches</span>
+   </div>
+
+   <div class="stat">
+    <b id="players">0</b>
+    <span>Players</span>
+   </div>
+
+   <div class="stat">
+    <b id="losses">0</b>
+    <span>Total Losses</span>
+   </div>
+
+   <div class="stat">
+    <b id="fines">৳0</b>
+    <span>Total Fine</span>
+   </div>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="sectionTitle">
+   <h3>🏆 Top 3</h3>
+   <span style="font-size:9px;color:#64748b">Overall</span>
+  </div>
+
+  <div id="top"></div>
+ </div>
+
+ <div class="card">
+  <div class="sectionTitle">
+   <h3>🎮 Today's Matches</h3>
+   <span id="todayCount" style="font-size:10px;color:#94a3b8"></span>
+  </div>
+
+  <div id="todayMatches"></div>
+ </div>
+
 </section>
 
+
+<!-- ADD MATCH -->
+
 <section id="add" class="page">
-<div class="card"><h3>➕ নতুন ম্যাচ যোগ করো</h3>
-<div class="formgrid"><div class="field"><label>DATE</label><input id="date" type="date"></div><div class="field"><label>TIME</label><input id="time" type="time"></div></div>
-<p style="color:#94a3b8;font-size:11px">৪ জনের নাম ও position দাও। ৩য়/৪র্থ হলে ৳20 auto যোগ হবে। ভুল করলে শুধু ☑️ টিক দাও—৳10 Fine auto হবে।</p>
-<div id="slots"></div><button class="save" onclick="saveMatch()">💾 SAVE MATCH</button><div id="msg" class="msg"></div>
-</div></section>
 
-<section id="rank" class="page"><div class="card"><h3>🏆 Ranking</h3><input class="search" id="search" placeholder="🔍 Player search..." oninput="renderRank"><div style="overflow:auto"><table><thead><tr><th>#</th><th>Player</th><th>Matches</th><th>Win</th><th>Loss</th><th>Fine</th><th>Total Paid</th></tr></thead><tbody id="rankBody"></tbody></table></div></div></section>
+ <div class="card">
 
-<section id="history" class="page"><div class="card"><h3>📜 Match History</h3><div style="overflow:auto"><table><thead><tr><th>Date</th><th>Time</th><th>Match details</th></tr></thead><tbody id="historyBody"></tbody></table></div></div></section>
+  <h3>➕ নতুন ম্যাচ যোগ করো</h3>
 
-<section id="players" class="page"><div class="card"><h3>👤 Players</h3><input class="search" id="psearch" placeholder="🔍 Search..." oninput="renderPlayers"><div id="playerBody"></div></div></section>
+  <div class="formgrid">
+
+   <div class="field">
+    <label>DATE</label>
+    <input id="date" type="date">
+   </div>
+
+   <div class="field">
+    <label>TIME</label>
+    <input id="time" type="time">
+   </div>
+
+  </div>
+
+  <p style="color:#94a3b8;font-size:11px">
+   ৪ জনের নাম ও position দাও। ৩য়/৪র্থ হলে ৳20 auto যোগ হবে।
+   ভুল করলে ☑️ টিক দাও — ৳10 Fine auto হবে।
+  </p>
+
+  <div id="slots"></div>
+
+  <button class="save" onclick="saveMatch()">💾 SAVE MATCH</button>
+
+  <div id="msg" class="msg"></div>
+
+ </div>
+
+</section>
+
+
+<!-- RANKING -->
+
+<section id="rank" class="page">
+
+ <div class="card">
+
+  <h3>🏆 Ranking</h3>
+
+  <input
+   class="search"
+   id="search"
+   placeholder="🔍 Player search..."
+   oninput="renderRank()"
+  >
+
+  <div style="overflow:auto">
+
+   <table>
+
+    <thead>
+     <tr>
+      <th>#</th>
+      <th>Player</th>
+      <th>Matches</th>
+      <th>Win</th>
+      <th>Loss</th>
+      <th>Fine</th>
+      <th>Total Paid</th>
+     </tr>
+    </thead>
+
+    <tbody id="rankBody"></tbody>
+
+   </table>
+
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- HISTORY -->
+
+<section id="history" class="page">
+
+ <div class="card">
+
+  <h3>🔎 Match Search & Filter</h3>
+
+  <div class="filterGrid">
+
+   <div class="field">
+    <label>DATE</label>
+    <input id="filterDate" type="date">
+   </div>
+
+   <div class="field">
+    <label>DAY</label>
+    <select id="filterDay">
+     <option value="">All Days</option>
+     <option value="0">Sunday</option>
+     <option value="1">Monday</option>
+     <option value="2">Tuesday</option>
+     <option value="3">Wednesday</option>
+     <option value="4">Thursday</option>
+     <option value="5">Friday</option>
+     <option value="6">Saturday</option>
+    </select>
+   </div>
+
+   <div class="field">
+    <label>TIME</label>
+    <select id="filterTime">
+     <option value="">All Time</option>
+     <option value="morning">Morning (06–11)</option>
+     <option value="afternoon">Afternoon (12–17)</option>
+     <option value="evening">Evening (18–23)</option>
+     <option value="night">Night (00–05)</option>
+    </select>
+   </div>
+
+  </div>
+
+  <div class="filterActions">
+
+   <button class="filterBtn primary" onclick="applyHistoryFilter()">
+    🔍 SEARCH
+   </button>
+
+   <button class="filterBtn" onclick="clearHistoryFilter()">
+    ✕ CLEAR
+   </button>
+
+  </div>
+
+ </div>
+
+
+ <div class="card">
+
+  <div class="sectionTitle">
+   <h3>📜 Match History</h3>
+   <span id="historyCount" style="font-size:10px;color:#94a3b8"></span>
+  </div>
+
+  <div style="overflow:auto">
+
+   <table>
+
+    <thead>
+     <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Match Details</th>
+     </tr>
+    </thead>
+
+    <tbody id="historyBody"></tbody>
+
+   </table>
+
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- PLAYERS -->
+
+<section id="players" class="page">
+
+ <div class="card">
+
+  <h3>👤 Players</h3>
+
+  <input
+   class="search"
+   id="psearch"
+   placeholder="🔍 Search player..."
+   oninput="renderPlayers()"
+  >
+
+  <div id="playerBody"></div>
+
+ </div>
+
+</section>
+
 </main>
-<div class="modal" id="modal"><div class="modalbox"><button class="close" onclick="closeModal()">✕</button><h2 id="mn"></h2><div id="md"></div></div></div>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+ <div class="modalbox">
+
+  <button class="close" onclick="closeModal()">✕</button>
+
+  <h2 id="mn"></h2>
+
+  <div id="md"></div>
+
+ </div>
+
+</div>
+
 
 <script>
-const API_URL="https://script.google.com/macros/s/AKfycbx1JzpYjv8w0kD2aBGGRTe6UrA63S9fBFI-B0oIU9QUjKySbYzHpKFnQMWAyF9c3F_Btw/exec";
-const LOSS_FEE=20, ERROR_FINE=10;
-let data=[],summary=[];
 
-function page(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
-function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function money(n){return "৳"+Number(n||0).toLocaleString("en-US")}
-function today(){return new Date().toISOString().slice(0,10)}
+const API_URL =
+"https://script.google.com/macros/s/AKfycbx1JzpYjv8w0kD2aBGGRTe6UrA63S9fBFI-B0oIU9QUjKySbYzHpKFnQMWAyF9c3F_Btw/exec";
+
+const LOSS_FEE = 20;
+const ERROR_FINE = 10;
+
+let data = [];
+let summary = [];
+let currentLeague = "24h";
+let filteredHistory = [];
+
+
+/* =========================
+   BASIC FUNCTIONS
+========================= */
+
+function page(id,btn){
+
+ document.querySelectorAll(".page")
+ .forEach(x=>x.classList.remove("active"));
+
+ document.getElementById(id)
+ .classList.add("active");
+
+ document.querySelectorAll("nav button")
+ .forEach(x=>x.classList.remove("active"));
+
+ btn.classList.add("active");
+}
+
+
+function esc(s){
+
+ return String(s ?? "")
+ .replace(/[&<>"']/g,m=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#039;"
+ }[m]));
+
+}
+
+
+function money(n){
+
+ return "৳"+Number(n||0).toLocaleString("en-US");
+
+}
+
+
+function today(){
+
+ const d = new Date();
+
+ const y = d.getFullYear();
+ const m = String(d.getMonth()+1).padStart(2,"0");
+ const day = String(d.getDate()).padStart(2,"0");
+
+ return `${y}-${m}-${day}`;
+
+}
+
+
+function matchDate(m){
+
+ if(!m.date) return null;
+
+ const time = m.time || "00:00";
+
+ const d = new Date(`${m.date}T${time}:00`);
+
+ if(isNaN(d.getTime())) return null;
+
+ return d;
+
+}
+
+
+function formatDate(date){
+
+ if(!date) return "";
+
+ return date.toLocaleDateString("en-GB",{
+  day:"2-digit",
+  month:"short",
+  year:"numeric"
+ });
+
+}
+
+
+/* =========================
+   ADD MATCH
+========================= */
+
 function buildSlots(){
+
  let h="";
- for(let i=1;i<=4;i++)h+=`<div class="player"><div class="playerTop"><b>PLAYER ${i}</b><span class="finePreview" id="fp${i}">Fine ৳0</span></div><div class="row"><input id="n${i}" list="names" placeholder="নাম"><select id="p${i}"><option value="1">🥇 1st</option><option value="2">🥈 2nd</option><option value="3">🥉 3rd</option><option value="4">4️⃣ 4th</option></select><div></div></div><label class="mistake"><input id="m${i}" type="checkbox" onchange="previewFine(${i})"> খেলার ভুল করেছে <span class="finePreview" id="x${i}">+৳0</span></label></div>`;
+
+ for(let i=1;i<=4;i++){
+
+  h += `
+  <div class="player">
+
+   <div class="playerTop">
+
+    <b>PLAYER ${i}</b>
+
+    <span class="finePreview" id="fp${i}">
+     Fine ৳0
+    </span>
+
+   </div>
+
+   <div class="row">
+
+    <input
+     id="n${i}"
+     list="names"
+     placeholder="নাম"
+    >
+
+    <select id="p${i}">
+     <option value="1">🥇 1st</option>
+     <option value="2">🥈 2nd</option>
+     <option value="3">🥉 3rd</option>
+     <option value="4">4️⃣ 4th</option>
+    </select>
+
+   </div>
+
+   <label class="mistake">
+
+    <input
+     id="m${i}"
+     type="checkbox"
+     onchange="previewFine(${i})"
+    >
+
+    খেলার ভুল করেছে
+
+    <span class="finePreview" id="x${i}">
+     +৳0
+    </span>
+
+   </label>
+
+  </div>
+  `;
+
+ }
+
  document.getElementById("slots").innerHTML=h;
- const dl=document.createElement("datalist");dl.id="names";document.body.appendChild(dl);
+
+ let dl=document.createElement("datalist");
+
+ dl.id="names";
+
+ document.body.appendChild(dl);
+
 }
-function previewFine(i){document.getElementById("x"+i).textContent="+"+money(document.getElementById("m"+i).checked?ERROR_FINE:0);document.getElementById("fp"+i).textContent="Fine "+money(document.getElementById("m"+i).checked?ERROR_FINE:0)}
+
+
+function previewFine(i){
+
+ const fine =
+ document.getElementById("m"+i).checked
+ ? ERROR_FINE
+ : 0;
+
+ document.getElementById("x"+i)
+ .textContent="+"+money(fine);
+
+ document.getElementById("fp"+i)
+ .textContent="Fine "+money(fine);
+
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
 function buildSummary(){
+
  const map={};
- data.forEach(m=>m.players.forEach(x=>{let k=x.name.toLowerCase();if(!map[k])map[k]={name:x.name,matches:0,win:0,loss:0,fine:0,due:0,h:[]};let p=map[k];p.matches++;p.fine+=x.fine;p.due+=(x.pos>=3?LOSS_FEE:0)+x.fine;x.pos>=3?p.loss++:p.win++;p.h.push({...x,date:m.date,time:m.time})}));
- summary=Object.values(map).sort((a,b)=>b.loss-a.loss||b.fine-a.fine||b.matches-a.matches);
+
+ data.forEach(m=>{
+
+  (m.players||[]).forEach(x=>{
+
+   const key=x.name.toLowerCase();
+
+   if(!map[key]){
+
+    map[key]={
+     name:x.name,
+     matches:0,
+     win:0,
+     loss:0,
+     fine:0,
+     paid:0,
+     h:[]
+    };
+
+   }
+
+   const p=map[key];
+
+   p.matches++;
+
+   p.fine += Number(x.fine||0);
+
+   if(Number(x.pos)>=3){
+
+    p.loss++;
+
+    p.paid += LOSS_FEE;
+
+   }else{
+
+    p.win++;
+
+   }
+
+   p.paid += Number(x.fine||0);
+
+   p.h.push({
+    ...x,
+    date:m.date,
+    time:m.time
+   });
+
+  });
+
+ });
+
+
+ /*
+   Ranking:
+   1. বেশি Win
+   2. কম Loss
+   3. কম Fine
+   4. বেশি Matches
+ */
+
+ summary=Object.values(map).sort((a,b)=>
+   b.win-a.win ||
+   a.loss-b.loss ||
+   a.fine-b.fine ||
+   b.matches-a.matches
+ );
+
 }
+
+
+/* =========================
+   RENDER ALL
+========================= */
+
 function renderAll(){
+
  buildSummary();
- document.getElementById("matches").textContent=data.length;document.getElementById("players").textContent=summary.length;document.getElementById("losses").textContent=summary.reduce((a,p)=>a+p.loss,0);document.getElementById("fines").textContent=money(summary.reduce((a,p)=>a+p.fine,0));
- document.getElementById("top").innerHTML=summary.slice(0,3).map((p,i)=>`<div class="player"><b>${["👑","🥈","🥉"][i]} ${esc(p.name)}</b><div style="font-size:11px;color:#94a3b8">${p.loss} Loss • ${p.win} Win • ${money(p.fine)} Fine • Paid ${money(p.due)}</div></div>`).join("")||'<div class="empty">No data</div>';
- renderRank();renderHistory();renderPlayers();
- const dl=document.getElementById("names"); if(dl)dl.innerHTML=summary.map(p=>`<option value="${esc(p.name)}">`).join("");
+
+ document.getElementById("matches")
+ .textContent=data.length;
+
+ document.getElementById("players")
+ .textContent=summary.length;
+
+ document.getElementById("losses")
+ .textContent=
+ summary.reduce((a,p)=>a+p.loss,0);
+
+ document.getElementById("fines")
+ .textContent=
+ money(summary.reduce((a,p)=>a+p.fine,0));
+
+ renderTop();
+
+ renderRank();
+
+ renderHistory();
+
+ renderPlayers();
+
+ renderTodayMatches();
+
+ renderLeague();
+
+ const dl=document.getElementById("names");
+
+ if(dl){
+
+  dl.innerHTML=
+  summary
+  .map(p=>`<option value="${esc(p.name)}">`)
+  .join("");
+
+ }
+
 }
-function renderRank(){let q=(document.getElementById("search")?.value||"").toLowerCase();let a=summary.filter(p=>p.name.toLowerCase().includes(q));document.getElementById("rankBody").innerHTML=a.map((p,i)=>`<tr><td>${i===0?"👑":i+1}</td><td><button style="background:none;border:0;color:white;font-weight:800" onclick="profile('${esc(p.name).replace(/'/g,"\\'")}')">${esc(p.name)}</button></td><td>${p.matches}</td><td><span class="badge win">${p.win}</span></td><td><span class="badge loss">${p.loss}</span></td><td class="fine">${money(p.fine)}</td><td>${money(p.due)}</td></tr>`).join("")||'<tr><td colspan="7" class="empty">No data</td></tr>'}
-function renderHistory(){document.getElementById("historyBody").innerHTML=data.slice().reverse().map(m=>`<tr><td>${esc(m.date)}</td><td>${esc(m.time)}</td><td>${m.players.map(x=>`${esc(x.name)} #${x.pos} — ${x.pos>=3?"Loss":"Win"}${x.fine?` <span class="fine">+${money(x.fine)} Fine</span>`:""}`).join("<br>")}</td></tr>`).join("")||'<tr><td colspan="3" class="empty">No history</td></tr>'}
-function renderPlayers(){let q=(document.getElementById("psearch")?.value||"").toLowerCase();document.getElementById("playerBody").innerHTML=summary.filter(p=>p.name.toLowerCase().includes(q)).map(p=>`<div class="player" onclick="profile('${esc(p.name).replace(/'/g,"\\'")}')" style="cursor:pointer"><b>${esc(p.name)}</b><div style="font-size:11px;color:#94a3b8">${p.matches} Matches • ${p.win} Win • ${p.loss} Loss • ${money(p.fine)} Fine • Total Paid ${money(p.due)}</div></div>`).join("")||'<div class="empty">No player</div>'}
-function profile(name){let p=summary.find(x=>x.name===name);if(!p)return;document.getElementById("mn").textContent="👤 "+p.name;document.getElementById("md").innerHTML=`<div class="grid"><div class="stat"><b>${p.matches}</b><span>Matches</span></div><div class="stat"><b>${p.win}</b><span>Win</span></div><div class="stat"><b>${p.loss}</b><span>Loss</span></div><div class="stat"><b>${money(p.fine)}</b><span>Fine</span></div></div><div class="card"><h3>Last Matches</h3>${p.h.slice().reverse().slice(0,10).map(x=>`<div style="padding:9px;border-bottom:1px solid #ffffff12">${x.date} ${x.time} — #${x.pos} — ${x.pos>=3?"Loss":"Win"} — ${x.fine?money(x.fine)+" Fine":"No Fine"}</div>`).join("")}</div>`;document.getElementById("modal").classList.add("show")}
-function closeModal(){document.getElementById("modal").classList.remove("show")}
-async function load(){if(!API_URL.startsWith("http"))return;try{let r=await fetch(API_URL+"?action=list&t="+Date.now());let j=await r.json();if(!j.ok)throw 0;data=j.matches||[];renderAll()}catch(e){console.error(e)}}
+
+
+/* =========================
+   TOP 3
+========================= */
+
+function renderTop(){
+
+ const medals=["🥇","🥈","🥉"];
+
+ const top=summary.slice(0,3);
+
+ document.getElementById("top").innerHTML=
+
+ top.map((p,i)=>`
+
+  <div class="topCard">
+
+   <div class="topMedal">
+    ${medals[i]}
+   </div>
+
+   <div class="topInfo">
+
+    <b>${esc(p.name)}</b>
+
+    <span>
+     ${p.win} Win •
+     ${p.loss} Loss •
+     ${p.matches} Matches •
+     ${money(p.fine)} Fine
+    </span>
+
+   </div>
+
+   <div class="topPaid">
+
+    <b>${money(p.paid)}</b>
+
+    <span>Total Paid</span>
+
+   </div>
+
+  </div>
+
+ `).join("")
+
+ || `<div class="empty">
+      এখনও কোনো ম্যাচ হয়নি
+    </div>`;
+
+}
+
+
+/* =========================
+   TODAY'S MATCHES
+========================= */
+
+function getTodayMatches(){
+
+ const t=today();
+
+ return data
+ .filter(m=>m.date===t)
+ .sort((a,b)=>
+  String(b.time||"").localeCompare(String(a.time||""))
+ );
+
+}
+
+
+function matchMoney(m){
+
+ return (m.players||[]).reduce((total,p)=>
+  total +
+  (Number(p.pos)>=3 ? LOSS_FEE : 0) +
+  Number(p.fine||0),
+ 0
+ );
+
+}
+
+
+function renderTodayMatches(){
+
+ const arr=getTodayMatches();
+
+ document.getElementById("todayCount")
+ .textContent=arr.length+" match"+(arr.length===1?"":"es");
+
+ const box=document.getElementById("todayMatches");
+
+ if(!arr.length){
+
+  box.innerHTML=`
+   <div class="empty">
+    🌙 আজ এখনো কোনো ম্যাচ হয়নি।
+    <br>
+    নতুন ম্যাচ হলে এখানে দেখা যাবে।
+   </div>
+  `;
+
+  return;
+
+ }
+
+ box.innerHTML=arr.map((m,i)=>`
+
+  <div class="matchCard"
+   onclick="openMatch(${data.indexOf(m)})">
+
+   <div class="matchTop">
+
+    <span class="matchDate">
+     🎮 Match #${arr.length-i}
+     • ${esc(m.time||"--:--")}
+    </span>
+
+    <span class="matchMoney">
+     ${money(matchMoney(m))}
+    </span>
+
+   </div>
+
+   <div class="matchPlayers">
+
+    ${(m.players||[]).map(p=>`
+
+     ${Number(p.pos)<=2?"🏆":"❌"}
+     ${esc(p.name)}
+     — ${Number(p.pos)<=2?"Win":"Loss"}
+     ${p.fine?` <span class="fine">+${money(p.fine)} Fine</span>`:""}
+
+    `).join("<br>")}
+
+   </div>
+
+   <div class="clickHint">
+    👆 বিস্তারিত দেখতে ক্লিক করো
+   </div>
+
+  </div>
+
+ `).join("");
+
+}
+
+
+/* =========================
+   CURRENT LEAGUE
+========================= */
+
+function setLeague(type,btn){
+
+ currentLeague=type;
+
+ document.querySelectorAll(".leagueTabs button")
+ .forEach(x=>x.classList.remove("active"));
+
+ btn.classList.add("active");
+
+ renderLeague();
+
+}
+
+
+function getWeekStart(d){
+
+ const x=new Date(d);
+
+ /*
+  Thursday = 4
+ */
+
+ const day=x.getDay();
+
+ let diff=day-4;
+
+ if(diff<0) diff+=7;
+
+ x.setDate(x.getDate()-diff);
+
+ x.setHours(0,0,0,0);
+
+ return x;
+
+}
+
+
+function getWeekMatches(){
+
+ const now=new Date();
+
+ const start=getWeekStart(now);
+
+ const end=new Date(start);
+
+ end.setDate(end.getDate()+7);
+
+ return data.filter(m=>{
+
+  const d=matchDate(m);
+
+  return d && d>=start && d<end;
+
+ });
+
+}
+
+
+function getMonthMatches(){
+
+ const now=new Date();
+
+ const y=now.getFullYear();
+ const mo=now.getMonth();
+
+ return data.filter(m=>{
+
+  const d=matchDate(m);
+
+  return d &&
+   d.getFullYear()===y &&
+   d.getMonth()===mo;
+
+ });
+
+}
+
+
+function get24hMatches(){
+
+ const now=new Date();
+
+ const start=new Date(
+  now.getTime()-24*60*60*1000
+ );
+
+ return data.filter(m=>{
+
+  const d=matchDate(m);
+
+  return d && d>=start && d<=now;
+
+ });
+
+}
+
+
+function renderLeague(){
+
+ let arr=[];
+ let title="";
+
+ if(currentLeague==="24h"){
+
+  arr=get24hMatches();
+  title="🕐 Last 24 Hours";
+
+ }else if(currentLeague==="week"){
+
+  arr=getWeekMatches();
+  title="📅 Weekly Result";
+
+ }else{
+
+  arr=getMonthMatches();
+  title="📆 Monthly Result";
+
+ }
+
+ arr.sort((a,b)=>
+  (matchDate(b)||0)-(matchDate(a)||0)
+ );
+
+ document.getElementById("leagueTitle")
+ .textContent=title;
+
+ document.getElementById("leagueCount")
+ .textContent=
+ arr.length+" match"+(arr.length===1?"":"es");
+
+ const box=document.getElementById("leagueResult");
+
+ if(!arr.length){
+
+  box.innerHTML=`
+   <div class="empty">
+    ⏳ এই সময়ে কোনো ম্যাচ হয়নি।
+    <br>
+    নতুন result আসার অপেক্ষায়...
+   </div>
+  `;
+
+  return;
+
+ }
+
+ /*
+  Period summary
+ */
+
+ const players={};
+
+ arr.forEach(m=>{
+
+  (m.players||[]).forEach(p=>{
+
+   const key=p.name.toLowerCase();
+
+   if(!players[key]){
+
+    players[key]={
+     name:p.name,
+     win:0,
+     loss:0,
+     fine:0,
+     paid:0
+    };
+
+   }
+
+   if(Number(p.pos)<=2){
+
+    players[key].win++;
+
+   }else{
+
+    players[key].loss++;
+    players[key].paid+=LOSS_FEE;
+
+   }
+
+   players[key].fine+=Number(p.fine||0);
+   players[key].paid+=Number(p.fine||0);
+
+  });
+
+ });
+
+ const ranked=Object.values(players).sort((a,b)=>
+  b.win-a.win ||
+  a.loss-b.loss ||
+  a.fine-b.fine
+ );
+
+ const winner=ranked[0];
+
+ let html="";
+
+ if(winner){
+
+  html+=`
+
+   <div style="
+    padding:15px;
+    border-radius:17px;
+    background:linear-gradient(135deg,#312e8155,#4c1d9555);
+    border:1px solid #ffffff14;
+   ">
+
+    <div class="leagueLabel">
+     🏆 CURRENT LEADER
+    </div>
+
+    <div class="leagueWinner">
+     ${esc(winner.name)}
+    </div>
+
+    <div class="leagueSub">
+     ${winner.win} Win •
+     ${winner.loss} Loss •
+     ${money(winner.fine)} Fine
+    </div>
+
+    <div class="moneyBox">
+
+     <div class="moneyMini">
+      <b>${money(winner.paid)}</b>
+      <span>Total Paid</span>
+     </div>
+
+     <div class="moneyMini">
+      <b>${arr.length}</b>
+      <span>Matches</span>
+     </div>
+
+    </div>
+
+   </div>
+
+  `;
+
+ }
+
+ html+=`
+
+  <div style="margin-top:12px">
+
+   ${arr.slice(0,5).map(m=>`
+
+    <div class="matchCard"
+     onclick="openMatch(${data.indexOf(m)})">
+
+     <div class="matchTop">
+
+      <span class="matchDate">
+       ${formatDate(matchDate(m))}
+       • ${esc(m.time||"")}
+      </span>
+
+      <span class="matchMoney">
+       ${money(matchMoney(m))}
+      </span>
+
+     </div>
+
+     <div class="matchPlayers">
+
+      ${(m.players||[]).map(p=>`
+
+       ${Number(p.pos)<=2?"🏆":"❌"}
+       ${esc(p.name)}
+       — ${Number(p.pos)<=2?"Win":"Loss"}
+
+      `).join("<br>")}
+
+     </div>
+
+    </div>
+
+   `).join("")}
+
+  </div>
+
+ `;
+
+ if(arr.length>5){
+
+  html+=`
+   <div class="clickHint" style="text-align:center">
+    আরও ${arr.length-5} টি ম্যাচ History-তে দেখা যাবে।
+   </div>
+  `;
+
+ }
+
+ box.innerHTML=html;
+
+}
+
+
+/* =========================
+   RANKING
+========================= */
+
+function renderRank(){
+
+ let q=
+ (document.getElementById("search")?.value||"")
+ .toLowerCase();
+
+ let a=summary.filter(p=>
+  p.name.toLowerCase().includes(q)
+ );
+
+ document.getElementById("rankBody").innerHTML=
+
+ a.map((p,i)=>`
+
+  <tr>
+
+   <td>
+    ${i===0&&!q?"👑":i+1}
+   </td>
+
+   <td>
+
+    <button
+     style="background:none;border:0;color:white;font-weight:800"
+     onclick="profile('${esc(p.name).replace(/'/g,"\\'")}')">
+
+     ${esc(p.name)}
+
+    </button>
+
+   </td>
+
+   <td>${p.matches}</td>
+
+   <td>
+    <span class="badge win">${p.win}</span>
+   </td>
+
+   <td>
+    <span class="badge loss">${p.loss}</span>
+   </td>
+
+   <td class="fine">
+    ${money(p.fine)}
+   </td>
+
+   <td>
+    ${money(p.paid)}
+   </td>
+
+  </tr>
+
+ `).join("")
+
+ ||
+ `<tr>
+   <td colspan="7" class="empty">
+    No data
+   </td>
+  </tr>`;
+
+}
+
+
+/* =========================
+   HISTORY FILTER
+========================= */
+
+function getFilteredHistory(){
+
+ const date=
+ document.getElementById("filterDate").value;
+
+ const day=
+ document.getElementById("filterDay").value;
+
+ const time=
+ document.getElementById("filterTime").value;
+
+ return data.filter(m=>{
+
+  const d=matchDate(m);
+
+  if(!d)return false;
+
+  if(date && m.date!==date)
+   return false;
+
+  if(day!=="" &&
+     String(d.getDay())!==String(day))
+   return false;
+
+  if(time){
+
+   const h=d.getHours();
+
+   if(time==="morning" &&
+      !(h>=6 && h<=11))
+    return false;
+
+   if(time==="afternoon" &&
+      !(h>=12 && h<=17))
+    return false;
+
+   if(time==="evening" &&
+      !(h>=18 && h<=23))
+    return false;
+
+   if(time==="night" &&
+      !(h>=0 && h<=5))
+    return false;
+
+  }
+
+  return true;
+
+ }).sort((a,b)=>
+  (matchDate(b)||0)-(matchDate(a)||0)
+ );
+
+}
+
+
+function applyHistoryFilter(){
+
+ filteredHistory=getFilteredHistory();
+
+ renderHistoryList(filteredHistory);
+
+}
+
+
+function clearHistoryFilter(){
+
+ document.getElementById("filterDate").value="";
+ document.getElementById("filterDay").value="";
+ document.getElementById("filterTime").value="";
+
+ filteredHistory=data.slice().sort((a,b)=>
+  (matchDate(b)||0)-(matchDate(a)||0)
+ );
+
+ renderHistoryList(filteredHistory);
+
+}
+
+
+function renderHistory(){
+
+ filteredHistory=data.slice().sort((a,b)=>
+  (matchDate(b)||0)-(matchDate(a)||0)
+ );
+
+ renderHistoryList(filteredHistory);
+
+}
+
+
+function renderHistoryList(arr){
+
+ document.getElementById("historyCount")
+ .textContent=
+ arr.length+" match"+(arr.length===1?"":"es");
+
+ const body=document.getElementById("historyBody");
+
+ if(!arr.length){
+
+  body.innerHTML=`
+   <tr>
+    <td colspan="3" class="empty">
+     🔍 কোনো ম্যাচ পাওয়া যায়নি
+    </td>
+   </tr>
+  `;
+
+  return;
+
+ }
+
+ body.innerHTML=arr.map(m=>`
+
+  <tr
+   onclick="openMatch(${data.indexOf(m)})"
+   style="cursor:pointer"
+  >
+
+   <td>
+    ${esc(m.date)}
+   </td>
+
+   <td>
+    ${esc(m.time||"--:--")}
+   </td>
+
+   <td>
+
+    ${(m.players||[]).map(x=>`
+
+     ${Number(x.pos)<=2?"🏆":"❌"}
+     ${esc(x.name)}
+     #${x.pos}
+     — ${Number(x.pos)<=2?"Win":"Loss"}
+
+     ${x.fine?
+      ` <span class="fine">
+       +${money(x.fine)} Fine
+      </span>`:""}
+
+    `).join("<br>")}
+
+    <div class="clickHint">
+     Tap for details
+    </div>
+
+   </td>
+
+  </tr>
+
+ `).join("");
+
+}
+
+
+/* =========================
+   PLAYERS
+========================= */
+
+function renderPlayers(){
+
+ let q=
+ (document.getElementById("psearch")?.value||"")
+ .toLowerCase();
+
+ document.getElementById("playerBody").innerHTML=
+
+ summary
+ .filter(p=>p.name.toLowerCase().includes(q))
+ .map(p=>`
+
+  <div
+   class="player"
+   onclick="profile('${esc(p.name).replace(/'/g,"\\'")}' )"
+   style="cursor:pointer"
+  >
+
+   <b>${esc(p.name)}</b>
+
+   <div style="
+    font-size:11px;
+    color:#94a3b8;
+    margin-top:5px
+   ">
+
+    ${p.matches} Matches •
+    ${p.win} Win •
+    ${p.loss} Loss •
+    ${money(p.fine)} Fine •
+    Total Paid ${money(p.paid)}
+
+   </div>
+
+  </div>
+
+ `).join("")
+
+ ||
+ `<div class="empty">
+  No player
+ </div>`;
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function profile(name){
+
+ let p=summary.find(x=>x.name===name);
+
+ if(!p)return;
+
+ document.getElementById("mn")
+ .textContent="👤 "+p.name;
+
+ document.getElementById("md").innerHTML=`
+
+  <div class="grid">
+
+   <div class="stat">
+    <b>${p.matches}</b>
+    <span>Matches</span>
+   </div>
+
+   <div class="stat">
+    <b>${p.win}</b>
+    <span>Win</span>
+   </div>
+
+   <div class="stat">
+    <b>${p.loss}</b>
+    <span>Loss</span>
+   </div>
+
+   <div class="stat">
+    <b>${money(p.fine)}</b>
+    <span>Fine</span>
+   </div>
+
+  </div>
+
+  <div class="moneyBox">
+
+   <div class="moneyMini">
+    <b>${money(p.paid)}</b>
+    <span>Total Paid</span>
+   </div>
+
+   <div class="moneyMini">
+    <b>${p.win+p.loss}</b>
+    <span>Results</span>
+   </div>
+
+  </div>
+
+  <div class="card" style="margin-top:12px">
+
+   <h3>Last Matches</h3>
+
+   ${
+    p.h
+    .slice()
+    .reverse()
+    .slice(0,10)
+    .map(x=>`
+
+     <div class="detailPlayer">
+
+      <b>
+       ${x.date}
+       ${x.time||""}
+      </b>
+
+      <span>
+       #${x.pos}
+       —
+       ${x.pos>=3?"Loss":"Win"}
+       ${x.fine?
+        " • "+money(x.fine)+" Fine":
+        ""}
+      </span>
+
+     </div>
+
+    `).join("")
+   }
+
+  </div>
+
+ `;
+
+ document.getElementById("modal")
+ .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+ document.getElementById("modal")
+ .classList.remove("show");
+
+}
+
+
+/* =========================
+   MATCH DETAILS
+========================= */
+
+function openMatch(index){
+
+ const m=data[index];
+
+ if(!m)return;
+
+ document.getElementById("mn")
+ .textContent=
+ "🎮 Match • "+m.date+" "+(m.time||"");
+
+ let total=matchMoney(m);
+
+ let html=`
+
+  <div class="moneyBox">
+
+   <div class="moneyMini">
+    <b>${money(total)}</b>
+    <span>Total Match Money</span>
+   </div>
+
+   <div class="moneyMini">
+    <b>${(m.players||[]).length}</b>
+    <span>Players</span>
+   </div>
+
+  </div>
+
+  <div class="card" style="margin-top:12px">
+
+   <h3>Match Result</h3>
+
+ `;
+
+ (m.players||[])
+ .slice()
+ .sort((a,b)=>Number(a.pos)-Number(b.pos))
+ .forEach(p=>{
+
+  html+=`
+
+   <div class="detailPlayer">
+
+    <b>
+     ${
+      Number(p.pos)===1?"🥇":
+      Number(p.pos)===2?"🥈":
+      Number(p.pos)===3?"🥉":"4️⃣"
+     }
+     ${esc(p.name)}
+    </b>
+
+    <span>
+
+     ${Number(p.pos)<=2?"WIN":"LOSS"}
+
+     • ${Number(p.pos)>=3?money(LOSS_FEE):"৳0"}
+
+     ${p.fine?
+      " + "+money(p.fine)+" Fine":
+      ""}
+
+    </span>
+
+   </div>
+
+  `;
+
+ });
+
+ html+=`</div>`;
+
+ document.getElementById("md").innerHTML=html;
+
+ document.getElementById("modal")
+ .classList.add("show");
+
+}
+
+
+/* =========================
+   API LOAD
+========================= */
+
+async function load(){
+
+ try{
+
+  let r=await fetch(
+   API_URL+
+   "?action=list&t="+Date.now()
+  );
+
+  let j=await r.json();
+
+  if(!j.ok)
+   throw new Error("API error");
+
+  data=j.matches||[];
+
+  renderAll();
+
+ }catch(e){
+
+  console.error(e);
+
+ }
+
+}
+
+
+/* =========================
+   SAVE MATCH
+========================= */
+
 async function saveMatch(){
+
  const players=[];
- for(let i=1;i<=4;i++){let name=document.getElementById("n"+i).value.trim(),pos=Number(document.getElementById("p"+i).value),fine=document.getElementById("m"+i).checked?ERROR_FINE:0;if(!name){document.getElementById("msg").textContent="Player "+i+" এর নাম দাও";return}players.push({name,pos,fine})}
- if(new Set(players.map(x=>x.name.toLowerCase())).size<4){document.getElementById("msg").textContent="একই player দুইবার দেওয়া যাবে না";return}
- if(new Set(players.map(x=>x.pos)).size<4){document.getElementById("msg").textContent="1st, 2nd, 3rd, 4th একবার করে দিতে হবে";return}
- const payload={action:"add",date:document.getElementById("date").value,time:document.getElementById("time").value,players};
- document.getElementById("msg").textContent="Saving...";
- try{let r=await fetch(API_URL+"?"+new URLSearchParams({action:"add",data:JSON.stringify(payload)}));let j=await r.json();if(!j.ok)throw 0;document.getElementById("msg").textContent="✅ Match saved";for(let i=1;i<=4;i++){document.getElementById("n"+i).value="";document.getElementById("m"+i).checked=false;previewFine(i)}document.getElementById("date").value=today();document.getElementById("time").value=new Date().toTimeString().slice(0,5);await load();setTimeout(()=>document.getElementById("msg").textContent="",1800)}catch(e){document.getElementById("msg").textContent="⚠️ Save হয়নি—Apps Script URL/permission check করো"}}
-document.getElementById("date").value=today();document.getElementById("time").value=new Date().toTimeString().slice(0,5);buildSlots();load();setInterval(load,15000);
-</script></body></html>
+
+ for(let i=1;i<=4;i++){
+
+  let name=
+   document.getElementById("n"+i)
+   .value.trim();
+
+  let pos=
+   Number(
+    document.getElementById("p"+i)
+    .value
+   );
+
+  let fine=
+   document.getElementById("m"+i)
+   .checked
+   ? ERROR_FINE
+   : 0;
+
+  if(!name){
+
+   document.getElementById("msg")
+   .textContent=
+   "Player "+i+" এর নাম দাও";
+
+   return;
+
+  }
+
+  players.push({
+   name,
+   pos,
+   fine
+  });
+
+ }
+
+
+ if(
+  new Set(
+   players.map(x=>x.name.toLowerCase())
+  ).size<4
+ ){
+
+  document.getElementById("msg")
+  .textContent=
+  "একই player দুইবার দেওয়া যাবে না";
+
+  return;
+
+ }
+
+
+ if(
+  new Set(players.map(x=>x.pos)).size<4
+ ){
+
+  document.getElementById("msg")
+  .textContent=
+  "1st, 2nd, 3rd, 4th একবার করে দিতে হবে";
+
+  return;
+
+ }
+
+
+ const payload={
+  action:"add",
+  date:document.getElementById("date").value,
+  time:document.getElementById("time").value,
+  players
+ };
+
+
+ document.getElementById("msg")
+ .textContent="Saving...";
+
+
+ try{
+
+  let r=await fetch(
+   API_URL+
+   "?"+
+   new URLSearchParams({
+    action:"add",
+    data:JSON.stringify(payload)
+   })
+  );
+
+  let j=await r.json();
+
+  if(!j.ok)
+   throw new Error("Save error");
+
+
+  document.getElementById("msg")
+  .textContent=
+  "✅ Match saved successfully";
+
+
+  for(let i=1;i<=4;i++){
+
+   document.getElementById("n"+i)
+   .value="";
+
+   document.getElementById("m"+i)
+   .checked=false;
+
+   previewFine(i);
+
+  }
+
+
+  document.getElementById("date")
+  .value=today();
+
+  document.getElementById("time")
+  .value=
+   new Date()
+   .toTimeString()
+   .slice(0,5);
+
+
+  await load();
+
+
+  setTimeout(()=>{
+
+   document.getElementById("msg")
+   .textContent="";
+
+  },1800);
+
+
+ }catch(e){
+
+  console.error(e);
+
+  document.getElementById("msg")
+  .textContent=
+  "⚠️ Save হয়নি — Apps Script check করো";
+
+ }
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+document.getElementById("date")
+.value=today();
+
+document.getElementById("time")
+.value=
+ new Date()
+ .toTimeString()
+ .slice(0,5);
+
+buildSlots();
+
+load();
+
+setInterval(load,15000);
+
+</script>
+
+</body>
+                </html>
