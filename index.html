@@ -34,6 +34,8 @@ body{
 
 button,input,select{font:inherit}
 
+button{cursor:pointer}
+
 header{
  position:sticky;
  top:0;
@@ -424,7 +426,6 @@ h3{
  border-radius:16px;
  margin-bottom:8px;
  background:#ffffff04;
- cursor:pointer;
 }
 
 .matchTop{
@@ -545,7 +546,7 @@ td{
  justify-content:space-between;
  align-items:center;
  gap:10px;
- padding:11px;
+ padding:12px;
  border-bottom:1px solid var(--line);
 }
 
@@ -555,6 +556,99 @@ td{
  color:#94a3b8;
  font-size:11px;
  text-align:right;
+}
+
+.positionBox{
+ min-width:46px;
+ text-align:center;
+ font-size:25px;
+}
+
+.matchDetailCard{
+ background:#ffffff05;
+ border:1px solid var(--line);
+ border-radius:15px;
+ padding:12px;
+ margin-bottom:8px;
+}
+
+.matchDetailHeader{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:8px;
+ margin-bottom:10px;
+}
+
+.matchDetailName{
+ font-size:15px;
+ font-weight:900;
+}
+
+.matchDetailStatus{
+ font-size:10px;
+ font-weight:900;
+ padding:5px 8px;
+ border-radius:8px;
+}
+
+.statusWin{
+ background:#34d3991c;
+ color:#34d399;
+}
+
+.statusLoss{
+ background:#fb71851c;
+ color:#fb7185;
+}
+
+.detailStats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:7px;
+}
+
+.detailStat{
+ background:#090f1d;
+ border-radius:10px;
+ padding:8px;
+ text-align:center;
+}
+
+.detailStat b{
+ display:block;
+ font-size:14px;
+}
+
+.detailStat span{
+ color:#94a3b8;
+ font-size:8px;
+}
+
+.deleteBtn{
+ width:100%;
+ margin-top:12px;
+ padding:13px;
+ border:0;
+ border-radius:13px;
+ background:linear-gradient(135deg,#dc2626,#be123c);
+ color:white;
+ font-weight:900;
+}
+
+.deleteBtn:disabled{
+ opacity:.5;
+}
+
+.cancelBtn{
+ width:100%;
+ margin-top:7px;
+ padding:11px;
+ border:0;
+ border-radius:12px;
+ background:#1f2937;
+ color:white;
+ font-weight:800;
 }
 
 .modal{
@@ -596,6 +690,95 @@ td{
  color:#94a3b8;
 }
 
+.historyMatch{
+ background:#ffffff04;
+ border:1px solid var(--line);
+ border-radius:17px;
+ padding:13px;
+ margin-bottom:9px;
+}
+
+.historyHead{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:8px;
+ margin-bottom:10px;
+}
+
+.historyDate{
+ font-size:11px;
+ font-weight:800;
+}
+
+.historyTotal{
+ color:var(--gold);
+ font-size:11px;
+ font-weight:900;
+}
+
+.historyPlayer{
+ display:flex;
+ align-items:center;
+ gap:9px;
+ padding:9px 0;
+ border-top:1px solid #ffffff0c;
+}
+
+.historyPlayer:first-child{
+ border-top:0;
+}
+
+.historyPlayerMedal{
+ width:28px;
+ text-align:center;
+ font-size:20px;
+}
+
+.historyPlayerInfo{
+ flex:1;
+ min-width:0;
+}
+
+.historyPlayerInfo b{
+ display:block;
+ font-size:12px;
+}
+
+.historyPlayerInfo span{
+ display:block;
+ color:#94a3b8;
+ font-size:9px;
+ margin-top:2px;
+}
+
+.historyPlayerMoney{
+ text-align:right;
+ font-size:10px;
+}
+
+.historyPlayerMoney .winText{
+ color:var(--green);
+ font-weight:900;
+}
+
+.historyPlayerMoney .lossText{
+ color:var(--red);
+ font-weight:900;
+}
+
+.deleteSmall{
+ margin-top:10px;
+ width:100%;
+ border:1px solid #fb718544;
+ background:#fb718512;
+ color:#fb7185;
+ padding:9px;
+ border-radius:10px;
+ font-size:10px;
+ font-weight:900;
+}
+
 @media(min-width:700px){
  .grid{grid-template-columns:repeat(4,1fr)}
 }
@@ -609,6 +792,10 @@ td{
 
  .row{
   grid-template-columns:1fr 105px;
+ }
+
+ .detailStats{
+  grid-template-columns:repeat(3,1fr);
  }
 }
 </style>
@@ -848,23 +1035,7 @@ oninput="renderRank()"
 <span id="historyCount"></span>
 </div>
 
-<div style="overflow:auto">
-
-<table>
-
-<thead>
-<tr>
-<th>Date</th>
-<th>Time</th>
-<th>Match Details</th>
-</tr>
-</thead>
-
-<tbody id="historyBody"></tbody>
-
-</table>
-
-</div>
+<div id="historyBody"></div>
 
 </div>
 
@@ -980,7 +1151,7 @@ window.scrollTo(0,0);
 
 
 /* =========================
-   BANGLADESH DATE/TIME
+   DATE / TIME
 ========================= */
 
 function bdParts(dateObj=new Date()){
@@ -1034,9 +1205,7 @@ return `${p.hour}:${p.minute}`;
 
 
 /* =========================
-   IMPORTANT:
-   NORMALIZE GOOGLE SHEET
-   DATE/TIME VALUES
+   NORMALIZE DATE
 ========================= */
 
 function normalizeDate(value){
@@ -1049,17 +1218,6 @@ let s=String(value).trim();
 
 if(!s)return "";
 
-
-/*
- Google Sheets may send:
-
- 2026-08-15
- 2026-08-15T00:00:00.000Z
- Sat Aug 15 2026...
- 08/15/2026
- 15/08/2026
-*/
-
 let m=s.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/);
 
 if(m){
@@ -1070,11 +1228,6 @@ String(m[3]).padStart(2,"0");
 
 }
 
-
-/*
- Google Date object string
- */
-
 m=s.match(
 /^[A-Za-z]{3}\s+[A-Za-z]{3}\s+(\d{1,2})\s+(\d{4})/
 );
@@ -1082,18 +1235,9 @@ m=s.match(
 if(m){
 
 const monthNames={
-Jan:"01",
-Feb:"02",
-Mar:"03",
-Apr:"04",
-May:"05",
-Jun:"06",
-Jul:"07",
-Aug:"08",
-Sep:"09",
-Oct:"10",
-Nov:"11",
-Dec:"12"
+Jan:"01",Feb:"02",Mar:"03",Apr:"04",
+May:"05",Jun:"06",Jul:"07",Aug:"08",
+Sep:"09",Oct:"10",Nov:"11",Dec:"12"
 };
 
 const month=s.substring(4,7);
@@ -1107,11 +1251,6 @@ String(m[1]).padStart(2,"0");
 }
 
 }
-
-
-/*
- Try normal Date only as last resort.
- */
 
 const d=new Date(s);
 
@@ -1128,6 +1267,10 @@ return "";
 }
 
 
+/* =========================
+   NORMALIZE TIME
+========================= */
+
 function normalizeTime(value){
 
 if(value===null || value===undefined || value===""){
@@ -1138,11 +1281,6 @@ let s=String(value).trim();
 
 if(!s)return "";
 
-
-/*
- Already HH:mm
- */
-
 let m=s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?/);
 
 if(m){
@@ -1152,16 +1290,7 @@ return String(Number(m[1])).padStart(2,"0")+
 
 }
 
-
-/*
- Google Sheets time sometimes becomes:
-
- Sat Dec 30 1899 07:10:20 GMT...
- */
-
-m=s.match(
-/(?:\s|T)(\d{1,2}):(\d{2})(?::\d{2})?/
-);
+m=s.match(/(?:\s|T)(\d{1,2}):(\d{2})(?::\d{2})?/);
 
 if(m){
 
@@ -1169,25 +1298,6 @@ return String(Number(m[1])).padStart(2,"0")+
 ":"+m[2];
 
 }
-
-
-/*
- 07:10:20 GMT
- */
-
-m=s.match(/^(\d{1,2}):(\d{2}):(\d{2})/);
-
-if(m){
-
-return String(Number(m[1])).padStart(2,"0")+
-":"+m[2];
-
-}
-
-
-/*
- Decimal fraction of a day.
- */
 
 const num=Number(value);
 
@@ -1208,6 +1318,10 @@ return "";
 }
 
 
+/* =========================
+   NORMALIZE PLAYER
+========================= */
+
 function normalizePlayer(p){
 
 if(!p || typeof p!=="object"){
@@ -1225,8 +1339,8 @@ p.NAME ??
 if(!name)return null;
 
 let pos=Number(
-p.pos ??
 p.position ??
+p.pos ??
 p.Position ??
 0
 );
@@ -1254,10 +1368,6 @@ if(fine<=0 && mistakes>0){
 fine=mistakes*ERROR_FINE;
 }
 
-if(mistakes<=0 && fine>0){
-mistakes=Math.round(fine/ERROR_FINE);
-}
-
 return {
 name:name,
 pos:pos,
@@ -1268,58 +1378,35 @@ fine:fine
 }
 
 
+/* =========================
+   NORMALIZE MATCH
+========================= */
+
 function normalizeMatch(m){
 
 if(!m || typeof m!=="object"){
 return null;
 }
 
-let date=normalizeDate(
+const date=normalizeDate(
 m.date ??
 m.Date ??
 m.matchDate ??
 ""
 );
 
-let time=normalizeTime(
+const time=normalizeTime(
 m.time ??
 m.Time ??
 m.matchTime ??
 ""
 );
 
-
-/*
- Some APIs may use timestamp.
- */
-
-if(!date && m.timestamp){
-
-const d=new Date(m.timestamp);
-
-if(!isNaN(d.getTime())){
-
-const p=bdParts(d);
-
-date=`${p.year}-${p.month}-${p.day}`;
-
-time=`${p.hour}:${p.minute}`;
-
-}
-
-}
-
-
 let playersRaw=
 m.players ??
 m.Players ??
 m.playerList ??
 [];
-
-
-/*
- If backend sends JSON string.
- */
 
 if(typeof playersRaw==="string"){
 
@@ -1331,19 +1418,35 @@ playersRaw=[];
 
 }
 
-
 if(!Array.isArray(playersRaw)){
 playersRaw=[];
 }
-
 
 const players=playersRaw
 .map(normalizePlayer)
 .filter(Boolean);
 
 
+/*
+ IMPORTANT:
+ Backend-এর Match ID বিভিন্ন নামে এলে
+ সবগুলো support করবে।
+ */
+
+const matchId=
+m.matchId ??
+m.matchID ??
+m.match_id ??
+m.id ??
+m.ID ??
+m.MatchId ??
+m.MatchID ??
+"";
+
+
 return {
 ...m,
+matchId:String(matchId || ""),
 date:date,
 time:time,
 players:players
@@ -1689,10 +1792,6 @@ if(fine<=0 && mistakes>0){
 fine=mistakes*ERROR_FINE;
 }
 
-if(mistakes<=0 && fine>0){
-mistakes=Math.round(fine/ERROR_FINE);
-}
-
 p.matches++;
 p.mistakes+=mistakes;
 p.fine+=fine;
@@ -1734,7 +1833,7 @@ b.matches-a.matches
 
 
 /* =========================
-   PLAYER DATAlIST
+   PLAYER LIST
 ========================= */
 
 function updateNameList(){
@@ -1939,7 +2038,6 @@ getPlayerFine(p)>0
 
 /* =========================
    WEEK
-   THURSDAY → WEDNESDAY
 ========================= */
 
 function getBDDateParts(){
@@ -2320,7 +2418,7 @@ color:white;
 font-weight:800;
 padding:0;
 "
-onclick="profile(${JSON.stringify(p.name)})"
+onclick='profile(${JSON.stringify(p.name)})'
 >
 ${esc(p.name)}
 </button>
@@ -2357,7 +2455,7 @@ ${money(p.paid)}
 
 
 /* =========================
-   HISTORY
+   HISTORY FILTER
 ========================= */
 
 function getFilteredHistory(){
@@ -2469,6 +2567,10 @@ renderHistoryList(filteredHistory);
 }
 
 
+/* =========================
+   BEAUTIFUL HISTORY
+========================= */
+
 function renderHistoryList(arr){
 
 document.getElementById("historyCount")
@@ -2482,63 +2584,102 @@ const body=document.getElementById("historyBody");
 if(!arr.length){
 
 body.innerHTML=`
-<tr>
-<td colspan="3" class="empty">
+<div class="empty">
 🔍 কোনো ম্যাচ পাওয়া যায়নি
-</td>
-</tr>
+</div>
 `;
 
 return;
 
 }
 
-body.innerHTML=arr.map(m=>`
+body.innerHTML=arr.map(m=>{
 
-<tr
-onclick="openMatch(${data.indexOf(m)})"
-style="cursor:pointer"
+const index=data.indexOf(m);
+
+return `
+
+<div
+class="historyMatch"
+onclick="openMatch(${index})"
 >
 
-<td>
-${esc(formatDate(matchDate(m)))}
-</td>
+<div class="historyHead">
 
-<td>
+<div class="historyDate">
+🎮 ${esc(formatDate(matchDate(m)))}
+<br>
+<span style="color:#64748b;font-size:9px">
 ${esc(formatTime(m.time))}
-</td>
-
-<td>
-
-${m.players.map(x=>`
-
-${Number(x.pos)<=2?"🏆":"❌"}
-${esc(x.name)}
-#${x.pos}
-—
-${Number(x.pos)<=2?"Win":"Loss"}
-
-${
-getPlayerFine(x)>0
-?`
-<span class="fine">
-+${money(getPlayerFine(x))} Fine
 </span>
-`
-:""
-}
-
-`).join("<br>")}
-
-<div class="clickHint">
-👆 বিস্তারিত দেখতে ক্লিক করো
 </div>
 
-</td>
+<div class="historyTotal">
+💰 ${money(matchMoney(m))}
+</div>
 
-</tr>
+</div>
 
-`).join("");
+${m.players
+.slice()
+.sort((a,b)=>Number(a.pos)-Number(b.pos))
+.map(p=>{
+
+const pos=Number(p.pos);
+
+const medal=
+pos===1?"🥇":
+pos===2?"🥈":
+pos===3?"🥉":"4️⃣";
+
+const fine=getPlayerFine(p);
+
+return `
+
+<div class="historyPlayer">
+
+<div class="historyPlayerMedal">
+${medal}
+</div>
+
+<div class="historyPlayerInfo">
+
+<b>${esc(p.name)}</b>
+
+<span>
+Position ${pos} •
+${p.mistakes} ভুল
+</span>
+
+</div>
+
+<div class="historyPlayerMoney">
+
+<div class="${pos<=2?"winText":"lossText"}">
+${pos<=2?"WIN":"LOSS"}
+</div>
+
+<div class="fine">
+${fine>0?money(fine)+" Fine":""}
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("")}
+
+<div class="clickHint">
+👆 ম্যাচের সব তথ্য দেখতে চাপ দাও
+</div>
+
+</div>
+
+`;
+
+}).join("");
 
 }
 
@@ -2576,7 +2717,7 @@ box.innerHTML=arr.map(p=>`
 
 <div
 class="player"
-onclick="profile(${JSON.stringify(p.name)})"
+onclick='profile(${JSON.stringify(p.name)})'
 style="cursor:pointer"
 >
 
@@ -2727,14 +2868,6 @@ document.getElementById("modal")
 }
 
 
-function closeModal(){
-
-document.getElementById("modal")
-.classList.remove("show");
-
-}
-
-
 /* =========================
    MATCH DETAILS
 ========================= */
@@ -2747,14 +2880,19 @@ if(!m)return;
 
 document.getElementById("mn")
 .textContent=
-"🎮 Match • "+
-formatDate(matchDate(m))+
-" "+
-formatTime(m.time);
+"🎮 Match Details";
 
 const total=matchMoney(m);
 
 let html=`
+
+<div class="status">
+
+📅 <b>${esc(formatDate(matchDate(m)))}</b>
+&nbsp; • &nbsp;
+🕐 <b>${esc(formatTime(m.time))}</b>
+
+</div>
 
 <div class="moneyBox">
 
@@ -2770,9 +2908,7 @@ let html=`
 
 </div>
 
-<div class="card" style="margin-top:12px">
-
-<h3>Match Result</h3>
+<div style="margin-top:12px">
 
 `;
 
@@ -2781,43 +2917,70 @@ m.players
 .sort((a,b)=>Number(a.pos)-Number(b.pos))
 .forEach(p=>{
 
-const mistakes=
-Number(p.mistakes||0);
+const pos=Number(p.pos);
+const mistakes=Number(p.mistakes||0);
+const fine=getPlayerFine(p);
 
-const fine=
-getPlayerFine(p);
+const medal=
+pos===1?"🥇":
+pos===2?"🥈":
+pos===3?"🥉":"4️⃣";
+
+const statusClass=
+pos<=2?"statusWin":"statusLoss";
 
 html+=`
 
-<div class="detailPlayer">
+<div class="matchDetailCard">
 
-<b>
+<div class="matchDetailHeader">
 
-${
-Number(p.pos)===1?"🥇":
-Number(p.pos)===2?"🥈":
-Number(p.pos)===3?"🥉":"4️⃣"
+<div class="matchDetailName">
+${medal} ${esc(p.name)}
+</div>
+
+<div class="matchDetailStatus ${statusClass}">
+${pos<=2?"WIN":"LOSS"}
+</div>
+
+</div>
+
+<div class="detailStats">
+
+<div class="detailStat">
+<b>#${pos}</b>
+<span>POSITION</span>
+</div>
+
+<div class="detailStat">
+<b>${mistakes}</b>
+<span>MISTAKES</span>
+</div>
+
+<div class="detailStat">
+<b>${money(fine)}</b>
+<span>FINE</span>
+</div>
+
+</div>
+
+<div style="
+margin-top:8px;
+font-size:10px;
+color:#94a3b8;
+text-align:center;
+">
+
+${pos>=3
+?`Loss Fee: ${money(LOSS_FEE)}`
+:`Loss Fee: ৳0`
 }
 
-${esc(p.name)}
+&nbsp; • &nbsp;
 
-</b>
+Mistake Fine: ${money(fine)}
 
-<span>
-
-${Number(p.pos)<=2?"WIN":"LOSS"}
-
-•
-${Number(p.pos)>=3?money(LOSS_FEE):"৳0"}
-
-${
-mistakes>0
-?
-` • ${mistakes} ভুল • ${money(fine)} Fine`
-:""
-}
-
-</span>
+</div>
 
 </div>
 
@@ -2825,12 +2988,165 @@ mistakes>0
 
 });
 
-html+=`</div>`;
+html+=`
+
+</div>
+
+<div class="status" style="margin-top:12px">
+
+💰 <b>Total Match Money: ${money(total)}</b>
+
+</div>
+
+<button
+class="deleteBtn"
+onclick="deleteMatch(${index})"
+>
+🗑️ DELETE THIS MATCH
+</button>
+
+<button
+class="cancelBtn"
+onclick="closeModal()"
+>
+CANCEL
+</button>
+
+`;
 
 document.getElementById("md").innerHTML=html;
 
 document.getElementById("modal")
 .classList.add("show");
+
+}
+
+
+/* =========================
+   DELETE MATCH
+========================= */
+
+async function deleteMatch(index){
+
+const m=data[index];
+
+if(!m)return;
+
+
+/*
+ Match ID ছাড়া delete করা নিরাপদ নয়।
+ */
+
+const matchId=String(
+m.matchId ||
+m.matchID ||
+m.match_id ||
+m.id ||
+""
+).trim();
+
+if(!matchId){
+
+alert(
+"এই ম্যাচের Match ID পাওয়া যায়নি।\n\n"+
+"Backend থেকে Match ID না এলে ভুল ম্যাচ delete হওয়ার ঝুঁকি থাকে।"
+);
+
+return;
+
+}
+
+const playersText=m.players
+.map(p=>p.name)
+.join(", ");
+
+const confirmed=confirm(
+"⚠️ এই ম্যাচটি স্থায়ীভাবে DELETE হবে।\n\n"+
+"📅 "+formatDate(matchDate(m))+"\n"+
+"🕐 "+formatTime(m.time)+"\n"+
+"👤 "+playersText+"\n\n"+
+"এই কাজটি Undo করা যাবে না।\n\n"+
+"Delete করতে OK চাপুন।"
+);
+
+if(!confirmed)return;
+
+const btn=document.querySelector(".deleteBtn");
+
+if(btn){
+
+btn.disabled=true;
+btn.textContent="⏳ Deleting...";
+
+}
+
+try{
+
+const payload={
+action:"deleteMatch",
+matchId:matchId
+};
+
+const response=await fetch(
+API_URL,
+{
+method:"POST",
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+body:JSON.stringify(payload)
+}
+);
+
+const text=await response.text();
+
+let result;
+
+try{
+
+result=JSON.parse(text);
+
+}catch(e){
+
+throw new Error(
+"Backend JSON response দেয়নি"
+);
+
+}
+
+if(!result.ok){
+
+throw new Error(
+result.error ||
+result.message ||
+"Delete failed"
+);
+
+}
+
+closeModal();
+
+alert("✅ Match successfully deleted.");
+
+await load();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ Match delete করা যায়নি.\n\n"+
+(error.message||"Unknown error")
+);
+
+if(btn){
+
+btn.disabled=false;
+btn.textContent="🗑️ DELETE THIS MATCH";
+
+}
+
+}
 
 }
 
@@ -2882,7 +3198,7 @@ try{
 
 const url=
 API_URL+
-"?action=list&t="+Date.now();
+"?action=all&t="+Date.now();
 
 const response=await fetch(
 url,
@@ -2893,9 +3209,11 @@ cache:"no-store"
 );
 
 if(!response.ok){
+
 throw new Error(
 "HTTP "+response.status
 );
+
 }
 
 const text=await response.text();
@@ -2934,8 +3252,10 @@ data=normalizeData(raw);
 renderAll();
 
 if(msg){
+
 msg.textContent="";
 msg.className="msg";
+
 }
 
 }catch(error){
@@ -2999,7 +3319,7 @@ document.getElementById("n"+i)
 .value
 .trim();
 
-const pos=
+const position=
 Number(
 document.getElementById("p"+i).value
 );
@@ -3018,10 +3338,20 @@ return;
 }
 
 players.push({
+
 name:name,
-pos:pos,
+
+/*
+ IMPORTANT:
+ Backend-এর জন্য position ব্যবহার করা হয়েছে।
+ */
+
+position:position,
+
 mistakes:mistakes,
+
 fine:mistakes*ERROR_FINE
+
 });
 
 }
@@ -3032,7 +3362,7 @@ fine:mistakes*ERROR_FINE
  */
 
 const positions=
-players.map(p=>p.pos);
+players.map(p=>p.position);
 
 if(new Set(positions).size!==4){
 
@@ -3045,21 +3375,28 @@ return;
 }
 
 
+/*
+ IMPORTANT:
+ Backend savematch/save/addmatch গ্রহণ করে।
+ তাই এখানে saveMatch পাঠানো হচ্ছে।
+ */
+
 const payload={
-action:"add",
+
+action:"saveMatch",
+
 date:date,
+
 time:time,
+
 players:players
+
 };
 
 btn.disabled=true;
 btn.textContent="⏳ Saving...";
 
 try{
-
-/*
- Backend-এ POST পাঠানো হচ্ছে।
- */
 
 const response=await fetch(
 API_URL,
@@ -3077,17 +3414,18 @@ const text=await response.text();
 let json;
 
 try{
+
 json=JSON.parse(text);
+
 }catch(e){
-json=null;
+
+throw new Error(
+"Backend JSON response দেয়নি"
+);
+
 }
 
-
-/*
- যদি Backend success দেয়।
- */
-
-if(json && json.ok===false){
+if(!json.ok){
 
 throw new Error(
 json.error||
@@ -3104,10 +3442,12 @@ msg.textContent=
 for(let i=1;i<=4;i++){
 
 document.getElementById("n"+i).value="";
+
 document.getElementById("p"+i).value=
 String(i);
 
-const el=document.getElementById("mistake"+i);
+const el=
+document.getElementById("mistake"+i);
 
 if(el)el.textContent="0";
 
@@ -3118,11 +3458,7 @@ updateFinePreview(i);
 document.getElementById("date").value=today();
 document.getElementById("time").value=nowTime();
 
-/*
- Backend update হওয়ার একটু সময় দিয়ে reload।
- */
-
-setTimeout(load,700);
+await load();
 
 }catch(error){
 
