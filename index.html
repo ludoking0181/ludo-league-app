@@ -7,7 +7,6 @@
 <title>Ludo League</title>
 
 <style>
-
 :root{
  --bg:#070a12;
  --card:#101827;
@@ -18,48 +17,25 @@
  --green:#34d399;
  --red:#fb7185;
  --gold:#fbbf24;
+ --purple:#8b5cf6;
 }
 
-*{
- box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
- scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
  margin:0;
  background:
- radial-gradient(
-  circle at 20% 0,
-  #28205c 0,
-  #090b14 42%,
-  #05070d 100%
- );
+ radial-gradient(circle at 20% 0,#28205c 0,#090b14 42%,#05070d 100%);
  color:var(--text);
- font-family:
- system-ui,
- -apple-system,
- Segoe UI,
- Roboto,
- sans-serif;
+ font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
  min-height:100vh;
 }
 
-body.modal-open{
- overflow:hidden;
-}
+button,input,select{font:inherit}
 
-button,
-input,
-select{
- font:inherit;
-}
-
-button{
- cursor:pointer;
-}
+button{cursor:pointer}
 
 header{
  position:sticky;
@@ -119,12 +95,7 @@ nav button{
 }
 
 nav button.active{
- background:
- linear-gradient(
-  135deg,
-  #7c3aed,
-  #2563eb
- );
+ background:linear-gradient(135deg,#7c3aed,#2563eb);
  color:#fff;
 }
 
@@ -142,17 +113,19 @@ main{
  display:block;
 }
 
+
+/* =========================
+   HERO
+========================= */
+
 .hero{
  background:
- linear-gradient(
-  135deg,
-  #4c1d95aa,
-  #1d4ed888
- );
+ linear-gradient(135deg,#4c1d95aa,#1d4ed888);
  border-radius:24px;
  padding:20px;
  margin-bottom:12px;
  border:1px solid #ffffff12;
+ box-shadow:0 10px 35px #0003;
 }
 
 .hero small{
@@ -169,7 +142,13 @@ main{
  margin:0;
  color:#cbd5e1;
  font-size:12px;
+ line-height:1.7;
 }
+
+
+/* =========================
+   COMMON
+========================= */
 
 .card{
  background:#0f172acc;
@@ -177,6 +156,7 @@ main{
  border-radius:20px;
  padding:15px;
  margin-bottom:12px;
+ box-shadow:0 8px 25px #0002;
 }
 
 h3{
@@ -216,6 +196,11 @@ h3{
  margin-top:2px;
 }
 
+
+/* =========================
+   LEAGUE TABS
+========================= */
+
 .leagueTabs{
  display:grid;
  grid-template-columns:repeat(3,1fr);
@@ -233,15 +218,15 @@ h3{
 }
 
 .leagueTabs button.active{
- background:
- linear-gradient(
-  135deg,
-  #7c3aed,
-  #2563eb
- );
+ background:linear-gradient(135deg,#7c3aed,#2563eb);
  color:white;
  border-color:transparent;
 }
+
+
+/* =========================
+   FORM
+========================= */
 
 .formgrid{
  display:grid;
@@ -349,12 +334,7 @@ h3{
 }
 
 .counter button.plus{
- background:
- linear-gradient(
-  135deg,
-  #7c3aed,
-  #2563eb
- );
+ background:linear-gradient(135deg,#7c3aed,#2563eb);
 }
 
 .counterValue{
@@ -384,12 +364,7 @@ h3{
  margin-top:7px;
  font-weight:900;
  color:#fff;
- background:
- linear-gradient(
-  135deg,
-  #7c3aed,
-  #2563eb
- );
+ background:linear-gradient(135deg,#7c3aed,#2563eb);
 }
 
 .save:disabled{
@@ -411,6 +386,11 @@ h3{
 .msg.error{
  color:var(--red);
 }
+
+
+/* =========================
+   TOP PLAYER CARDS
+========================= */
 
 .topCard{
  display:flex;
@@ -447,6 +427,7 @@ h3{
  font-size:10px;
  color:#94a3b8;
  margin-top:3px;
+ line-height:1.5;
 }
 
 .topPaid{
@@ -462,6 +443,148 @@ h3{
  color:#64748b;
  font-size:9px;
 }
+
+
+/* =========================
+   BEST / WORST HOME CARDS
+========================= */
+
+.performanceSection{
+ margin-top:12px;
+}
+
+.performanceHeader{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+ margin-bottom:9px;
+}
+
+.performanceHeaderLeft{
+ display:flex;
+ align-items:center;
+ gap:8px;
+}
+
+.performanceHeaderLeft .icon{
+ width:34px;
+ height:34px;
+ border-radius:11px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:18px;
+ background:#ffffff08;
+ border:1px solid var(--line);
+}
+
+.performanceHeaderLeft b{
+ font-size:15px;
+}
+
+.performanceHeader small{
+ color:#64748b;
+ font-size:9px;
+}
+
+.performanceCard{
+ border-radius:18px;
+ padding:11px;
+ margin-bottom:8px;
+ border:1px solid var(--line);
+ background:#ffffff04;
+}
+
+.performanceCard.best{
+ background:
+ linear-gradient(135deg,#064e3b22,#0f172a88);
+ border-color:#34d39922;
+}
+
+.performanceCard.worst{
+ background:
+ linear-gradient(135deg,#7f1d1d18,#0f172a88);
+ border-color:#fb718522;
+}
+
+.performanceRow{
+ display:flex;
+ align-items:center;
+ gap:9px;
+}
+
+.performanceRank{
+ width:31px;
+ height:31px;
+ border-radius:10px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:#ffffff08;
+ font-size:17px;
+ flex-shrink:0;
+}
+
+.performanceInfo{
+ flex:1;
+ min-width:0;
+}
+
+.performanceInfo b{
+ display:block;
+ font-size:13px;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+
+.performanceInfo span{
+ display:block;
+ color:#94a3b8;
+ font-size:9px;
+ margin-top:3px;
+ line-height:1.5;
+}
+
+.performanceScore{
+ text-align:right;
+ min-width:58px;
+}
+
+.performanceScore b{
+ display:block;
+ font-size:12px;
+}
+
+.performanceScore span{
+ display:block;
+ color:#64748b;
+ font-size:8px;
+ margin-top:2px;
+}
+
+.best .performanceScore b{
+ color:var(--green);
+}
+
+.worst .performanceScore b{
+ color:var(--red);
+}
+
+.noPerformance{
+ padding:15px;
+ text-align:center;
+ color:var(--muted);
+ font-size:11px;
+ background:#ffffff04;
+ border-radius:14px;
+}
+
+
+/* =========================
+   LEAGUE
+========================= */
 
 .leagueLabel{
  font-size:10px;
@@ -541,6 +664,11 @@ h3{
  margin-top:6px;
 }
 
+
+/* =========================
+   FILTER
+========================= */
+
 .filterGrid{
  display:grid;
  grid-template-columns:1fr 1fr 1fr;
@@ -564,12 +692,7 @@ h3{
 }
 
 .filterBtn.primary{
- background:
- linear-gradient(
-  135deg,
-  #7c3aed,
-  #2563eb
- );
+ background:linear-gradient(135deg,#7c3aed,#2563eb);
 }
 
 .search{
@@ -582,6 +705,11 @@ h3{
  margin-bottom:9px;
  outline:none;
 }
+
+
+/* =========================
+   TABLE
+========================= */
 
 table{
  width:100%;
@@ -630,6 +758,11 @@ td{
  color:var(--muted);
  padding:22px;
 }
+
+
+/* =========================
+   MODAL / DETAILS
+========================= */
 
 .detailPlayer{
  display:flex;
@@ -723,12 +856,7 @@ td{
  padding:13px;
  border:0;
  border-radius:13px;
- background:
- linear-gradient(
-  135deg,
-  #dc2626,
-  #be123c
- );
+ background:linear-gradient(135deg,#dc2626,#be123c);
  color:white;
  font-weight:900;
 }
@@ -778,8 +906,6 @@ td{
  border:0;
  border-radius:9px;
  padding:7px 10px;
- font-size:18px;
- line-height:1;
 }
 
 .status{
@@ -790,6 +916,11 @@ td{
  font-size:11px;
  color:#94a3b8;
 }
+
+
+/* =========================
+   HISTORY
+========================= */
 
 .historyMatch{
  background:#ffffff04;
@@ -880,6 +1011,11 @@ td{
  font-weight:900;
 }
 
+
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media(min-width:700px){
 
  .grid{
@@ -906,94 +1042,111 @@ td{
   grid-template-columns:repeat(3,1fr);
  }
 
+ .hero{
+  padding:17px;
+ }
+
+ .hero h2{
+  font-size:23px;
+ }
+
+ .performanceInfo span{
+  font-size:8px;
+ }
+
+ .performanceScore{
+  min-width:52px;
+ }
+
 }
 
+
+/* =========================
+   EXTRA HOME POLISH
+========================= */
+
+.homeSection{
+ margin-bottom:12px;
+}
+
+.homeSectionTitle{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:8px;
+ margin-bottom:9px;
+}
+
+.homeSectionTitle h3{
+ margin:0;
+}
+
+.homeSectionTitle span{
+ color:#64748b;
+ font-size:9px;
+}
+
+.homeDivider{
+ height:1px;
+ background:linear-gradient(
+  90deg,
+  transparent,
+  #ffffff12,
+  transparent
+ );
+ margin:13px 0;
+}
+
+
+/* =========================
+   END CSS
+========================= */
 </style>
 </head>
 
 <body>
 
 <header>
-
 <div>
-
 <h1>🎲 LUDO LEAGUE</h1>
-
-<span class="live">
-● LIVE
-</span>
-
+<span class="live">● LIVE</span>
 </div>
-
 </header>
 
-
 <nav>
-
-<button
-class="active"
-onclick="page('home',this)"
->
-🏆 Home
-</button>
-
-<button
-onclick="page('add',this)"
->
-➕ Add Match
-</button>
-
-<button
-onclick="page('rank',this)"
->
-📊 Ranking
-</button>
-
-<button
-onclick="page('history',this)"
->
-📜 History
-</button>
-
-<button
-onclick="page('playerPage',this)"
->
-👤 Players
-</button>
-
+<button class="active" onclick="page('home',this)">🏆 Home</button>
+<button onclick="page('add',this)">➕ Add Match</button>
+<button onclick="page('rank',this)">📊 Ranking</button>
+<button onclick="page('history',this)">📜 History</button>
+<button onclick="page('players',this)">👤 Players</button>
 </nav>
 
-
 <main>
-
 
 <!-- =========================
      HOME
 ========================= -->
 
-<section
-id="home"
-class="page active"
->
+<section id="home" class="page active">
 
 <div class="hero">
 
-<small>
-CURRENT LEAGUE
-</small>
+<small>CURRENT LEAGUE</small>
 
-<h2>
-বন্ধুদের Ludo League
-</h2>
+<h2>বন্ধুদের Ludo League</h2>
 
 <p>
-🥇 1st / 🥈 2nd = ৳0 •
-🥉 3rd / 4th = ৳20 •
+🥇 1st / 🥈 2nd = ৳0
+•
+🥉 3rd / 4th = ৳20
+•
 প্রতি ভুল = ৳10
 </p>
 
 </div>
 
+
+<!-- LEAGUE TABS -->
 
 <div class="leagueTabs">
 
@@ -1019,7 +1172,9 @@ onclick="setLeague('month',this)"
 </div>
 
 
-<div class="card">
+<!-- LEAGUE RESULT -->
+
+<div class="card homeSection">
 
 <div class="sectionTitle">
 
@@ -1036,109 +1191,120 @@ onclick="setLeague('month',this)"
 </div>
 
 
-<div class="card">
+<!-- OVERVIEW -->
 
-<div class="sectionTitle">
+<div class="card homeSection">
 
-<h3>
-📊 League Overview
-</h3>
+<div class="homeSectionTitle">
+
+<h3>📊 League Overview</h3>
+
+<span>OVERALL</span>
 
 </div>
-
 
 <div class="grid">
 
+<div class="stat">
+<b id="matches">0</b>
+<span>Total Matches</span>
+</div>
 
 <div class="stat">
-
-<b id="matches">
-0
-</b>
-
-<span>
-Total Matches
-</span>
-
+<b id="players">0</b>
+<span>Players</span>
 </div>
-
 
 <div class="stat">
-
-<!-- FIXED ID -->
-<b id="playerCount">
-0
-</b>
-
-<span>
-Players
-</span>
-
+<b id="losses">0</b>
+<span>Total Losses</span>
 </div>
-
 
 <div class="stat">
-
-<b id="losses">
-0
-</b>
-
-<span>
-Total Losses
-</span>
-
+<b id="fines">৳0</b>
+<span>Total Fine</span>
 </div>
-
-
-<div class="stat">
-
-<b id="fines">
-৳0
-</b>
-
-<span>
-Total Fine
-</span>
-
-</div>
-
 
 </div>
 
 </div>
 
 
-<div class="card">
+<!-- BEST / WORST -->
 
-<div class="sectionTitle">
+<div class="card homeSection">
 
-<h3>
-🏆 Top 3
-</h3>
+<div class="homeSectionTitle">
 
-<span
-style="
-font-size:9px;
-color:#64748b
-"
->
-Overall
-</span>
+<h3>🏆 Player Performance</h3>
 
-</div>
-
-<div id="top"></div>
+<span>OVERALL</span>
 
 </div>
 
 
-<div class="card">
+<!-- BEST -->
 
-<div class="sectionTitle">
+<div class="performanceSection">
 
-<h3>
-🎮 Today's Matches
-</h3>
+<div class="performanceHeader">
+
+<div class="performanceHeaderLeft">
+
+<div class="icon">
+🏆
+</div>
+
+<b>Best 3 Players</b>
+
+</div>
+
+<small>Top Performance</small>
+
+</div>
+
+<div id="bestPlayers"></div>
+
+</div>
+
+
+<div class="homeDivider"></div>
+
+
+<!-- WORST -->
+
+<div class="performanceSection">
+
+<div class="performanceHeader">
+
+<div class="performanceHeaderLeft">
+
+<div class="icon">
+⚠️
+</div>
+
+<b>Needs Improvement</b>
+
+</div>
+
+<small>Lowest Performance</small>
+
+</div>
+
+<div id="worstPlayers"></div>
+
+</div>
+
+</div>
+
+
+<!-- TODAY -->
+
+<div class="card homeSection">
+
+<div class="homeSectionTitle">
+
+<h3>🎮 Today's Matches</h3>
 
 <span id="todayCount"></span>
 
@@ -1151,31 +1317,21 @@ Overall
 </section>
 
 
-
 <!-- =========================
      ADD MATCH
 ========================= -->
 
-<section
-id="add"
-class="page"
->
+<section id="add" class="page">
 
 <div class="card">
 
-<h3>
-➕ নতুন ম্যাচ যোগ করো
-</h3>
-
+<h3>➕ নতুন ম্যাচ যোগ করো</h3>
 
 <div class="formgrid">
 
-
 <div class="field">
 
-<label>
-DATE
-</label>
+<label>DATE</label>
 
 <input
 id="date"
@@ -1184,12 +1340,9 @@ type="date"
 
 </div>
 
-
 <div class="field">
 
-<label>
-TIME
-</label>
+<label>TIME</label>
 
 <input
 id="time"
@@ -1198,17 +1351,10 @@ type="time"
 
 </div>
 
-
 </div>
 
 
-<p
-style="
-color:#94a3b8;
-font-size:11px;
-line-height:1.6
-"
->
+<p style="color:#94a3b8;font-size:11px;line-height:1.6">
 
 ৪ জনের নাম ও position দাও।
 ৩য়/৪র্থ হলে ৳20 Loss Fee।
@@ -1237,34 +1383,25 @@ onclick="saveMatch()"
 💾 SAVE MATCH
 </button>
 
-
 <div
 id="msg"
 class="msg"
 ></div>
-
 
 </div>
 
 </section>
 
 
-
 <!-- =========================
      RANKING
 ========================= -->
 
-<section
-id="rank"
-class="page"
->
+<section id="rank" class="page">
 
 <div class="card">
 
-<h3>
-🏆 Ranking
-</h3>
-
+<h3>🏆 Ranking</h3>
 
 <input
 class="search"
@@ -1272,7 +1409,6 @@ id="search"
 placeholder="🔍 Player search..."
 oninput="renderRank()"
 >
-
 
 <div style="overflow:auto">
 
@@ -1282,38 +1418,17 @@ oninput="renderRank()"
 
 <tr>
 
-<th>
-#
-</th>
-
-<th>
-Player
-</th>
-
-<th>
-Matches
-</th>
-
-<th>
-Win
-</th>
-
-<th>
-Loss
-</th>
-
-<th>
-Fine
-</th>
-
-<th>
-Total Paid
-</th>
+<th>#</th>
+<th>Player</th>
+<th>Matches</th>
+<th>Win</th>
+<th>Loss</th>
+<th>Fine</th>
+<th>Total Paid</th>
 
 </tr>
 
 </thead>
-
 
 <tbody id="rankBody"></tbody>
 
@@ -1326,31 +1441,21 @@ Total Paid
 </section>
 
 
-
 <!-- =========================
      HISTORY
 ========================= -->
 
-<section
-id="history"
-class="page"
->
+<section id="history" class="page">
 
 <div class="card">
 
-<h3>
-🔎 Match Search & Filter
-</h3>
-
+<h3>🔎 Match Search & Filter</h3>
 
 <div class="filterGrid">
 
-
 <div class="field">
 
-<label>
-DATE
-</label>
+<label>DATE</label>
 
 <input
 id="filterDate"
@@ -1359,63 +1464,33 @@ type="date"
 
 </div>
 
-
 <div class="field">
 
-<label>
-DAY
-</label>
+<label>DAY</label>
 
 <select id="filterDay">
 
-<option value="">
-All Days
-</option>
+<option value="">All Days</option>
 
-<option value="0">
-Sunday
-</option>
-
-<option value="1">
-Monday
-</option>
-
-<option value="2">
-Tuesday
-</option>
-
-<option value="3">
-Wednesday
-</option>
-
-<option value="4">
-Thursday
-</option>
-
-<option value="5">
-Friday
-</option>
-
-<option value="6">
-Saturday
-</option>
+<option value="0">Sunday</option>
+<option value="1">Monday</option>
+<option value="2">Tuesday</option>
+<option value="3">Wednesday</option>
+<option value="4">Thursday</option>
+<option value="5">Friday</option>
+<option value="6">Saturday</option>
 
 </select>
 
 </div>
 
-
 <div class="field">
 
-<label>
-TIME
-</label>
+<label>TIME</label>
 
 <select id="filterTime">
 
-<option value="">
-All Time
-</option>
+<option value="">All Time</option>
 
 <option value="morning">
 Morning (06–11)
@@ -1437,12 +1512,10 @@ Night (00–05)
 
 </div>
 
-
 </div>
 
 
 <div class="filterActions">
-
 
 <button
 class="filterBtn primary"
@@ -1451,14 +1524,12 @@ onclick="applyHistoryFilter()"
 🔍 SEARCH
 </button>
 
-
 <button
 class="filterBtn"
 onclick="clearHistoryFilter()"
 >
 ✕ CLEAR
 </button>
-
 
 </div>
 
@@ -1469,9 +1540,7 @@ onclick="clearHistoryFilter()"
 
 <div class="sectionTitle">
 
-<h3>
-📜 Match History
-</h3>
+<h3>📜 Match History</h3>
 
 <span id="historyCount"></span>
 
@@ -1484,23 +1553,15 @@ onclick="clearHistoryFilter()"
 </section>
 
 
-
 <!-- =========================
      PLAYERS
 ========================= -->
 
-<!-- FIXED: players section renamed -->
-<section
-id="playerPage"
-class="page"
->
+<section id="players" class="page">
 
 <div class="card">
 
-<h3>
-👤 Players
-</h3>
-
+<h3>👤 Players</h3>
 
 <input
 class="search"
@@ -1509,16 +1570,13 @@ placeholder="🔍 Search player..."
 oninput="renderPlayers()"
 >
 
-
 <div id="playerBody"></div>
 
 </div>
 
 </section>
 
-
 </main>
-
 
 
 <!-- =========================
@@ -1539,7 +1597,6 @@ onclick="closeModal()"
 ✕
 </button>
 
-
 <h2 id="mn"></h2>
 
 <div id="md"></div>
@@ -1549,9 +1606,7 @@ onclick="closeModal()"
 </div>
 
 
-
 <script>
-
 
 /* =========================
    CONFIG
@@ -1560,21 +1615,14 @@ onclick="closeModal()"
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx1JzpYjv8w0kD2aBGGRTe6UrA63S9fBFI-B0oIU9QUjKySbYzHpKFnQMWAyF9c3F_Btw/exec";
 
-const LOSS_FEE = 20;
+const LOSS_FEE=20;
+const ERROR_FINE=10;
+const BD_TIMEZONE="Asia/Dhaka";
 
-const ERROR_FINE = 10;
-
-const BD_TIMEZONE = "Asia/Dhaka";
-
-
-let data = [];
-
-let summary = [];
-
-let currentLeague = "24h";
-
-let filteredHistory = [];
-
+let data=[];
+let summary=[];
+let currentLeague="24h";
+let filteredHistory=[];
 
 
 /* =========================
@@ -1583,191 +1631,108 @@ let filteredHistory = [];
 
 function esc(value){
 
- return String(value ?? "")
- .replace(
-  /[&<>"']/g,
-  function(m){
+return String(value ?? "")
+.replace(/[&<>"']/g,function(m){
 
-   return {
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-   }[m];
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m];
 
-  }
- );
+});
 
 }
-
 
 
 function money(value){
 
- let n = Number(value);
+let n=Number(value);
 
- if(!Number.isFinite(n)){
-  n = 0;
- }
+if(!Number.isFinite(n))n=0;
 
- return "৳" +
- n.toLocaleString("en-US");
+return "৳"+n.toLocaleString("en-US");
 
 }
 
-
-
-/* =========================
-   PAGE
-========================= */
 
 function page(id,btn){
 
- closeModal();
+document.querySelectorAll(".page")
+.forEach(x=>x.classList.remove("active"));
 
+const target=document.getElementById(id);
 
- document
- .querySelectorAll(".page")
- .forEach(
-  x => x.classList.remove("active")
- );
-
-
- const target =
- document.getElementById(id);
-
-
- if(target){
-
-  target.classList.add("active");
-
- }
-
-
- document
- .querySelectorAll("nav button")
- .forEach(
-  x => x.classList.remove("active")
- );
-
-
- if(btn){
-
-  btn.classList.add("active");
-
- }
-
-
- window.scrollTo(
-  0,
-  0
- );
-
+if(target){
+target.classList.add("active");
 }
 
+document.querySelectorAll("nav button")
+.forEach(x=>x.classList.remove("active"));
 
-
-/* =========================
-   MODAL CLOSE
-========================= */
-
-function closeModal(){
-
- const modal =
- document.getElementById("modal");
-
-
- if(!modal){
-  return;
- }
-
-
- modal.classList.remove("show");
-
-
- document.body.classList.remove(
-  "modal-open"
- );
-
-
+if(btn){
+btn.classList.add("active");
 }
 
+window.scrollTo(0,0);
+
+}
 
 
 /* =========================
    DATE / TIME
 ========================= */
 
-function bdParts(
- dateObj = new Date()
-){
+function bdParts(dateObj=new Date()){
 
- const parts =
- new Intl.DateTimeFormat(
-  "en-CA",
-  {
-   timeZone:BD_TIMEZONE,
-   year:"numeric",
-   month:"2-digit",
-   day:"2-digit",
-   hour:"2-digit",
-   minute:"2-digit",
-   second:"2-digit",
-   weekday:"short",
-   hourCycle:"h23"
-  }
- )
- .formatToParts(dateObj);
+const parts=new Intl.DateTimeFormat(
+"en-CA",
+{
+timeZone:BD_TIMEZONE,
+year:"numeric",
+month:"2-digit",
+day:"2-digit",
+hour:"2-digit",
+minute:"2-digit",
+second:"2-digit",
+weekday:"short",
+hourCycle:"h23"
+}
+).formatToParts(dateObj);
 
+const o={};
 
- const o = {};
+parts.forEach(p=>{
 
-
- parts.forEach(
-  p => {
-
-   if(
-    p.type !== "literal"
-   ){
-
-    o[p.type] =
-    p.value;
-
-   }
-
-  }
- );
-
-
- return o;
-
+if(p.type!=="literal"){
+o[p.type]=p.value;
 }
 
+});
+
+return o;
+
+}
 
 
 function today(){
 
- const p = bdParts();
+const p=bdParts();
 
- return (
-  `${p.year}-${p.month}-${p.day}`
- );
+return `${p.year}-${p.month}-${p.day}`;
 
 }
-
 
 
 function nowTime(){
 
- const p = bdParts();
+const p=bdParts();
 
- return (
-  `${p.hour}:${p.minute}`
- );
+return `${p.hour}:${p.minute}`;
 
 }
-
 
 
 /* =========================
@@ -1776,109 +1741,70 @@ function nowTime(){
 
 function normalizeDate(value){
 
- if(
-  value === null ||
-  value === undefined ||
-  value === ""
- ){
-  return "";
- }
+if(value===null || value===undefined || value===""){
+return "";
+}
 
+let s=String(value).trim();
 
- let s =
- String(value).trim();
+if(!s)return "";
 
+let m=s.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/);
 
- if(!s){
-  return "";
- }
+if(m){
 
-
- let m =
- s.match(
-  /^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/
- );
-
-
- if(m){
-
-  return (
-   m[1] +
-   "-" +
-   String(m[2]).padStart(2,"0") +
-   "-" +
-   String(m[3]).padStart(2,"0")
-  );
-
- }
-
-
- m =
- s.match(
-  /^[A-Za-z]{3}\s+[A-Za-z]{3}\s+(\d{1,2})\s+(\d{4})/
- );
-
-
- if(m){
-
-  const monthNames = {
-
-   Jan:"01",
-   Feb:"02",
-   Mar:"03",
-   Apr:"04",
-   May:"05",
-   Jun:"06",
-   Jul:"07",
-   Aug:"08",
-   Sep:"09",
-   Oct:"10",
-   Nov:"11",
-   Dec:"12"
-
-  };
-
-
-  const month =
-  s.substring(4,7);
-
-
-  if(monthNames[month]){
-
-   return (
-    m[2] +
-    "-" +
-    monthNames[month] +
-    "-" +
-    String(m[1]).padStart(2,"0")
-   );
-
-  }
-
- }
-
-
- const d =
- new Date(s);
-
-
- if(!isNaN(d.getTime())){
-
-  const p =
-  bdParts(d);
-
-
-  return (
-   `${p.year}-${p.month}-${p.day}`
-  );
-
- }
-
-
- return "";
+return m[1]+"-"+
+String(m[2]).padStart(2,"0")+"-"+
+String(m[3]).padStart(2,"0");
 
 }
 
+m=s.match(
+/^[A-Za-z]{3}\s+[A-Za-z]{3}\s+(\d{1,2})\s+(\d{4})/
+);
+
+if(m){
+
+const monthNames={
+Jan:"01",
+Feb:"02",
+Mar:"03",
+Apr:"04",
+May:"05",
+Jun:"06",
+Jul:"07",
+Aug:"08",
+Sep:"09",
+Oct:"10",
+Nov:"11",
+Dec:"12"
+};
+
+const month=s.substring(4,7);
+
+if(monthNames[month]){
+
+return m[2]+"-"+
+monthNames[month]+"-"+
+String(m[1]).padStart(2,"0");
+
+}
+
+}
+
+const d=new Date(s);
+
+if(!isNaN(d.getTime())){
+
+const p=bdParts(d);
+
+return `${p.year}-${p.month}-${p.day}`;
+
+}
+
+return "";
+
+}
 
 
 /* =========================
@@ -1887,93 +1813,49 @@ function normalizeDate(value){
 
 function normalizeTime(value){
 
- if(
-  value === null ||
-  value === undefined ||
-  value === ""
- ){
-  return "";
- }
+if(value===null || value===undefined || value===""){
+return "";
+}
 
+let s=String(value).trim();
 
- let s =
- String(value).trim();
+if(!s)return "";
 
+let m=s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?/);
 
- if(!s){
-  return "";
- }
+if(m){
 
-
- let m =
- s.match(
-  /^(\d{1,2}):(\d{2})(?::\d{2})?/
- );
-
-
- if(m){
-
-  return (
-   String(Number(m[1])).padStart(2,"0") +
-   ":" +
-   m[2]
-  );
-
- }
-
-
- m =
- s.match(
-  /(?:\s|T)(\d{1,2}):(\d{2})(?::\d{2})?/
- );
-
-
- if(m){
-
-  return (
-   String(Number(m[1])).padStart(2,"0") +
-   ":" +
-   m[2]
-  );
-
- }
-
-
- const num =
- Number(value);
-
-
- if(
-  Number.isFinite(num) &&
-  num >= 0 &&
-  num < 1
- ){
-
-  const totalMinutes =
-  Math.round(num * 1440);
-
-
-  const h =
-  Math.floor(totalMinutes / 60) % 24;
-
-
-  const mi =
-  totalMinutes % 60;
-
-
-  return (
-   String(h).padStart(2,"0") +
-   ":" +
-   String(mi).padStart(2,"0")
-  );
-
- }
-
-
- return "";
+return String(Number(m[1])).padStart(2,"0")+
+":"+m[2];
 
 }
 
+m=s.match(/(?:\s|T)(\d{1,2}):(\d{2})(?::\d{2})?/);
+
+if(m){
+
+return String(Number(m[1])).padStart(2,"0")+
+":"+m[2];
+
+}
+
+const num=Number(value);
+
+if(Number.isFinite(num) && num>=0 && num<1){
+
+const totalMinutes=Math.round(num*1440);
+
+const h=Math.floor(totalMinutes/60)%24;
+const mi=totalMinutes%60;
+
+return String(h).padStart(2,"0")+
+":"+String(mi).padStart(2,"0");
+
+}
+
+return "";
+
+}
 
 
 /* =========================
@@ -1982,93 +1864,58 @@ function normalizeTime(value){
 
 function normalizePlayer(p){
 
- if(
-  !p ||
-  typeof p !== "object"
- ){
-  return null;
- }
-
-
- const name =
- String(
-  p.name ??
-  p.player ??
-  p.Player ??
-  p.NAME ??
-  ""
- )
- .trim();
-
-
- if(!name){
-  return null;
- }
-
-
- let pos =
- Number(
-  p.position ??
-  p.pos ??
-  p.Position ??
-  0
- );
-
-
- if(!Number.isFinite(pos)){
-  pos = 0;
- }
-
-
- let mistakes =
- Number(
-  p.mistakes ??
-  p.mistake ??
-  p.errors ??
-  0
- );
-
-
- if(!Number.isFinite(mistakes)){
-  mistakes = 0;
- }
-
-
- let fine =
- Number(
-  p.fine ??
-  p.Fine ??
-  0
- );
-
-
- if(!Number.isFinite(fine)){
-  fine = 0;
- }
-
-
- if(
-  fine <= 0 &&
-  mistakes > 0
- ){
-
-  fine =
-  mistakes * ERROR_FINE;
-
- }
-
-
- return {
-
-  name:name,
-  pos:pos,
-  mistakes:mistakes,
-  fine:fine
-
- };
-
+if(!p || typeof p!=="object"){
+return null;
 }
 
+const name=String(
+p.name ??
+p.player ??
+p.Player ??
+p.NAME ??
+""
+).trim();
+
+if(!name)return null;
+
+let pos=Number(
+p.position ??
+p.pos ??
+p.Position ??
+0
+);
+
+if(!Number.isFinite(pos))pos=0;
+
+let mistakes=Number(
+p.mistakes ??
+p.mistake ??
+p.errors ??
+0
+);
+
+if(!Number.isFinite(mistakes))mistakes=0;
+
+let fine=Number(
+p.fine ??
+p.Fine ??
+0
+);
+
+if(!Number.isFinite(fine))fine=0;
+
+if(fine<=0 && mistakes>0){
+fine=mistakes*ERROR_FINE;
+}
+
+return {
+name:name,
+pos:pos,
+mistakes:mistakes,
+fine:fine
+};
+
+}
 
 
 /* =========================
@@ -2077,302 +1924,181 @@ function normalizePlayer(p){
 
 function normalizeMatch(m){
 
- if(
-  !m ||
-  typeof m !== "object"
- ){
-  return null;
- }
+if(!m || typeof m!=="object"){
+return null;
+}
 
+const date=normalizeDate(
+m.date ??
+m.Date ??
+m.matchDate ??
+""
+);
 
- const date =
- normalizeDate(
-  m.date ??
-  m.Date ??
-  m.matchDate ??
-  ""
- );
+const time=normalizeTime(
+m.time ??
+m.Time ??
+m.matchTime ??
+""
+);
 
+let playersRaw=
+m.players ??
+m.Players ??
+m.playerList ??
+[];
 
- const time =
- normalizeTime(
-  m.time ??
-  m.Time ??
-  m.matchTime ??
-  ""
- );
+if(typeof playersRaw==="string"){
 
-
- let playersRaw =
- m.players ??
- m.Players ??
- m.playerList ??
- [];
-
-
- if(
-  typeof playersRaw === "string"
- ){
-
-  try{
-
-   playersRaw =
-   JSON.parse(playersRaw);
-
-  }catch(e){
-
-   playersRaw = [];
-
-  }
-
- }
-
-
- if(
-  !Array.isArray(playersRaw)
- ){
-
-  playersRaw = [];
-
- }
-
-
- const players =
- playersRaw
- .map(normalizePlayer)
- .filter(Boolean);
-
-
- const matchId =
- m.matchId ??
- m.matchID ??
- m.match_id ??
- m.id ??
- m.ID ??
- m.MatchId ??
- m.MatchID ??
- "";
-
-
- return {
-
-  ...m,
-
-  matchId:
-  String(matchId || ""),
-
-  date:date,
-
-  time:time,
-
-  players:players
-
- };
+try{
+playersRaw=JSON.parse(playersRaw);
+}catch(e){
+playersRaw=[];
+}
 
 }
 
+if(!Array.isArray(playersRaw)){
+playersRaw=[];
+}
+
+const players=playersRaw
+.map(normalizePlayer)
+.filter(Boolean);
 
 
-/* =========================
-   NORMALIZE DATA
-========================= */
+const matchId=
+m.matchId ??
+m.matchID ??
+m.match_id ??
+m.id ??
+m.ID ??
+m.MatchId ??
+m.MatchID ??
+"";
+
+
+return {
+...m,
+matchId:String(matchId || ""),
+date:date,
+time:time,
+players:players
+};
+
+}
+
 
 function normalizeData(arr){
 
- if(!Array.isArray(arr)){
-  return [];
- }
+if(!Array.isArray(arr))return [];
 
-
- return arr
- .map(normalizeMatch)
- .filter(
-  m =>
-  m &&
-  m.players.length > 0
- );
+return arr
+.map(normalizeMatch)
+.filter(m=>m && m.players.length>0);
 
 }
-
 
 
 /* =========================
    DATE OBJECT
 ========================= */
 
-function localDateToUTC(
- date,
- time
-){
+function localDateToUTC(date,time){
 
- if(!date){
-  return null;
- }
+if(!date)return null;
 
+const parts=date.split("-").map(Number);
 
- const parts =
- date.split("-").map(Number);
+if(parts.length!==3)return null;
 
+const y=parts[0];
+const mo=parts[1];
+const d=parts[2];
 
- if(parts.length !== 3){
-  return null;
- }
+const tp=(time||"00:00").split(":").map(Number);
 
+const h=Number(tp[0]||0);
+const mi=Number(tp[1]||0);
 
- const y = parts[0];
+const utc=Date.UTC(
+y,
+mo-1,
+d,
+h-6,
+mi,
+0
+);
 
- const mo = parts[1];
+const result=new Date(utc);
 
- const d = parts[2];
-
-
- const tp =
- (time || "00:00")
- .split(":")
- .map(Number);
-
-
- const h =
- Number(tp[0] || 0);
-
-
- const mi =
- Number(tp[1] || 0);
-
-
- const utc =
- Date.UTC(
-  y,
-  mo - 1,
-  d,
-  h - 6,
-  mi,
-  0
- );
-
-
- const result =
- new Date(utc);
-
-
- return isNaN(
-  result.getTime()
- )
- ? null
- : result;
+return isNaN(result.getTime())?null:result;
 
 }
-
 
 
 function matchDate(m){
 
- return localDateToUTC(
-  m.date,
-  m.time
- );
+return localDateToUTC(
+m.date,
+m.time
+);
 
 }
-
 
 
 function getBDHour(m){
 
- const d =
- matchDate(m);
+const d=matchDate(m);
 
+if(!d)return -1;
 
- if(!d){
-  return -1;
- }
+const p=bdParts(d);
 
-
- const p =
- bdParts(d);
-
-
- return Number(p.hour);
+return Number(p.hour);
 
 }
-
 
 
 function formatDate(date){
 
- if(!date){
-  return "";
- }
+if(!date)return "";
 
-
- return new Intl.DateTimeFormat(
-  "en-GB",
-  {
-   timeZone:BD_TIMEZONE,
-   day:"2-digit",
-   month:"short",
-   year:"numeric"
-  }
- )
- .format(date);
+return new Intl.DateTimeFormat(
+"en-GB",
+{
+timeZone:BD_TIMEZONE,
+day:"2-digit",
+month:"short",
+year:"numeric"
+}
+).format(date);
 
 }
-
 
 
 function formatTime(time){
 
- if(!time){
-  return "--:--";
- }
+if(!time)return "--:--";
 
+const p=time.split(":");
 
- const p =
- time.split(":");
+if(p.length<2)return time;
 
+let h=Number(p[0]);
+const m=p[1];
 
- if(p.length < 2){
-  return time;
- }
+if(!Number.isFinite(h))return time;
 
+const suffix=h>=12?"PM":"AM";
 
- let h =
- Number(p[0]);
+h=h%12;
 
+if(h===0)h=12;
 
- const m =
- p[1];
-
-
- if(!Number.isFinite(h)){
-  return time;
- }
-
-
- const suffix =
- h >= 12
- ? "PM"
- : "AM";
-
-
- h =
- h % 12;
-
-
- if(h === 0){
-  h = 12;
- }
-
-
- return (
-  String(h).padStart(2,"0") +
-  ":" +
-  m +
-  " " +
-  suffix
- );
+return String(h).padStart(2,"0")+":"+m+" "+suffix;
 
 }
-
 
 
 /* =========================
@@ -2381,24 +2107,17 @@ function formatTime(time){
 
 function buildSlots(){
 
- let html = "";
+let html="";
 
+for(let i=1;i<=4;i++){
 
- for(
-  let i = 1;
-  i <= 4;
-  i++
- ){
-
-  html += `
+html+=`
 
 <div class="player">
 
 <div class="playerTop">
 
-<b>
-PLAYER ${i}
-</b>
+<b>PLAYER ${i}</b>
 
 <span
 class="finePreview"
@@ -2409,7 +2128,6 @@ No Fine
 
 </div>
 
-
 <div class="row">
 
 <input
@@ -2419,44 +2137,25 @@ autocomplete="off"
 placeholder="নাম"
 >
 
-
 <select id="p${i}">
 
-<option value="1">
-🥇 1st
-</option>
-
-<option value="2">
-🥈 2nd
-</option>
-
-<option value="3">
-🥉 3rd
-</option>
-
-<option value="4">
-4️⃣ 4th
-</option>
+<option value="1">🥇 1st</option>
+<option value="2">🥈 2nd</option>
+<option value="3">🥉 3rd</option>
+<option value="4">4️⃣ 4th</option>
 
 </select>
 
 </div>
 
-
 <div class="mistakeBox">
 
 <div class="mistakeTitle">
 
-<span>
-❌
-</span>
-
-<span>
-ভুলের সংখ্যা
-</span>
+<span>❌</span>
+<span>ভুলের সংখ্যা</span>
 
 </div>
-
 
 <div class="counter">
 
@@ -2467,14 +2166,12 @@ onclick="changeMistakes(${i},-1)"
 −
 </button>
 
-
 <div
 class="counterValue"
 id="mistake${i}"
 >
 0
 </div>
-
 
 <button
 type="button"
@@ -2485,7 +2182,6 @@ onclick="changeMistakes(${i},1)"
 </button>
 
 </div>
-
 
 <div
 class="counterHelp"
@@ -2500,160 +2196,89 @@ id="mh${i}"
 
 `;
 
- }
+}
 
+document.getElementById("slots").innerHTML=html;
 
- document.getElementById(
-  "slots"
- ).innerHTML = html;
+let dl=document.getElementById("names");
 
+if(!dl){
 
- let dl =
- document.getElementById(
-  "names"
- );
-
-
- if(!dl){
-
-  dl =
-  document.createElement(
-   "datalist"
-  );
-
-  dl.id = "names";
-
-  document.body.appendChild(dl);
-
- }
-
-
- updateAllFinePreview();
+dl=document.createElement("datalist");
+dl.id="names";
+document.body.appendChild(dl);
 
 }
 
+updateAllFinePreview();
+
+}
 
 
 function getMistakes(i){
 
- const el =
- document.getElementById(
-  "mistake" + i
- );
+const el=document.getElementById("mistake"+i);
 
-
- return el
- ? Number(el.textContent || 0)
- : 0;
+return el?Number(el.textContent||0):0;
 
 }
 
 
+function changeMistakes(i,amount){
 
-function changeMistakes(
- i,
- amount
-){
+const el=document.getElementById("mistake"+i);
 
- const el =
- document.getElementById(
-  "mistake" + i
- );
+if(!el)return;
 
+let value=Number(el.textContent||0);
 
- if(!el){
-  return;
- }
+value+=amount;
 
+if(value<0)value=0;
 
- let value =
- Number(
-  el.textContent || 0
- );
+if(value>99)value=99;
 
+el.textContent=value;
 
- value += amount;
-
-
- if(value < 0){
-  value = 0;
- }
-
-
- if(value > 99){
-  value = 99;
- }
-
-
- el.textContent =
- value;
-
-
- updateFinePreview(i);
+updateFinePreview(i);
 
 }
-
 
 
 function updateFinePreview(i){
 
- const mistakes =
- getMistakes(i);
+const mistakes=getMistakes(i);
+const fine=mistakes*ERROR_FINE;
 
+const fp=document.getElementById("fp"+i);
+const mh=document.getElementById("mh"+i);
 
- const fine =
- mistakes * ERROR_FINE;
+if(fp){
 
-
- const fp =
- document.getElementById(
-  "fp" + i
- );
-
-
- const mh =
- document.getElementById(
-  "mh" + i
- );
-
-
- if(fp){
-
-  fp.textContent =
-  fine > 0
-  ? "Fine " + money(fine)
-  : "No Fine";
-
- }
-
-
- if(mh){
-
-  mh.textContent =
-  mistakes +
-  " ভুল = " +
-  money(fine);
-
- }
+fp.textContent=
+fine>0
+?"Fine "+money(fine)
+:"No Fine";
 
 }
 
+if(mh){
+
+mh.textContent=
+mistakes+" ভুল = "+money(fine);
+
+}
+
+}
 
 
 function updateAllFinePreview(){
 
- for(
-  let i = 1;
-  i <= 4;
-  i++
- ){
-
-  updateFinePreview(i);
-
- }
-
+for(let i=1;i<=4;i++){
+updateFinePreview(i);
 }
 
+}
 
 
 /* =========================
@@ -2662,228 +2287,432 @@ function updateAllFinePreview(){
 
 function buildSummary(){
 
- const map = {};
+const map={};
+
+data.forEach(m=>{
+
+m.players.forEach(x=>{
+
+const name=String(x.name||"").trim();
+
+if(!name)return;
+
+const key=name.toLowerCase();
+
+if(!map[key]){
+
+map[key]={
+name:name,
+matches:0,
+win:0,
+loss:0,
+fine:0,
+paid:0,
+mistakes:0,
+h:[]
+};
+
+}
+
+const p=map[key];
+
+const pos=Number(x.pos||0);
+
+let mistakes=Number(x.mistakes||0);
+let fine=Number(x.fine||0);
+
+if(!Number.isFinite(mistakes))mistakes=0;
+if(!Number.isFinite(fine))fine=0;
+
+if(fine<=0 && mistakes>0){
+fine=mistakes*ERROR_FINE;
+}
+
+p.matches++;
+p.mistakes+=mistakes;
+p.fine+=fine;
+
+if(pos>=3){
+
+p.loss++;
+p.paid+=LOSS_FEE;
+
+}else{
+
+p.win++;
+
+}
+
+p.paid+=fine;
+
+p.h.push({
+...x,
+mistakes,
+fine,
+date:m.date,
+time:m.time
+});
+
+});
+
+});
 
 
- data.forEach(
-  m => {
-
-   m.players.forEach(
-    x => {
-
-     const name =
-     String(
-      x.name || ""
-     ).trim();
-
-
-     if(!name){
-      return;
-     }
-
-
-     const key =
-     name.toLowerCase();
-
-
-     if(!map[key]){
-
-      map[key] = {
-
-       name:name,
-       matches:0,
-       win:0,
-       loss:0,
-       fine:0,
-       paid:0,
-       mistakes:0,
-       h:[]
-
-      };
-
-     }
-
-
-     const p =
-     map[key];
-
-
-     const pos =
-     Number(
-      x.pos || 0
-     );
-
-
-     let mistakes =
-     Number(
-      x.mistakes || 0
-     );
-
-
-     let fine =
-     Number(
-      x.fine || 0
-     );
-
-
-     if(
-      !Number.isFinite(mistakes)
-     ){
-      mistakes = 0;
-     }
-
-
-     if(
-      !Number.isFinite(fine)
-     ){
-      fine = 0;
-     }
-
-
-     if(
-      fine <= 0 &&
-      mistakes > 0
-     ){
-
-      fine =
-      mistakes * ERROR_FINE;
-
-     }
-
-
-     p.matches++;
-
-     p.mistakes +=
-     mistakes;
-
-     p.fine +=
-     fine;
-
-
-     if(pos >= 3){
-
-      p.loss++;
-
-      p.paid +=
-      LOSS_FEE;
-
-     }else{
-
-      p.win++;
-
-     }
-
-
-     p.paid +=
-     fine;
-
-
-     p.h.push({
-
-      ...x,
-
-      mistakes:mistakes,
-
-      fine:fine,
-
-      date:m.date,
-
-      time:m.time
-
-     });
-
-    }
-   );
-
-  }
- );
-
-
- summary =
- Object.values(map)
- .sort(
-  (a,b) =>
-   b.win - a.win ||
-   a.loss - b.loss ||
-   a.fine - b.fine ||
-   b.matches - a.matches
- );
+summary=Object.values(map).sort((a,b)=>
+b.win-a.win ||
+a.loss-b.loss ||
+a.fine-b.fine ||
+b.matches-a.matches
+);
 
 }
 
 
-
 /* =========================
-   PLAYER NAME LIST
+   PLAYER LIST
 ========================= */
 
 function updateNameList(){
 
- const dl =
- document.getElementById(
-  "names"
- );
+const dl=document.getElementById("names");
 
+if(!dl)return;
 
- if(!dl){
-  return;
- }
-
-
- dl.innerHTML =
- summary
- .map(
-  p =>
-  `<option value="${esc(p.name)}"></option>`
- )
- .join("");
+dl.innerHTML=summary
+.map(p=>`<option value="${esc(p.name)}"></option>`)
+.join("");
 
 }
 
 
+/* =========================
+   PERFORMANCE SCORE
+========================= */
+
+/*
+ BEST:
+ Win = +3
+ Loss = -2
+ Fine = -1 per ৳10
+
+ WORST:
+ Loss = +3
+ Fine = +1 per ৳10
+ Win = -2
+
+ Match count is used only as tie-breaker.
+ এতে বেশি ম্যাচ খেলা মানেই অটোমেটিকALLY best
+ হয়ে যায় না।
+ */
+
+function bestPerformanceScore(p){
+
+const win=Number(p.win||0);
+const loss=Number(p.loss||0);
+const fine=Number(p.fine||0);
+
+return
+(
+ win*3
+ -
+ loss*2
+ -
+ fine/ERROR_FINE
+);
+
+}
+
+
+function worstPerformanceScore(p){
+
+const win=Number(p.win||0);
+const loss=Number(p.loss||0);
+const fine=Number(p.fine||0);
+
+return
+(
+ loss*3
+ +
+ fine/ERROR_FINE
+ -
+ win*2
+);
+
+}
+
+
+function getBestPlayers(){
+
+return summary
+.slice()
+.sort((a,b)=>{
+
+const scoreDiff=
+bestPerformanceScore(b)-
+bestPerformanceScore(a);
+
+if(scoreDiff!==0){
+return scoreDiff;
+}
+
+if(b.win!==a.win){
+return b.win-a.win;
+}
+
+if(a.loss!==b.loss){
+return a.loss-b.loss;
+}
+
+if(a.fine!==b.fine){
+return a.fine-b.fine;
+}
+
+return b.matches-a.matches;
+
+})
+.slice(0,3);
+
+}
+
+
+function getWorstPlayers(){
+
+/*
+ প্রথমে best 3 বাদ দিচ্ছি,
+ যাতে একই player দুই জায়গায় না আসে।
+ */
+
+const bestNames=new Set(
+getBestPlayers()
+.map(p=>p.name.toLowerCase())
+);
+
+const candidates=summary.filter(
+p=>!bestNames.has(p.name.toLowerCase())
+);
+
+return candidates
+.slice()
+.sort((a,b)=>{
+
+const scoreDiff=
+worstPerformanceScore(b)-
+worstPerformanceScore(a);
+
+if(scoreDiff!==0){
+return scoreDiff;
+}
+
+if(b.loss!==a.loss){
+return b.loss-a.loss;
+}
+
+if(b.fine!==a.fine){
+return b.fine-a.fine;
+}
+
+if(a.win!==b.win){
+return a.win-b.win;
+}
+
+return b.matches-a.matches;
+
+})
+.slice(0,3);
+
+}
+
 
 /* =========================
-   TOP
+   RENDER PERFORMANCE
+========================= */
+
+function renderPerformance(){
+
+const bestBox=
+document.getElementById("bestPlayers");
+
+const worstBox=
+document.getElementById("worstPlayers");
+
+if(!bestBox || !worstBox)return;
+
+
+/* BEST */
+
+const best=getBestPlayers();
+
+if(!best.length){
+
+bestBox.innerHTML=`
+<div class="noPerformance">
+🏆 এখনো পর্যাপ্ত ম্যাচের data নেই
+</div>
+`;
+
+}else{
+
+const medals=[
+"🥇",
+"🥈",
+"🥉"
+];
+
+bestBox.innerHTML=best.map((p,i)=>{
+
+const score=bestPerformanceScore(p);
+
+return `
+
+<div class="performanceCard best">
+
+<div class="performanceRow">
+
+<div class="performanceRank">
+${medals[i]}
+</div>
+
+<div class="performanceInfo">
+
+<b>${esc(p.name)}</b>
+
+<span>
+${p.win} Win
+•
+${p.loss} Loss
+•
+${p.matches} Matches
+•
+${money(p.fine)} Fine
+</span>
+
+</div>
+
+<div class="performanceScore">
+
+<b>${score>0?"+":""}${score}</b>
+
+<span>PERFORMANCE</span>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* WORST */
+
+const worst=getWorstPlayers();
+
+if(!worst.length){
+
+worstBox.innerHTML=`
+<div class="noPerformance">
+⚠️ এখনো পর্যাপ্ত player data নেই
+</div>
+`;
+
+}else{
+
+const icons=[
+"🔴",
+"🟠",
+"🟡"
+];
+
+worstBox.innerHTML=worst.map((p,i)=>{
+
+const score=worstPerformanceScore(p);
+
+return `
+
+<div class="performanceCard worst">
+
+<div class="performanceRow">
+
+<div class="performanceRank">
+${icons[i]}
+</div>
+
+<div class="performanceInfo">
+
+<b>${esc(p.name)}</b>
+
+<span>
+${p.win} Win
+•
+${p.loss} Loss
+•
+${p.matches} Matches
+•
+${money(p.fine)} Fine
+</span>
+
+</div>
+
+<div class="performanceScore">
+
+<b>${score>0?"+":""}${score}</b>
+
+<span>ATTENTION</span>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+}
+
+
+/* =========================
+   OLD TOP FUNCTION
+   Kept for compatibility
 ========================= */
 
 function renderTop(){
 
- const medals =
- [
-  "🥇",
-  "🥈",
-  "🥉"
- ];
+/*
+ আগের top element থাকলে সেটাও update করা হবে।
+ বর্তমানে Home Page-এ নতুন Best/Worst section ব্যবহার হচ্ছে।
+ */
 
+const box=document.getElementById("top");
 
- const top =
- summary.slice(0,3);
+if(!box){
+renderPerformance();
+return;
+}
 
+const medals=[
+"🥇",
+"🥈",
+"🥉"
+];
 
- const box =
- document.getElementById(
-  "top"
- );
+const top=getBestPlayers();
 
+if(!top.length){
 
- if(!top.length){
+box.innerHTML=
+`<div class="empty">এখনও কোনো ম্যাচ হয়নি</div>`;
 
-  box.innerHTML =
-  `
-  <div class="empty">
-  এখনও কোনো ম্যাচ হয়নি
-  </div>
-  `;
+}else{
 
-  return;
-
- }
-
-
- box.innerHTML =
- top
- .map(
-  (p,i) => `
+box.innerHTML=top.map((p,i)=>`
 
 <div class="topCard">
 
@@ -2893,9 +2722,7 @@ ${medals[i]}
 
 <div class="topInfo">
 
-<b>
-${esc(p.name)}
-</b>
+<b>${esc(p.name)}</b>
 
 <span>
 ${p.win} Win •
@@ -2908,24 +2735,20 @@ ${money(p.fine)} Fine
 
 <div class="topPaid">
 
-<b>
-${money(p.paid)}
-</b>
-
-<span>
-Total Paid
-</span>
+<b>${money(p.paid)}</b>
+<span>Total Paid</span>
 
 </div>
 
 </div>
 
-`
- )
- .join("");
+`).join("");
 
 }
 
+renderPerformance();
+
+}
 
 
 /* =========================
@@ -2934,64 +2757,36 @@ Total Paid
 
 function getPlayerFine(p){
 
- let fine =
- Number(
-  p.fine || 0
- );
+let fine=Number(p.fine||0);
 
+if(!Number.isFinite(fine))fine=0;
 
- if(
-  !Number.isFinite(fine)
- ){
-  fine = 0;
- }
+if(fine<=0){
 
+const mistakes=Number(p.mistakes||0);
 
- if(fine <= 0){
-
-  const mistakes =
-  Number(
-   p.mistakes || 0
-  );
-
-
-  if(
-   Number.isFinite(mistakes)
-  ){
-
-   fine =
-   mistakes * ERROR_FINE;
-
-  }
-
- }
-
-
- return fine;
+if(Number.isFinite(mistakes)){
+fine=mistakes*ERROR_FINE;
+}
 
 }
 
+return fine;
+
+}
 
 
 function matchMoney(m){
 
- return m.players.reduce(
-  (
-   total,
-   p
-  ) =>
-   total +
-   (
-    Number(p.pos) >= 3
-    ? LOSS_FEE
-    : 0
-   ) +
-   getPlayerFine(p),
-  0
- );
+return m.players.reduce(
+(total,p)=>
+total+
+(Number(p.pos)>=3?LOSS_FEE:0)+
+getPlayerFine(p),
+0
+);
 
 }
-
 
 
 /* =========================
@@ -3000,73 +2795,43 @@ function matchMoney(m){
 
 function getTodayMatches(){
 
- const t =
- today();
+const t=today();
 
-
- return data
- .filter(
-  m =>
-  m.date === t
- )
- .sort(
-  (a,b) =>
-  String(b.time)
-  .localeCompare(
-   String(a.time)
-  )
- );
+return data
+.filter(m=>m.date===t)
+.sort((a,b)=>
+String(b.time).localeCompare(String(a.time))
+);
 
 }
 
 
-
 function renderTodayMatches(){
 
- const arr =
- getTodayMatches();
+const arr=getTodayMatches();
 
+const count=document.getElementById("todayCount");
 
- const count =
- document.getElementById(
-  "todayCount"
- );
+count.textContent=
+arr.length+
+" match"+
+(arr.length===1?"":"es");
 
+const box=document.getElementById("todayMatches");
 
- count.textContent =
- arr.length +
- " match" +
- (
-  arr.length === 1
-  ? ""
-  : "es"
- );
+if(!arr.length){
 
+box.innerHTML=`
+<div class="empty">
+🌙 আজ এখনো কোনো ম্যাচ হয়নি।
+</div>
+`;
 
- const box =
- document.getElementById(
-  "todayMatches"
- );
+return;
 
+}
 
- if(!arr.length){
-
-  box.innerHTML =
-  `
-  <div class="empty">
-  🌙 আজ এখনো কোনো ম্যাচ হয়নি।
-  </div>
-  `;
-
-  return;
-
- }
-
-
- box.innerHTML =
- arr
- .map(
-  m => `
+box.innerHTML=arr.map(m=>`
 
 <div
 class="matchCard"
@@ -3085,12 +2850,9 @@ ${money(matchMoney(m))}
 
 </div>
 
-
 <div class="matchPlayers">
 
-${m.players
-.map(
- p => `
+${m.players.map(p=>`
 
 ${Number(p.pos)<=2?"🏆":"❌"}
 ${esc(p.name)}
@@ -3098,21 +2860,16 @@ ${esc(p.name)}
 ${Number(p.pos)<=2?"Win":"Loss"}
 
 ${
- getPlayerFine(p)>0
- ?
- `<span class="fine">
- +${money(getPlayerFine(p))} Fine
- </span>`
- :
- ""
+getPlayerFine(p)>0
+?` <span class="fine">
++${money(getPlayerFine(p))} Fine
+</span>`
+:""
 }
 
-`
-)
-.join("<br>")}
+`).join("<br>")}
 
 </div>
-
 
 <div class="clickHint">
 👆 বিস্তারিত দেখতে ক্লিক করো
@@ -3120,12 +2877,9 @@ ${
 
 </div>
 
-`
- )
- .join("");
+`).join("");
 
 }
-
 
 
 /* =========================
@@ -3134,101 +2888,65 @@ ${
 
 function getBDDateParts(){
 
- const p =
- bdParts();
+const p=bdParts();
 
-
- return {
-
-  year:Number(p.year),
-
-  month:Number(p.month),
-
-  day:Number(p.day)
-
- };
+return {
+year:Number(p.year),
+month:Number(p.month),
+day:Number(p.day)
+};
 
 }
-
 
 
 function getWeekStartBD(){
 
- const x =
- getBDDateParts();
+const x=getBDDateParts();
 
+const base=new Date(
+Date.UTC(
+x.year,
+x.month-1,
+x.day
+)
+);
 
- const base =
- new Date(
-  Date.UTC(
-   x.year,
-   x.month - 1,
-   x.day
-  )
- );
+const day=base.getUTCDay();
 
+let diff=day-4;
 
- const day =
- base.getUTCDay();
+if(diff<0)diff+=7;
 
+base.setUTCDate(
+base.getUTCDate()-diff
+);
 
- let diff =
- day - 4;
-
-
- if(diff < 0){
-  diff += 7;
- }
-
-
- base.setUTCDate(
-  base.getUTCDate() - diff
- );
-
-
- return base;
+return base;
 
 }
-
 
 
 function getWeekMatches(){
 
- const start =
- getWeekStartBD();
+const start=getWeekStartBD();
 
+const end=new Date(start);
 
- const end =
- new Date(start);
+end.setUTCDate(
+end.getUTCDate()+7
+);
 
+return data.filter(m=>{
 
- end.setUTCDate(
-  end.getUTCDate() + 7
- );
+const d=matchDate(m);
 
+if(!d)return false;
 
- return data.filter(
-  m => {
+return d>=start && d<end;
 
-   const d =
-   matchDate(m);
-
-
-   if(!d){
-    return false;
-   }
-
-
-   return (
-    d >= start &&
-    d < end
-   );
-
-  }
- );
+});
 
 }
-
 
 
 /* =========================
@@ -3237,32 +2955,20 @@ function getWeekMatches(){
 
 function getMonthMatches(){
 
- const now =
- getBDDateParts();
+const now=getBDDateParts();
 
+return data.filter(m=>{
 
- return data.filter(
-  m => {
+if(!m.date)return false;
 
-   if(!m.date){
-    return false;
-   }
+const parts=m.date.split("-");
 
+return Number(parts[0])===now.year &&
+Number(parts[1])===now.month;
 
-   const parts =
-   m.date.split("-");
-
-
-   return (
-    Number(parts[0]) === now.year &&
-    Number(parts[1]) === now.month
-   );
-
-  }
- );
+});
 
 }
-
 
 
 /* =========================
@@ -3271,265 +2977,160 @@ function getMonthMatches(){
 
 function get24hMatches(){
 
- const now =
- new Date();
+const now=new Date();
 
+const start=new Date(
+now.getTime()-86400000
+);
 
- const start =
- new Date(
-  now.getTime() -
-  86400000
- );
+return data.filter(m=>{
 
+const d=matchDate(m);
 
- return data.filter(
-  m => {
+return d && d>=start && d<=now;
 
-   const d =
-   matchDate(m);
-
-
-   return (
-    d &&
-    d >= start &&
-    d <= now
-   );
-
-  }
- );
+});
 
 }
-
 
 
 /* =========================
    LEAGUE
 ========================= */
 
-function setLeague(
- type,
- btn
-){
+function setLeague(type,btn){
 
- currentLeague =
- type;
+currentLeague=type;
 
+document.querySelectorAll(".leagueTabs button")
+.forEach(x=>x.classList.remove("active"));
 
- document
- .querySelectorAll(
-  ".leagueTabs button"
- )
- .forEach(
-  x =>
-  x.classList.remove("active")
- );
+if(btn){
+btn.classList.add("active");
+}
 
-
- if(btn){
-  btn.classList.add("active");
- }
-
-
- renderLeague();
+renderLeague();
 
 }
 
 
-
 function renderLeague(){
 
- let arr = [];
+let arr=[];
+let title="";
 
- let title = "";
+if(currentLeague==="24h"){
 
+arr=get24hMatches();
+title="🕐 Last 24 Hours";
 
- if(
-  currentLeague === "24h"
- ){
+}else if(currentLeague==="week"){
 
-  arr =
-  get24hMatches();
+arr=getWeekMatches();
+title="📅 Weekly Result — Thu to Wed";
 
-  title =
-  "🕐 Last 24 Hours";
+}else{
 
- }else if(
-  currentLeague === "week"
- ){
+arr=getMonthMatches();
+title="📆 Monthly Result";
 
-  arr =
-  getWeekMatches();
+}
 
-  title =
-  "📅 Weekly Result — Thu to Wed";
+arr.sort((a,b)=>
+(matchDate(b)?.getTime()||0)-
+(matchDate(a)?.getTime()||0)
+);
 
- }else{
+document.getElementById("leagueTitle")
+.textContent=title;
 
-  arr =
-  getMonthMatches();
+document.getElementById("leagueCount")
+.textContent=
+arr.length+
+" match"+
+(arr.length===1?"":"es");
 
-  title =
-  "📆 Monthly Result";
+const box=document.getElementById("leagueResult");
 
- }
+if(!arr.length){
 
+box.innerHTML=`
+<div class="empty">
+⏳ এই সময়ে কোনো ম্যাচ হয়নি।
+</div>
+`;
 
- arr.sort(
-  (a,b) =>
-  (
-   matchDate(b)?.getTime() || 0
-  ) -
-  (
-   matchDate(a)?.getTime() || 0
-  )
- );
+return;
 
+}
 
- document.getElementById(
-  "leagueTitle"
- )
- .textContent =
- title;
+const players={};
 
+arr.forEach(m=>{
 
- document.getElementById(
-  "leagueCount"
- )
- .textContent =
- arr.length +
- " match" +
- (
-  arr.length === 1
-  ? ""
-  : "es"
- );
+m.players.forEach(p=>{
 
+const key=p.name.toLowerCase();
 
- const box =
- document.getElementById(
-  "leagueResult"
- );
+if(!players[key]){
 
+players[key]={
+name:p.name,
+win:0,
+loss:0,
+fine:0,
+paid:0,
+matches:0
+};
 
- if(!arr.length){
+}
 
-  box.innerHTML =
-  `
-  <div class="empty">
-  ⏳ এই সময়ে কোনো ম্যাচ হয়নি।
-  </div>
-  `;
+const q=players[key];
 
-  return;
+q.matches++;
 
- }
+const fine=getPlayerFine(p);
 
+q.fine+=fine;
+q.paid+=fine;
 
- const players = {};
+if(Number(p.pos)<=2){
 
+q.win++;
 
- arr.forEach(
-  m => {
+}else{
 
-   m.players.forEach(
-    p => {
+q.loss++;
+q.paid+=LOSS_FEE;
 
-     const key =
-     p.name.toLowerCase();
+}
 
+});
 
-     if(!players[key]){
+});
 
-      players[key] = {
 
-       name:p.name,
-       win:0,
-       loss:0,
-       fine:0,
-       paid:0,
-       matches:0
+const ranked=Object.values(players).sort((a,b)=>
+b.win-a.win ||
+a.loss-b.loss ||
+a.fine-b.fine ||
+b.matches-a.matches
+);
 
-      };
+const winner=ranked[0];
 
-     }
+let html="";
 
+if(winner){
 
-     const q =
-     players[key];
+html+=`
 
-
-     q.matches++;
-
-
-     const fine =
-     getPlayerFine(p);
-
-
-     q.fine +=
-     fine;
-
-
-     q.paid +=
-     fine;
-
-
-     if(
-      Number(p.pos) <= 2
-     ){
-
-      q.win++;
-
-     }else{
-
-      q.loss++;
-
-      q.paid +=
-      LOSS_FEE;
-
-     }
-
-    }
-   );
-
-  }
- );
-
-
- const ranked =
- Object.values(players)
- .sort(
-  (a,b) =>
-   b.win - a.win ||
-   a.loss - b.loss ||
-   a.fine - b.fine ||
-   b.matches - a.matches
- );
-
-
- const winner =
- ranked[0];
-
-
- let html = "";
-
-
- if(winner){
-
-  html += `
-
-<div
-style="
+<div style="
 padding:15px;
 border-radius:17px;
-background:
-linear-gradient(
-135deg,
-#312e8155,
-#4c1d9555
-);
+background:linear-gradient(135deg,#312e8155,#4c1d9555);
 border:1px solid #ffffff14;
-"
->
+">
 
 <div class="leagueLabel">
 🏆 CURRENT LEADER
@@ -3548,28 +3149,13 @@ ${money(winner.fine)} Fine
 <div class="moneyBox">
 
 <div class="moneyMini">
-
-<b>
-${money(winner.paid)}
-</b>
-
-<span>
-Total Paid
-</span>
-
+<b>${money(winner.paid)}</b>
+<span>Total Paid</span>
 </div>
 
-
 <div class="moneyMini">
-
-<b>
-${winner.matches}
-</b>
-
-<span>
-Matches
-</span>
-
+<b>${winner.matches}</b>
+<span>Matches</span>
 </div>
 
 </div>
@@ -3578,17 +3164,13 @@ Matches
 
 `;
 
- }
+}
 
-
- html += `
+html+=`
 
 <div style="margin-top:12px">
 
-${arr
-.slice(0,5)
-.map(
- m => `
+${arr.slice(0,5).map(m=>`
 
 <div
 class="matchCard"
@@ -3598,11 +3180,9 @@ onclick="openMatch(${data.indexOf(m)})"
 <div class="matchTop">
 
 <span class="matchDate">
-
 ${formatDate(matchDate(m))}
 •
 ${formatTime(m.time)}
-
 </span>
 
 <span class="matchMoney">
@@ -3611,40 +3191,30 @@ ${money(matchMoney(m))}
 
 </div>
 
-
 <div class="matchPlayers">
 
-${m.players
-.map(
- p => `
+${m.players.map(p=>`
 
 ${Number(p.pos)<=2?"🏆":"❌"}
 ${esc(p.name)}
 —
 ${Number(p.pos)<=2?"Win":"Loss"}
 
-`
-)
-.join("<br>")}
+`).join("<br>")}
 
 </div>
 
 </div>
 
-`
-)
-.join("")}
+`).join("")}
 
 </div>
 
 `;
 
-
- box.innerHTML =
- html;
+box.innerHTML=html;
 
 }
-
 
 
 /* =========================
@@ -3653,65 +3223,38 @@ ${Number(p.pos)<=2?"Win":"Loss"}
 
 function renderRank(){
 
- const q =
- (
-  document.getElementById(
-   "search"
-  )?.value || ""
- )
- .toLowerCase()
- .trim();
+const q=
+(document.getElementById("search")?.value||"")
+.toLowerCase()
+.trim();
 
+const arr=summary.filter(p=>
+p.name.toLowerCase().includes(q)
+);
 
- const arr =
- summary.filter(
-  p =>
-  p.name
-  .toLowerCase()
-  .includes(q)
- );
+const body=document.getElementById("rankBody");
 
+if(!arr.length){
 
- const body =
- document.getElementById(
-  "rankBody"
- );
+body.innerHTML=`
+<tr>
+<td colspan="7" class="empty">
+No player found
+</td>
+</tr>
+`;
 
+return;
 
- if(!arr.length){
+}
 
-  body.innerHTML =
-  `
-  <tr>
-  <td
-  colspan="7"
-  class="empty"
-  >
-  No player found
-  </td>
-  </tr>
-  `;
-
-  return;
-
- }
-
-
- body.innerHTML =
- arr
- .map(
-  (p,i) => `
+body.innerHTML=arr.map((p,i)=>`
 
 <tr>
 
 <td>
-${
- i === 0 && !q
- ? "👑"
- : i + 1
-}
+${i===0&&!q?"👑":i+1}
 </td>
-
 
 <td>
 
@@ -3725,41 +3268,28 @@ padding:0;
 "
 onclick='profile(${JSON.stringify(p.name)})'
 >
-
 ${esc(p.name)}
-
 </button>
 
 </td>
 
+<td>${p.matches}</td>
 
 <td>
-${p.matches}
-</td>
-
-
-<td>
-
 <span class="badge win">
 ${p.win}
 </span>
-
 </td>
 
-
 <td>
-
 <span class="badge loss">
 ${p.loss}
 </span>
-
 </td>
-
 
 <td class="fine">
 ${money(p.fine)}
 </td>
-
 
 <td>
 ${money(p.paid)}
@@ -3767,12 +3297,9 @@ ${money(p.paid)}
 
 </tr>
 
-`
- )
- .join("");
+`).join("");
 
 }
-
 
 
 /* =========================
@@ -3781,241 +3308,144 @@ ${money(p.paid)}
 
 function getFilteredHistory(){
 
- const date =
- document.getElementById(
-  "filterDate"
- ).value;
+const date=
+document.getElementById("filterDate").value;
 
+const day=
+document.getElementById("filterDay").value;
 
- const day =
- document.getElementById(
-  "filterDay"
- ).value;
+const time=
+document.getElementById("filterTime").value;
 
+return data
+.filter(m=>{
 
- const time =
- document.getElementById(
-  "filterTime"
- ).value;
+if(!m.date)return false;
 
+if(date && m.date!==date){
+return false;
+}
 
- return data
- .filter(
-  m => {
+const d=matchDate(m);
 
-   if(!m.date){
-    return false;
-   }
+if(day!==""){
 
+const p=bdParts(d);
 
-   if(
-    date &&
-    m.date !== date
-   ){
-    return false;
-   }
+const map={
+Sun:"0",
+Mon:"1",
+Tue:"2",
+Wed:"3",
+Thu:"4",
+Fri:"5",
+Sat:"6"
+};
 
-
-   const d =
-   matchDate(m);
-
-
-   if(day !== ""){
-
-    const p =
-    bdParts(d);
-
-
-    const map = {
-
-     Sun:"0",
-     Mon:"1",
-     Tue:"2",
-     Wed:"3",
-     Thu:"4",
-     Fri:"5",
-     Sat:"6"
-
-    };
-
-
-    if(
-     map[p.weekday] !== day
-    ){
-     return false;
-    }
-
-   }
-
-
-   if(time){
-
-    const h =
-    getBDHour(m);
-
-
-    if(
-     time === "morning" &&
-     !(h >= 6 && h <= 11)
-    ){
-     return false;
-    }
-
-
-    if(
-     time === "afternoon" &&
-     !(h >= 12 && h <= 17)
-    ){
-     return false;
-    }
-
-
-    if(
-     time === "evening" &&
-     !(h >= 18 && h <= 23)
-    ){
-     return false;
-    }
-
-
-    if(
-     time === "night" &&
-     !(h >= 0 && h <= 5)
-    ){
-     return false;
-    }
-
-   }
-
-
-   return true;
-
-  }
- )
- .sort(
-  (a,b) =>
-  (
-   matchDate(b)?.getTime() || 0
-  ) -
-  (
-   matchDate(a)?.getTime() || 0
-  )
- );
+if(map[p.weekday]!==day){
+return false;
+}
 
 }
 
+if(time){
+
+const h=getBDHour(m);
+
+if(time==="morning" && !(h>=6&&h<=11)){
+return false;
+}
+
+if(time==="afternoon" && !(h>=12&&h<=17)){
+return false;
+}
+
+if(time==="evening" && !(h>=18&&h<=23)){
+return false;
+}
+
+if(time==="night" && !(h>=0&&h<=5)){
+return false;
+}
+
+}
+
+return true;
+
+})
+.sort((a,b)=>
+(matchDate(b)?.getTime()||0)-
+(matchDate(a)?.getTime()||0)
+);
+
+}
 
 
 function applyHistoryFilter(){
 
- filteredHistory =
- getFilteredHistory();
+filteredHistory=getFilteredHistory();
 
-
- renderHistoryList(
-  filteredHistory
- );
+renderHistoryList(filteredHistory);
 
 }
-
 
 
 function clearHistoryFilter(){
 
- document.getElementById(
-  "filterDate"
- ).value = "";
+document.getElementById("filterDate").value="";
+document.getElementById("filterDay").value="";
+document.getElementById("filterTime").value="";
 
-
- document.getElementById(
-  "filterDay"
- ).value = "";
-
-
- document.getElementById(
-  "filterTime"
- ).value = "";
-
-
- renderHistory();
+renderHistory();
 
 }
-
 
 
 function renderHistory(){
 
- filteredHistory =
- data
- .slice()
- .sort(
-  (a,b) =>
-  (
-   matchDate(b)?.getTime() || 0
-  ) -
-  (
-   matchDate(a)?.getTime() || 0
-  )
- );
+filteredHistory=data
+.slice()
+.sort((a,b)=>
+(matchDate(b)?.getTime()||0)-
+(matchDate(a)?.getTime()||0)
+);
 
-
- renderHistoryList(
-  filteredHistory
- );
+renderHistoryList(filteredHistory);
 
 }
 
 
-
 /* =========================
-   BEAUTIFUL HISTORY
+   HISTORY LIST
 ========================= */
 
 function renderHistoryList(arr){
 
- document.getElementById(
-  "historyCount"
- )
- .textContent =
- arr.length +
- " match" +
- (
-  arr.length === 1
-  ? ""
-  : "es"
- );
+document.getElementById("historyCount")
+.textContent=
+arr.length+
+" match"+
+(arr.length===1?"":"es");
 
+const body=document.getElementById("historyBody");
 
- const body =
- document.getElementById(
-  "historyBody"
- );
+if(!arr.length){
 
+body.innerHTML=`
+<div class="empty">
+🔍 কোনো ম্যাচ পাওয়া যায়নি
+</div>
+`;
 
- if(!arr.length){
+return;
 
-  body.innerHTML =
-  `
-  <div class="empty">
-  🔍 কোনো ম্যাচ পাওয়া যায়নি
-  </div>
-  `;
+}
 
-  return;
+body.innerHTML=arr.map(m=>{
 
- }
+const index=data.indexOf(m);
 
-
- body.innerHTML =
- arr
- .map(
-  m => {
-
-   const index =
-   data.indexOf(m);
-
-
-   return `
+return `
 
 <div
 class="historyMatch"
@@ -4026,36 +3456,20 @@ onclick="openMatch(${index})"
 
 <div class="historyDate">
 
-🎮 ${esc(
- formatDate(
-  matchDate(m)
- )
-)}
+🎮 ${esc(formatDate(matchDate(m)))}
 
 <br>
 
-<span
-style="
-color:#64748b;
-font-size:9px
-"
->
+<span style="color:#64748b;font-size:9px">
 
-${esc(
- formatTime(m.time)
-)}
+${esc(formatTime(m.time))}
 
 </span>
 
 </div>
 
-
 <div class="historyTotal">
-
-💰 ${money(
- matchMoney(m)
-)}
-
+💰 ${money(matchMoney(m))}
 </div>
 
 </div>
@@ -4063,33 +3477,19 @@ ${esc(
 
 ${m.players
 .slice()
-.sort(
- (a,b) =>
- Number(a.pos) -
- Number(b.pos)
-)
-.map(
- p => {
+.sort((a,b)=>Number(a.pos)-Number(b.pos))
+.map(p=>{
 
-  const pos =
-  Number(p.pos);
+const pos=Number(p.pos);
 
+const medal=
+pos===1?"🥇":
+pos===2?"🥈":
+pos===3?"🥉":"4️⃣";
 
-  const medal =
-  pos === 1
-  ? "🥇"
-  : pos === 2
-  ? "🥈"
-  : pos === 3
-  ? "🥉"
-  : "4️⃣";
+const fine=getPlayerFine(p);
 
-
-  const fine =
-  getPlayerFine(p);
-
-
-  return `
+return `
 
 <div class="historyPlayer">
 
@@ -4097,50 +3497,25 @@ ${m.players
 ${medal}
 </div>
 
-
 <div class="historyPlayerInfo">
 
-<b>
-${esc(p.name)}
-</b>
+<b>${esc(p.name)}</b>
 
 <span>
-
 Position ${pos} •
 ${p.mistakes} ভুল
-
 </span>
 
 </div>
 
-
 <div class="historyPlayerMoney">
 
-<div
-class="${
- pos <= 2
- ? "winText"
- : "lossText"
-}"
->
-
-${
- pos <= 2
- ? "WIN"
- : "LOSS"
-}
-
+<div class="${pos<=2?"winText":"lossText"}">
+${pos<=2?"WIN":"LOSS"}
 </div>
 
-
 <div class="fine">
-
-${
- fine > 0
- ? money(fine) + " Fine"
- : ""
-}
-
+${fine>0?money(fine)+" Fine":""}
 </div>
 
 </div>
@@ -4149,27 +3524,20 @@ ${
 
 `;
 
- }
-)
-.join("")}
+}).join("")}
 
 
 <div class="clickHint">
-
 👆 ম্যাচের সব তথ্য দেখতে চাপ দাও
-
 </div>
 
 </div>
 
 `;
 
-  }
- )
- .join("");
+}).join("");
 
 }
-
 
 
 /* =========================
@@ -4178,49 +3546,30 @@ ${
 
 function renderPlayers(){
 
- const q =
- (
-  document.getElementById(
-   "psearch"
-  )?.value || ""
- )
- .toLowerCase()
- .trim();
+const q=
+(document.getElementById("psearch")?.value||"")
+.toLowerCase()
+.trim();
 
+const box=document.getElementById("playerBody");
 
- const box =
- document.getElementById(
-  "playerBody"
- );
+const arr=summary.filter(p=>
+p.name.toLowerCase().includes(q)
+);
 
+if(!arr.length){
 
- const arr =
- summary.filter(
-  p =>
-  p.name
-  .toLowerCase()
-  .includes(q)
- );
+box.innerHTML=`
+<div class="empty">
+👤 কোনো player পাওয়া যায়নি
+</div>
+`;
 
+return;
 
- if(!arr.length){
+}
 
-  box.innerHTML =
-  `
-  <div class="empty">
-  👤 কোনো player পাওয়া যায়নি
-  </div>
-  `;
-
-  return;
-
- }
-
-
- box.innerHTML =
- arr
- .map(
-  p => `
+box.innerHTML=arr.map(p=>`
 
 <div
 class="player"
@@ -4235,37 +3584,23 @@ style="cursor:pointer"
 </b>
 
 <span class="finePreview">
-
 ${money(p.fine)}
-
 </span>
 
 </div>
 
-
-<div
-style="
+<div style="
 font-size:11px;
 color:#94a3b8;
 line-height:1.8;
-"
->
+">
 
-${p.matches}
-Matches •
-
+${p.matches} Matches •
 <span style="color:#34d399">
-
 ${p.win} Win
-
-</span>
-
-•
-
+</span> •
 <span style="color:#fb7185">
-
 ${p.loss} Loss
-
 </span>
 
 <br>
@@ -4282,12 +3617,9 @@ ${money(p.paid)}
 
 </div>
 
-`
- )
- .join("");
+`).join("");
 
 }
-
 
 
 /* =========================
@@ -4296,81 +3628,37 @@ ${money(p.paid)}
 
 function profile(name){
 
- const p =
- summary.find(
-  x =>
-  x.name.toLowerCase() ===
-  String(name).toLowerCase()
- );
+const p=summary.find(x=>
+x.name.toLowerCase()===String(name).toLowerCase()
+);
 
+if(!p)return;
 
- if(!p){
-  return;
- }
+document.getElementById("mn")
+.textContent="👤 "+p.name;
 
-
- document.getElementById(
-  "mn"
- )
- .textContent =
- "👤 " + p.name;
-
-
- document.getElementById(
-  "md"
- ).innerHTML = `
+document.getElementById("md").innerHTML=`
 
 <div class="grid">
 
 <div class="stat">
-
-<b>
-${p.matches}
-</b>
-
-<span>
-Matches
-</span>
-
+<b>${p.matches}</b>
+<span>Matches</span>
 </div>
 
-
 <div class="stat">
-
-<b>
-${p.win}
-</b>
-
-<span>
-Win
-</span>
-
+<b>${p.win}</b>
+<span>Win</span>
 </div>
 
-
 <div class="stat">
-
-<b>
-${p.loss}
-</b>
-
-<span>
-Loss
-</span>
-
+<b>${p.loss}</b>
+<span>Loss</span>
 </div>
 
-
 <div class="stat">
-
-<b>
-${money(p.fine)}
-</b>
-
-<span>
-Fine
-</span>
-
+<b>${money(p.fine)}</b>
+<span>Fine</span>
 </div>
 
 </div>
@@ -4379,139 +3667,70 @@ Fine
 <div class="moneyBox">
 
 <div class="moneyMini">
-
-<b>
-${money(p.paid)}
-</b>
-
-<span>
-Total Paid
-</span>
-
+<b>${money(p.paid)}</b>
+<span>Total Paid</span>
 </div>
-
 
 <div class="moneyMini">
-
-<b>
-${p.mistakes}
-</b>
-
-<span>
-Total Mistakes
-</span>
-
+<b>${p.mistakes}</b>
+<span>Total Mistakes</span>
 </div>
 
 </div>
 
 
-<div
-class="card"
-style="margin-top:12px"
->
+<div class="card" style="margin-top:12px">
 
-<h3>
-Last Matches
-</h3>
+<h3>Last Matches</h3>
 
 ${
- p.h
- .slice()
- .reverse()
- .slice(0,10)
- .map(
-  x => `
+p.h
+.slice()
+.reverse()
+.slice(0,10)
+.map(x=>`
 
 <div class="detailPlayer">
 
 <b>
 
-${esc(
- formatDate(
-  matchDate(x)
- )
-)}
+${esc(formatDate(matchDate(x)))}
 
 <br>
 
-${esc(
- formatTime(x.time)
-)}
+${esc(formatTime(x.time))}
 
 </b>
-
 
 <span>
 
 #${x.pos}
-
 —
+${Number(x.pos)>=3?"Loss":"Win"}
 
 ${
- Number(x.pos) >= 3
- ? "Loss"
- : "Win"
-}
-
-${
- getPlayerFine(x) > 0
- ?
- ` • ${money(
-   getPlayerFine(x)
-  )} Fine`
- :
- ""
+getPlayerFine(x)>0
+?
+` • ${money(getPlayerFine(x))} Fine`
+:""
 }
 
 </span>
 
 </div>
 
-`
- )
- .join("")
+`)
+.join("")
 }
 
 </div>
 
 `;
 
-
- openModal();
-
-}
-
-
-
-/* =========================
-   OPEN MODAL
-========================= */
-
-function openModal(){
-
- const modal =
- document.getElementById(
-  "modal"
- );
-
-
- if(!modal){
-  return;
- }
-
-
- modal.classList.add(
-  "show"
- );
-
-
- document.body.classList.add(
-  "modal-open"
- );
+document.getElementById("modal")
+.classList.add("show");
 
 }
-
 
 
 /* =========================
@@ -4520,45 +3739,25 @@ function openModal(){
 
 function openMatch(index){
 
- const m =
- data[index];
+const m=data[index];
 
+if(!m)return;
 
- if(!m){
-  return;
- }
+document.getElementById("mn")
+.textContent=
+"🎮 Match Details";
 
+const total=matchMoney(m);
 
- document.getElementById(
-  "mn"
- )
- .textContent =
- "🎮 Match Details";
-
-
- const total =
- matchMoney(m);
-
-
- let html = `
+let html=`
 
 <div class="status">
 
-📅 <b>
-${esc(
- formatDate(
-  matchDate(m)
- )
-)}
-</b>
+📅 <b>${esc(formatDate(matchDate(m)))}</b>
 
 &nbsp; • &nbsp;
 
-🕐 <b>
-${esc(
- formatTime(m.time)
-)}
-</b>
+🕐 <b>${esc(formatTime(m.time))}</b>
 
 </div>
 
@@ -4567,80 +3766,46 @@ ${esc(
 
 <div class="moneyMini">
 
-<b>
-${money(total)}
-</b>
+<b>${money(total)}</b>
 
-<span>
-Total Match Money
-</span>
+<span>Total Match Money</span>
 
 </div>
-
 
 <div class="moneyMini">
 
-<b>
-${m.players.length}
-</b>
+<b>${m.players.length}</b>
 
-<span>
-Players
-</span>
+<span>Players</span>
 
 </div>
 
 </div>
 
 
-<div
-style="margin-top:12px"
->
+<div style="margin-top:12px">
 
 `;
 
 
- m.players
- .slice()
- .sort(
-  (a,b) =>
-  Number(a.pos) -
-  Number(b.pos)
- )
- .forEach(
-  p => {
+m.players
+.slice()
+.sort((a,b)=>Number(a.pos)-Number(b.pos))
+.forEach(p=>{
 
-   const pos =
-   Number(p.pos);
+const pos=Number(p.pos);
+const mistakes=Number(p.mistakes||0);
+const fine=getPlayerFine(p);
 
+const medal=
+pos===1?"🥇":
+pos===2?"🥈":
+pos===3?"🥉":"4️⃣";
 
-   const mistakes =
-   Number(
-    p.mistakes || 0
-   );
+const statusClass=
+pos<=2?"statusWin":"statusLoss";
 
-
-   const fine =
-   getPlayerFine(p);
-
-
-   const medal =
-   pos === 1
-   ? "🥇"
-   : pos === 2
-   ? "🥈"
-   : pos === 3
-   ? "🥉"
-   : "4️⃣";
-
-
-   const statusClass =
-   pos <= 2
-   ? "statusWin"
-   : "statusLoss";
-
-
-   html += `
+html+=`
 
 <div class="matchDetailCard">
 
@@ -4648,24 +3813,13 @@ style="margin-top:12px"
 
 <div class="matchDetailName">
 
-${medal}
-${esc(p.name)}
+${medal} ${esc(p.name)}
 
 </div>
 
+<div class="matchDetailStatus ${statusClass}">
 
-<div
-class="
-matchDetailStatus
-${statusClass}
-"
->
-
-${
- pos <= 2
- ? "WIN"
- : "LOSS"
-}
+${pos<=2?"WIN":"LOSS"}
 
 </div>
 
@@ -4676,64 +3830,48 @@ ${
 
 <div class="detailStat">
 
-<b>
-#${pos}
-</b>
+<b>#${pos}</b>
 
-<span>
-POSITION
-</span>
+<span>POSITION</span>
 
 </div>
 
 
 <div class="detailStat">
 
-<b>
-${mistakes}
-</b>
+<b>${mistakes}</b>
 
-<span>
-MISTAKES
-</span>
+<span>MISTAKES</span>
 
 </div>
 
 
 <div class="detailStat">
 
-<b>
-${money(fine)}
-</b>
+<b>${money(fine)}</b>
 
-<span>
-FINE
-</span>
+<span>FINE</span>
 
 </div>
 
 </div>
 
 
-<div
-style="
+<div style="
 margin-top:8px;
 font-size:10px;
 color:#94a3b8;
 text-align:center;
-"
->
+">
 
-${
- pos >= 3
- ? `Loss Fee: ${money(LOSS_FEE)}`
- : `Loss Fee: ৳0`
+${pos>=3
+?`Loss Fee: ${money(LOSS_FEE)}`
+:`Loss Fee: ৳0`
 }
 
 &nbsp; • &nbsp;
 
-Mistake Fine:
-${money(fine)}
+Mistake Fine: ${money(fine)}
 
 </div>
 
@@ -4741,25 +3879,17 @@ ${money(fine)}
 
 `;
 
-  }
- );
+});
 
 
- html += `
+html+=`
 
 </div>
 
 
-<div
-class="status"
-style="margin-top:12px"
->
+<div class="status" style="margin-top:12px">
 
-💰
-<b>
-Total Match Money:
-${money(total)}
-</b>
+💰 <b>Total Match Money: ${money(total)}</b>
 
 </div>
 
@@ -4781,17 +3911,27 @@ CANCEL
 
 `;
 
+document.getElementById("md").innerHTML=html;
 
- document.getElementById(
-  "md"
- ).innerHTML =
- html;
-
-
- openModal();
+document.getElementById("modal")
+.classList.add("show");
 
 }
 
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeModal(){
+
+const modal=document.getElementById("modal");
+
+if(!modal)return;
+
+modal.classList.remove("show");
+
+}
 
 
 /* =========================
@@ -4800,184 +3940,137 @@ CANCEL
 
 async function deleteMatch(index){
 
- const m =
- data[index];
+const m=data[index];
 
+if(!m)return;
 
- if(!m){
-  return;
- }
 
+const matchId=String(
+m.matchId ||
+m.matchID ||
+m.match_id ||
+m.id ||
+""
+).trim();
 
- const matchId =
- String(
-  m.matchId ||
-  m.matchID ||
-  m.match_id ||
-  m.id ||
-  ""
- )
- .trim();
 
+if(!matchId){
 
- if(!matchId){
+alert(
+"এই ম্যাচের Match ID পাওয়া যায়নি।\n\n"+
+"Backend থেকে Match ID না এলে ভুল ম্যাচ delete হওয়ার ঝুঁকি থাকে।"
+);
 
-  alert(
-   "এই ম্যাচের Match ID পাওয়া যায়নি।\n\n" +
-   "Backend থেকে Match ID না এলে " +
-   "ভুল ম্যাচ delete হওয়ার ঝুঁকি থাকে।"
-  );
-
-  return;
-
- }
-
-
- const playersText =
- m.players
- .map(
-  p => p.name
- )
- .join(", ");
-
-
- const confirmed =
- confirm(
-  "⚠️ এই ম্যাচটি স্থায়ীভাবে DELETE হবে।\n\n" +
-  "📅 " +
-  formatDate(matchDate(m)) +
-  "\n" +
-  "🕐 " +
-  formatTime(m.time) +
-  "\n" +
-  "👤 " +
-  playersText +
-  "\n\n" +
-  "এই কাজটি Undo করা যাবে না।\n\n" +
-  "Delete করতে OK চাপুন।"
- );
-
-
- if(!confirmed){
-  return;
- }
-
-
- const btn =
- document.querySelector(
-  ".deleteBtn"
- );
-
-
- if(btn){
-
-  btn.disabled = true;
-
-  btn.textContent =
-  "⏳ Deleting...";
-
- }
-
-
- try{
-
-  const payload = {
-
-   action:"deleteMatch",
-
-   matchId:matchId
-
-  };
-
-
-  const response =
-  await fetch(
-   API_URL,
-   {
-    method:"POST",
-
-    headers:{
-     "Content-Type":
-     "text/plain;charset=utf-8"
-    },
-
-    body:
-    JSON.stringify(payload)
-
-   }
-  );
-
-
-  const text =
-  await response.text();
-
-
-  let result;
-
-
-  try{
-
-   result =
-   JSON.parse(text);
-
-  }catch(e){
-
-   throw new Error(
-    "Backend JSON response দেয়নি"
-   );
-
-  }
-
-
-  if(!result.ok){
-
-   throw new Error(
-    result.error ||
-    result.message ||
-    "Delete failed"
-   );
-
-  }
-
-
-  closeModal();
-
-
-  alert(
-   "✅ Match successfully deleted."
-  );
-
-
-  await load();
-
-
- }catch(error){
-
-  console.error(error);
-
-
-  alert(
-   "❌ Match delete করা যায়নি.\n\n" +
-   (
-    error.message ||
-    "Unknown error"
-   )
-  );
-
-
-  if(btn){
-
-   btn.disabled = false;
-
-   btn.textContent =
-   "🗑️ DELETE THIS MATCH";
-
-  }
-
- }
+return;
 
 }
 
+
+const playersText=m.players
+.map(p=>p.name)
+.join(", ");
+
+
+const confirmed=confirm(
+"⚠️ এই ম্যাচটি স্থায়ীভাবে DELETE হবে।\n\n"+
+"📅 "+formatDate(matchDate(m))+"\n"+
+"🕐 "+formatTime(m.time)+"\n"+
+"👤 "+playersText+"\n\n"+
+"এই কাজটি Undo করা যাবে না।\n\n"+
+"Delete করতে OK চাপুন।"
+);
+
+
+if(!confirmed)return;
+
+
+const btn=document.querySelector(".deleteBtn");
+
+
+if(btn){
+
+btn.disabled=true;
+btn.textContent="⏳ Deleting...";
+
+}
+
+
+try{
+
+const payload={
+action:"deleteMatch",
+matchId:matchId
+};
+
+
+const response=await fetch(
+API_URL,
+{
+method:"POST",
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+body:JSON.stringify(payload)
+}
+);
+
+
+const text=await response.text();
+
+let result;
+
+
+try{
+
+result=JSON.parse(text);
+
+}catch(e){
+
+throw new Error(
+"Backend JSON response দেয়নি"
+);
+
+}
+
+
+if(!result.ok){
+
+throw new Error(
+result.error ||
+result.message ||
+"Delete failed"
+);
+
+}
+
+
+closeModal();
+
+alert("✅ Match successfully deleted.");
+
+await load();
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ Match delete করা যায়নি.\n\n"+
+(error.message||"Unknown error")
+);
+
+
+if(btn){
+
+btn.disabled=false;
+btn.textContent="🗑️ DELETE THIS MATCH";
+
+}
+
+}
+
+}
 
 
 /* =========================
@@ -4986,70 +4079,41 @@ async function deleteMatch(index){
 
 function renderAll(){
 
- buildSummary();
+buildSummary();
 
+document.getElementById("matches")
+.textContent=data.length;
 
- document.getElementById(
-  "matches"
- )
- .textContent =
- data.length;
+document.getElementById("players")
+.textContent=summary.length;
 
+document.getElementById("losses")
+.textContent=
+summary.reduce((a,p)=>a+p.loss,0);
 
- /*
- IMPORTANT:
- Overview Player Count-এর জন্য
- playerCount ব্যবহার করা হয়েছে।
- Players page-এর ID এখন playerPage।
- */
+document.getElementById("fines")
+.textContent=
+money(
+summary.reduce((a,p)=>a+p.fine,0)
+);
 
- document.getElementById(
-  "playerCount"
- )
- .textContent =
- summary.length;
+renderTop();
 
+renderRank();
 
- document.getElementById(
-  "losses"
- )
- .textContent =
- summary.reduce(
-  (a,p) =>
-  a + p.loss,
-  0
- );
+renderHistory();
 
+renderPlayers();
 
- document.getElementById(
-  "fines"
- )
- .textContent =
- money(
-  summary.reduce(
-   (a,p) =>
-   a + p.fine,
-   0
-  )
- );
+renderTodayMatches();
 
+renderLeague();
 
- renderTop();
+updateNameList();
 
- renderRank();
-
- renderHistory();
-
- renderPlayers();
-
- renderTodayMatches();
-
- renderLeague();
-
- updateNameList();
+renderPerformance();
 
 }
-
 
 
 /* =========================
@@ -5058,117 +4122,98 @@ function renderAll(){
 
 async function load(){
 
- const msg =
- document.getElementById(
-  "msg"
- );
+const msg=document.getElementById("msg");
+
+try{
+
+const url=
+API_URL+
+"?action=all&t="+Date.now();
 
 
- try{
-
-  const url =
-  API_URL +
-  "?action=all&t=" +
-  Date.now();
-
-
-  const response =
-  await fetch(
-   url,
-   {
-    method:"GET",
-    cache:"no-store"
-   }
-  );
+const response=await fetch(
+url,
+{
+method:"GET",
+cache:"no-store"
+}
+);
 
 
-  if(!response.ok){
+if(!response.ok){
 
-   throw new Error(
-    "HTTP " +
-    response.status
-   );
-
-  }
-
-
-  const text =
-  await response.text();
-
-
-  let json;
-
-
-  try{
-
-   json =
-   JSON.parse(text);
-
-  }catch(e){
-
-   throw new Error(
-    "API JSON পাওয়া যায়নি"
-   );
-
-  }
-
-
-  if(!json.ok){
-
-   throw new Error(
-    json.error ||
-    json.message ||
-    "API error"
-   );
-
-  }
-
-
-  const raw =
-  Array.isArray(
-   json.matches
-  )
-  ? json.matches
-  : [];
-
-
-  data =
-  normalizeData(raw);
-
-
-  renderAll();
-
-
-  if(msg){
-
-   msg.textContent = "";
-
-   msg.className =
-   "msg";
-
-  }
-
-
- }catch(error){
-
-  console.error(error);
-
-
-  if(msg){
-
-   msg.className =
-   "msg error";
-
-
-   msg.textContent =
-   "⚠️ Data load হয়নি";
-
-  }
-
- }
+throw new Error(
+"HTTP "+response.status
+);
 
 }
 
+
+const text=await response.text();
+
+let json;
+
+
+try{
+
+json=JSON.parse(text);
+
+}catch(e){
+
+throw new Error(
+"API JSON পাওয়া যায়নি"
+);
+
+}
+
+
+if(!json.ok){
+
+throw new Error(
+json.error||
+json.message||
+"API error"
+);
+
+}
+
+
+const raw=
+Array.isArray(json.matches)
+?json.matches
+:[];
+
+
+data=normalizeData(raw);
+
+renderAll();
+
+
+if(msg){
+
+msg.textContent="";
+msg.className="msg";
+
+}
+
+
+}catch(error){
+
+console.error(error);
+
+
+if(msg){
+
+msg.className="msg error";
+
+msg.textContent=
+"⚠️ Data load হয়নি";
+
+}
+
+}
+
+}
 
 
 /* =========================
@@ -5177,306 +4222,223 @@ async function load(){
 
 async function saveMatch(){
 
- const msg =
- document.getElementById(
-  "msg"
- );
+const msg=document.getElementById("msg");
+const btn=document.getElementById("saveBtn");
 
+msg.className="msg";
+msg.textContent="";
 
- const btn =
- document.getElementById(
-  "saveBtn"
- );
 
+const date=
+document.getElementById("date").value;
 
- msg.className =
- "msg";
+const time=
+document.getElementById("time").value;
 
 
- msg.textContent =
- "";
+if(!date){
 
+msg.className="msg error";
+msg.textContent="Date নির্বাচন করো";
 
- const date =
- document.getElementById(
-  "date"
- ).value;
-
-
- const time =
- document.getElementById(
-  "time"
- ).value;
-
-
- if(!date){
-
-  msg.className =
-  "msg error";
-
-  msg.textContent =
-  "Date নির্বাচন করো";
-
-  return;
-
- }
-
-
- if(!time){
-
-  msg.className =
-  "msg error";
-
-  msg.textContent =
-  "Time নির্বাচন করো";
-
-  return;
-
- }
-
-
- const players = [];
-
-
- for(
-  let i = 1;
-  i <= 4;
-  i++
- ){
-
-  const name =
-  document.getElementById(
-   "n" + i
-  )
-  .value
-  .trim();
-
-
-  const position =
-  Number(
-   document.getElementById(
-    "p" + i
-   ).value
-  );
-
-
-  const mistakes =
-  getMistakes(i);
-
-
-  if(!name){
-
-   msg.className =
-   "msg error";
-
-
-   msg.textContent =
-   "Player " +
-   i +
-   " এর নাম দাও";
-
-
-   return;
-
-  }
-
-
-  players.push({
-
-   name:name,
-
-   position:position,
-
-   mistakes:mistakes,
-
-   fine:
-   mistakes *
-   ERROR_FINE
-
-  });
-
- }
-
-
- const positions =
- players.map(
-  p =>
-  p.position
- );
-
-
- if(
-  new Set(positions).size !== 4
- ){
-
-  msg.className =
-  "msg error";
-
-
-  msg.textContent =
-  "প্রতিটি player-এর position আলাদা হতে হবে";
-
-
-  return;
-
- }
-
-
- const payload = {
-
-  action:"saveMatch",
-
-  date:date,
-
-  time:time,
-
-  players:players
-
- };
-
-
- btn.disabled = true;
-
- btn.textContent =
- "⏳ Saving...";
-
-
- try{
-
-  const response =
-  await fetch(
-   API_URL,
-   {
-    method:"POST",
-
-    headers:{
-     "Content-Type":
-     "text/plain;charset=utf-8"
-    },
-
-    body:
-    JSON.stringify(payload)
-
-   }
-  );
-
-
-  const text =
-  await response.text();
-
-
-  let json;
-
-
-  try{
-
-   json =
-   JSON.parse(text);
-
-  }catch(e){
-
-   throw new Error(
-    "Backend JSON response দেয়নি"
-   );
-
-  }
-
-
-  if(!json.ok){
-
-   throw new Error(
-    json.error ||
-    json.message ||
-    "Save failed"
-   );
-
-  }
-
-
-  msg.className =
-  "msg ok";
-
-
-  msg.textContent =
-  "✅ Match save হয়েছে";
-
-
-  for(
-   let i = 1;
-   i <= 4;
-   i++
-  ){
-
-   document.getElementById(
-    "n" + i
-   ).value = "";
-
-
-   document.getElementById(
-    "p" + i
-   ).value =
-   String(i);
-
-
-   const el =
-   document.getElementById(
-    "mistake" + i
-   );
-
-
-   if(el){
-    el.textContent = "0";
-   }
-
-
-   updateFinePreview(i);
-
-  }
-
-
-  document.getElementById(
-   "date"
-  ).value =
-  today();
-
-
-  document.getElementById(
-   "time"
-  ).value =
-  nowTime();
-
-
-  await load();
-
-
- }catch(error){
-
-  console.error(error);
-
-
-  msg.className =
-  "msg error";
-
-
-  msg.textContent =
-  "⚠️ Save করা যায়নি: " +
-  (
-   error.message ||
-   "Unknown error"
-  );
-
-
- }finally{
-
-  btn.disabled = false;
-
-  btn.textContent =
-  "💾 SAVE MATCH";
-
- }
+return;
 
 }
 
+
+if(!time){
+
+msg.className="msg error";
+msg.textContent="Time নির্বাচন করো";
+
+return;
+
+}
+
+
+const players=[];
+
+
+for(let i=1;i<=4;i++){
+
+const name=
+document.getElementById("n"+i)
+.value
+.trim();
+
+
+const position=
+Number(
+document.getElementById("p"+i).value
+);
+
+
+const mistakes=
+getMistakes(i);
+
+
+if(!name){
+
+msg.className="msg error";
+
+msg.textContent=
+"Player "+i+" এর নাম দাও";
+
+return;
+
+}
+
+
+players.push({
+
+name:name,
+
+position:position,
+
+mistakes:mistakes,
+
+fine:mistakes*ERROR_FINE
+
+});
+
+}
+
+
+/* duplicate position check */
+
+const positions=
+players.map(p=>p.position);
+
+
+if(new Set(positions).size!==4){
+
+msg.className="msg error";
+
+msg.textContent=
+"প্রতিটি player-এর position আলাদা হতে হবে";
+
+return;
+
+}
+
+
+const payload={
+
+action:"saveMatch",
+
+date:date,
+
+time:time,
+
+players:players
+
+};
+
+
+btn.disabled=true;
+btn.textContent="⏳ Saving...";
+
+
+try{
+
+const response=await fetch(
+API_URL,
+{
+method:"POST",
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+body:JSON.stringify(payload)
+}
+);
+
+
+const text=await response.text();
+
+let json;
+
+
+try{
+
+json=JSON.parse(text);
+
+}catch(e){
+
+throw new Error(
+"Backend JSON response দেয়নি"
+);
+
+}
+
+
+if(!json.ok){
+
+throw new Error(
+json.error||
+json.message||
+"Save failed"
+);
+
+}
+
+
+msg.className="msg ok";
+
+msg.textContent=
+"✅ Match save হয়েছে";
+
+
+for(let i=1;i<=4;i++){
+
+document.getElementById("n"+i).value="";
+
+document.getElementById("p"+i).value=
+String(i);
+
+
+const el=
+document.getElementById("mistake"+i);
+
+
+if(el){
+el.textContent="0";
+}
+
+
+updateFinePreview(i);
+
+}
+
+
+document.getElementById("date").value=today();
+
+document.getElementById("time").value=nowTime();
+
+
+await load();
+
+
+}catch(error){
+
+console.error(error);
+
+
+msg.className="msg error";
+
+msg.textContent=
+"⚠️ Save করা যায়নি: "+
+(error.message||"Unknown error");
+
+
+}finally{
+
+btn.disabled=false;
+
+btn.textContent="💾 SAVE MATCH";
+
+}
+
+}
 
 
 /* =========================
@@ -5485,95 +4447,48 @@ async function saveMatch(){
 
 function init(){
 
- const date =
- document.getElementById(
-  "date"
- );
+const date=
+document.getElementById("date");
+
+const time=
+document.getElementById("time");
 
 
- const time =
- document.getElementById(
-  "time"
- );
-
-
- if(date){
-
-  date.value =
-  today();
-
- }
-
-
- if(time){
-
-  time.value =
-  nowTime();
-
- }
-
-
- buildSlots();
-
- renderAll();
-
- load();
-
+if(date){
+date.value=today();
 }
 
+if(time){
+time.value=nowTime();
+}
+
+
+buildSlots();
+
+renderAll();
+
+load();
+
+}
 
 
 /* =========================
    MODAL OUTSIDE CLICK
 ========================= */
 
-document
-.getElementById("modal")
-.addEventListener(
- "click",
- function(e){
+document.getElementById("modal")
+.addEventListener("click",function(e){
 
-  if(
-   e.target === this
-  ){
+if(e.target===this){
+closeModal();
+}
 
-   closeModal();
+});
 
-  }
-
- }
-);
-
-
-
-/* =========================
-   ESC KEY
-========================= */
-
-document.addEventListener(
- "keydown",
- function(e){
-
-  if(
-   e.key === "Escape"
-  ){
-
-   closeModal();
-
-  }
-
- }
-);
-
-
-
-/* =========================
-   START
-========================= */
 
 init();
 
 </script>
 
 </body>
- </html>
+</html>
