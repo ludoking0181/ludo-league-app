@@ -4,15 +4,9 @@
 
 <meta charset="utf-8">
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta
-  name="theme-color"
-  content="#080b16"
->
+<meta name="theme-color" content="#080b16">
 
 <title>Ludo League</title>
 
@@ -39,11 +33,6 @@
 
   --purple:#7c3aed;
 }
-
-
-/* =========================================================
-   GLOBAL
-========================================================= */
 
 *{
   box-sizing:border-box;
@@ -133,7 +122,7 @@ h1{
 
 
 /* =========================================================
-   NAVIGATION
+   NAV
 ========================================================= */
 
 nav{
@@ -298,7 +287,7 @@ h3{
 
 
 /* =========================================================
-   GRID / STATS
+   GRID
 ========================================================= */
 
 .grid{
@@ -492,7 +481,7 @@ h3{
 
 
 /* =========================================================
-   MISTAKE BOX
+   MISTAKE
 ========================================================= */
 
 .mistakeBox{
@@ -645,7 +634,7 @@ h3{
 
 
 /* =========================================================
-   TOP PLAYER
+   TOP 3
 ========================================================= */
 
 .topCard{
@@ -1205,14 +1194,6 @@ td{
   text-align:right;
 }
 
-.positionBox{
-  min-width:46px;
-
-  text-align:center;
-
-  font-size:25px;
-}
-
 .matchDetailCard{
   background:#ffffff05;
 
@@ -1298,7 +1279,7 @@ td{
 
 
 /* =========================================================
-   DELETE / CANCEL
+   DELETE
 ========================================================= */
 
 .deleteBtn{
@@ -1385,58 +1366,72 @@ td{
   letter-spacing:.5px;
 }
 
-.performanceSection{
-  margin-top:10px;
-}
 
-.performanceSectionTitle{
-  display:flex;
+/* =========================================================
+   BEST / LOSER TWO COLUMN
+========================================================= */
 
-  align-items:center;
+.performanceColumns{
+  display:grid;
 
-  justify-content:space-between;
+  grid-template-columns:
+    1fr 1fr;
 
   gap:10px;
 
-  padding:4px 0 10px;
+  align-items:start;
 }
 
-.performanceSectionLeft{
-  display:flex;
+.performanceColumn{
+  min-width:0;
 
-  align-items:center;
+  padding:11px;
 
-  gap:9px;
-}
-
-.performanceIcon{
-  width:48px;
-  height:48px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-radius:15px;
-
-  background:#ffffff06;
+  border-radius:17px;
 
   border:1px solid var(--line);
 
-  font-size:25px;
+  background:#ffffff03;
 }
 
-.performanceSectionTitle h4{
-  margin:0;
+.performanceColumn.bestColumn{
+  border-color:#34d39925;
 
-  font-size:16px;
+  background:
+    linear-gradient(
+      180deg,
+      #34d3990b,
+      #ffffff02
+    );
 }
 
-.performanceSectionTitle span{
-  color:#64748b;
+.performanceColumn.worstColumn{
+  border-color:#fb718525;
 
-  font-size:9px;
+  background:
+    linear-gradient(
+      180deg,
+      #fb71850b,
+      #ffffff02
+    );
+}
+
+.performanceColumnTitle{
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  font-weight:900;
+
+  font-size:13px;
+
+  margin-bottom:10px;
+}
+
+.performanceColumnTitle span{
+  font-size:20px;
 }
 
 .performanceList{
@@ -1444,7 +1439,7 @@ td{
 
   flex-direction:column;
 
-  gap:8px;
+  gap:7px;
 }
 
 .performanceCard{
@@ -1452,58 +1447,41 @@ td{
 
   align-items:center;
 
-  gap:10px;
+  gap:7px;
 
-  padding:11px;
+  padding:9px;
 
-  border-radius:17px;
+  border-radius:14px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff05,
-      #ffffff02
-    );
+  background:#ffffff05;
 
   border:1px solid var(--line);
+
+  min-width:0;
 }
 
 .performanceCard.best{
-  border-color:#34d39925;
-
-  background:
-    linear-gradient(
-      135deg,
-      #34d3990b,
-      #ffffff02
-    );
+  border-color:#34d39918;
 }
 
 .performanceCard.worst{
-  border-color:#fb718525;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fb71850b,
-      #ffffff02
-    );
+  border-color:#fb718518;
 }
 
 .performanceRank{
-  width:48px;
-  height:48px;
+  width:31px;
+  height:31px;
 
   display:flex;
 
   align-items:center;
   justify-content:center;
 
-  border-radius:15px;
+  border-radius:10px;
 
-  background:#ffffff06;
+  background:#ffffff07;
 
-  font-size:23px;
+  font-size:17px;
 
   flex-shrink:0;
 }
@@ -1517,7 +1495,7 @@ td{
 .performanceInfo b{
   display:block;
 
-  font-size:14px;
+  font-size:11px;
 
   overflow:hidden;
 
@@ -1531,9 +1509,9 @@ td{
 
   color:#94a3b8;
 
-  font-size:9px;
+  font-size:7px;
 
-  margin-top:4px;
+  margin-top:3px;
 
   white-space:nowrap;
 
@@ -1545,24 +1523,22 @@ td{
 .performanceScore{
   text-align:right;
 
-  min-width:72px;
+  min-width:38px;
 }
 
 .performanceScore b{
   display:block;
 
-  font-size:16px;
+  font-size:14px;
 
   font-weight:900;
 }
 
-.performanceCard.best
-.performanceScore b{
+.performanceCard.best .performanceScore b{
   color:var(--green);
 }
 
-.performanceCard.worst
-.performanceScore b{
+.performanceCard.worst .performanceScore b{
   color:var(--red);
 }
 
@@ -1571,22 +1547,19 @@ td{
 
   color:#64748b;
 
-  font-size:8px;
+  font-size:6px;
 
-  margin-top:2px;
+  margin-top:1px;
 }
 
+.performanceEmpty{
+  padding:15px 5px;
 
-/* =========================================================
-   PERFORMANCE DIVIDER
-========================================================= */
+  text-align:center;
 
-.performanceDivider{
-  height:1px;
+  color:#94a3b8;
 
-  background:var(--line);
-
-  margin:20px 0 15px;
+  font-size:9px;
 }
 
 
@@ -1674,27 +1647,6 @@ td{
 
 
 /* =========================================================
-   PERFORMANCE EMPTY
-========================================================= */
-
-.performanceEmpty{
-  padding:18px;
-
-  text-align:center;
-
-  color:#94a3b8;
-
-  font-size:11px;
-
-  background:#ffffff04;
-
-  border:1px dashed #ffffff15;
-
-  border-radius:14px;
-}
-
-
-/* =========================================================
    RESPONSIVE
 ========================================================= */
 
@@ -1706,7 +1658,6 @@ td{
   }
 
 }
-
 
 @media(max-width:600px){
 
@@ -1724,40 +1675,52 @@ td{
       1fr 105px;
   }
 
-  .detailStats{
+  .performanceColumns{
     grid-template-columns:
-      repeat(3,1fr);
+      1fr 1fr;
   }
 
 }
 
-
-/* =========================================================
-   SAFE MOBILE PERFORMANCE
-========================================================= */
-
 @media(max-width:420px){
 
+  .performanceColumns{
+    gap:7px;
+  }
+
+  .performanceColumn{
+    padding:8px;
+  }
+
   .performanceCard{
-    padding:10px;
+    padding:7px;
+    gap:5px;
   }
 
   .performanceRank{
-    width:43px;
-    height:43px;
-    font-size:20px;
+    width:27px;
+    height:27px;
+    font-size:14px;
   }
 
   .performanceInfo b{
-    font-size:13px;
+    font-size:10px;
+  }
+
+  .performanceInfo span{
+    font-size:6px;
   }
 
   .performanceScore{
-    min-width:65px;
+    min-width:32px;
   }
 
   .performanceScore b{
-    font-size:14px;
+    font-size:12px;
+  }
+
+  .performanceColumnTitle{
+    font-size:11px;
   }
 
 }
@@ -1766,13 +1729,12 @@ td{
 
 </head>
 
-
 <body>
 
 
-<!-- =======================================================
+<!-- =========================================================
      HEADER
-======================================================= -->
+========================================================= -->
 
 <header>
 
@@ -1789,9 +1751,9 @@ td{
 </header>
 
 
-<!-- =======================================================
+<!-- =========================================================
      NAVIGATION
-======================================================= -->
+========================================================= -->
 
 <nav id="mainNav">
 
@@ -1834,16 +1796,12 @@ td{
 </nav>
 
 
-<!-- =======================================================
-     MAIN
-======================================================= -->
-
 <main>
 
 
-<!-- =======================================================
+<!-- =========================================================
      HOME
-======================================================= -->
+========================================================= -->
 
 <section
   id="home"
@@ -1871,8 +1829,6 @@ td{
   </div>
 
 
-  <!-- LEAGUE TABS -->
-
   <div class="leagueTabs">
 
     <button
@@ -1897,8 +1853,6 @@ td{
   </div>
 
 
-  <!-- LEAGUE RESULT -->
-
   <div class="card">
 
     <div class="sectionTitle">
@@ -1916,7 +1870,10 @@ td{
   </div>
 
 
-  <!-- OVERVIEW -->
+  <!-- IMPORTANT:
+       এখানে id="players" ব্যবহার করা হয়নি।
+       আগে players page-এর ID-এর সাথে conflict হচ্ছিল।
+  -->
 
   <div class="card">
 
@@ -1927,7 +1884,6 @@ td{
       </h3>
 
     </div>
-
 
     <div class="grid">
 
@@ -1946,7 +1902,7 @@ td{
 
       <div class="stat">
 
-        <b id="players">
+        <b id="playersStat">
           0
         </b>
 
@@ -1987,7 +1943,9 @@ td{
   </div>
 
 
-  <!-- TOP 3 -->
+  <!-- =======================================================
+       HOME TOP 3
+  ======================================================= -->
 
   <div class="card">
 
@@ -2013,8 +1971,6 @@ td{
   </div>
 
 
-  <!-- TODAY -->
-
   <div class="card">
 
     <div class="sectionTitle">
@@ -2034,9 +1990,9 @@ td{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================================================
      ADD MATCH
-======================================================= -->
+========================================================= -->
 
 <section
   id="add"
@@ -2132,9 +2088,9 @@ td{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================================================
      RANKING
-======================================================= -->
+========================================================= -->
 
 <section
   id="rank"
@@ -2156,9 +2112,7 @@ td{
     >
 
 
-    <div
-      style="overflow:auto"
-    >
+    <div style="overflow:auto">
 
       <table>
 
@@ -2178,7 +2132,6 @@ td{
 
         </thead>
 
-
         <tbody id="rankBody"></tbody>
 
       </table>
@@ -2190,9 +2143,9 @@ td{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================================================
      HISTORY
-======================================================= -->
+========================================================= -->
 
 <section
   id="history"
@@ -2343,9 +2296,9 @@ td{
 </section>
 
 
-<!-- =======================================================
+<!-- =========================================================
      PLAYERS
-======================================================= -->
+========================================================= -->
 
 <section
   id="players"
@@ -2353,7 +2306,9 @@ td{
 >
 
 
-  <!-- PERFORMANCE CARD -->
+  <!-- =======================================================
+       PLAYER PERFORMANCE
+  ======================================================= -->
 
   <div class="card">
 
@@ -2370,86 +2325,68 @@ td{
     </div>
 
 
-    <!-- BEST -->
+    <!-- BEST 3 / LOSER 3 -->
 
-    <div class="performanceSection">
+    <div class="performanceColumns">
 
-      <div class="performanceSectionTitle">
 
-        <div class="performanceSectionLeft">
+      <!-- BEST 3 -->
 
-          <div class="performanceIcon">
+      <div class="performanceColumn bestColumn">
+
+        <div class="performanceColumnTitle">
+
+          <span>
             🏆
-          </div>
+          </span>
 
           <div>
-
-            <h4>
-              Best 3 Players
-            </h4>
-
-            <span>
-              Top Performance
-            </span>
-
+            Best 3
           </div>
 
         </div>
 
+
+        <div
+          id="bestPlayers"
+          class="performanceList"
+        ></div>
+
       </div>
 
 
-      <div
-        id="bestPlayers"
-        class="performanceList"
-      ></div>
+      <!-- LOSER 3 -->
 
-    </div>
+      <div class="performanceColumn worstColumn">
 
+        <div class="performanceColumnTitle">
 
-    <div class="performanceDivider"></div>
-
-
-    <!-- WORST -->
-
-    <div class="performanceSection">
-
-      <div class="performanceSectionTitle">
-
-        <div class="performanceSectionLeft">
-
-          <div class="performanceIcon">
+          <span>
             ⚠️
-          </div>
+          </span>
 
           <div>
-
-            <h4>
-              Needs Improvement
-            </h4>
-
-            <span>
-              Lowest Performance
-            </span>
-
+            Losser 3
           </div>
 
         </div>
 
+
+        <div
+          id="worstPlayers"
+          class="performanceList"
+        ></div>
+
       </div>
-
-
-      <div
-        id="worstPlayers"
-        class="performanceList"
-      ></div>
 
     </div>
 
   </div>
 
 
-  <!-- ALL PLAYERS -->
+  <!-- =======================================================
+       ALL PLAYERS
+  ======================================================= -->
 
   <div class="card">
 
@@ -2482,9 +2419,9 @@ td{
 </main>
 
 
-<!-- =======================================================
+<!-- =========================================================
      MODAL
-======================================================= -->
+========================================================= -->
 
 <div
   class="modal"
@@ -2512,12 +2449,7 @@ td{
 </div>
 
 
-<!-- =======================================================
-     SCRIPT
-======================================================= -->
-
 <script>
-
 
 /* =========================================================
    CONFIG
@@ -2525,7 +2457,6 @@ td{
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx1JzpYjv8w0kD2aBGGRTe6UrA63S9fBFI-B0oIU9QUjKySbYzHpKFnQMWAyF9c3F_Btw/exec";
-
 
 const LOSS_FEE = 20;
 
@@ -2535,7 +2466,7 @@ const BD_TIMEZONE = "Asia/Dhaka";
 
 
 /* =========================================================
-   GLOBAL STATE
+   GLOBAL
 ========================================================= */
 
 let data = [];
@@ -2550,7 +2481,7 @@ let currentModalOpen = false;
 
 
 /* =========================================================
-   SAFE ESCAPE
+   ESCAPE
 ========================================================= */
 
 function esc(value){
@@ -2593,7 +2524,10 @@ function money(value){
 
 
 /* =========================================================
-   PAGE NAVIGATION
+   PAGE
+   IMPORTANT FIX:
+   document.getElementById("players")
+   এখন সরাসরি Players SECTION-ই পাবে।
 ========================================================= */
 
 function page(id,btn){
@@ -2602,6 +2536,10 @@ function page(id,btn){
     document.getElementById(id);
 
   if(!target){
+    console.error(
+      "Page not found:",
+      id
+    );
     return;
   }
 
@@ -2628,7 +2566,9 @@ function page(id,btn){
 
 
   if(btn){
+
     btn.classList.add("active");
+
   }else{
 
     const navBtn =
@@ -2667,7 +2607,7 @@ function page(id,btn){
 
 
 /* =========================================================
-   DATE PARTS
+   BD PARTS
 ========================================================= */
 
 function bdParts(
@@ -2738,7 +2678,7 @@ function today(){
 
 
 /* =========================================================
-   NOW TIME
+   NOW
 ========================================================= */
 
 function nowTime(){
@@ -3036,8 +2976,11 @@ function normalizePlayer(p){
     fine <= 0 &&
     mistakes > 0
   ){
+
     fine =
-      mistakes * ERROR_FINE;
+      mistakes *
+      ERROR_FINE;
+
   }
 
 
@@ -3098,10 +3041,14 @@ function normalizeMatch(m){
   if(typeof playersRaw === "string"){
 
     try{
+
       playersRaw =
         JSON.parse(playersRaw);
+
     }catch(e){
+
       playersRaw = [];
+
     }
 
   }
@@ -3162,10 +3109,12 @@ function normalizeData(arr){
     .map(normalizeMatch)
     .filter(
       function(m){
+
         return (
           m &&
           m.players.length > 0
         );
+
       }
     );
 
@@ -3363,7 +3312,7 @@ function formatTime(time){
 
 
 /* =========================================================
-   ADD MATCH - BUILD SLOTS
+   BUILD SLOTS
 ========================================================= */
 
 function buildSlots(){
@@ -3521,7 +3470,7 @@ function buildSlots(){
 
 
 /* =========================================================
-   GET MISTAKES
+   MISTAKES
 ========================================================= */
 
 function getMistakes(i){
@@ -3538,10 +3487,6 @@ function getMistakes(i){
 
 }
 
-
-/* =========================================================
-   CHANGE MISTAKES
-========================================================= */
 
 function changeMistakes(
   i,
@@ -3584,10 +3529,6 @@ function changeMistakes(
 
 }
 
-
-/* =========================================================
-   FINE PREVIEW
-========================================================= */
 
 function updateFinePreview(i){
 
@@ -3633,10 +3574,6 @@ function updateFinePreview(i){
 }
 
 
-/* =========================================================
-   ALL FINE PREVIEW
-========================================================= */
-
 function updateAllFinePreview(){
 
   for(
@@ -3644,7 +3581,9 @@ function updateAllFinePreview(){
     i <= 4;
     i++
   ){
+
     updateFinePreview(i);
+
   }
 
 }
@@ -3739,8 +3678,11 @@ function buildSummary(){
             fine <= 0 &&
             mistakes > 0
           ){
+
             fine =
-              mistakes * ERROR_FINE;
+              mistakes *
+              ERROR_FINE;
+
           }
 
 
@@ -3811,7 +3753,7 @@ function buildSummary(){
 
 
 /* =========================================================
-   PLAYER NAME LIST
+   NAME LIST
 ========================================================= */
 
 function updateNameList(){
@@ -3846,7 +3788,7 @@ function updateNameList(){
 
 
 /* =========================================================
-   TOP 3
+   HOME TOP 3
 ========================================================= */
 
 function renderTop(){
@@ -4009,7 +3951,7 @@ function matchMoney(m){
 
 
 /* =========================================================
-   TODAY MATCHES
+   TODAY
 ========================================================= */
 
 function getTodayMatches(){
@@ -4037,10 +3979,6 @@ function getTodayMatches(){
 
 }
 
-
-/* =========================================================
-   RENDER TODAY
-========================================================= */
 
 function renderTodayMatches(){
 
@@ -4182,7 +4120,7 @@ function renderTodayMatches(){
 
 
 /* =========================================================
-   BD DATE PARTS
+   DATE HELPERS
 ========================================================= */
 
 function getBDDateParts(){
@@ -4203,10 +4141,6 @@ function getBDDateParts(){
 
 }
 
-
-/* =========================================================
-   WEEK START
-========================================================= */
 
 function getWeekStartBD(){
 
@@ -4247,10 +4181,6 @@ function getWeekStartBD(){
 }
 
 
-/* =========================================================
-   WEEK MATCHES
-========================================================= */
-
 function getWeekMatches(){
 
   const start =
@@ -4289,10 +4219,6 @@ function getWeekMatches(){
 }
 
 
-/* =========================================================
-   MONTH MATCHES
-========================================================= */
-
 function getMonthMatches(){
 
   const now =
@@ -4321,10 +4247,6 @@ function getMonthMatches(){
 
 }
 
-
-/* =========================================================
-   24 HOURS
-========================================================= */
 
 function get24hMatches(){
 
@@ -4359,7 +4281,7 @@ function get24hMatches(){
 
 
 /* =========================================================
-   SET LEAGUE
+   LEAGUE
 ========================================================= */
 
 function setLeague(
@@ -4391,10 +4313,6 @@ function setLeague(
 
 }
 
-
-/* =========================================================
-   RENDER LEAGUE
-========================================================= */
 
 function renderLeague(){
 
@@ -4677,11 +4595,7 @@ function renderLeague(){
 
   html += `
 
-    <div
-      style="
-        margin-top:12px;
-      "
-    >
+    <div style="margin-top:12px">
 
       ${
         arr
@@ -4882,20 +4796,16 @@ function renderRank(){
 
 
               <td>
-
                 <span class="badge win">
                   ${p.win}
                 </span>
-
               </td>
 
 
               <td>
-
                 <span class="badge loss">
                   ${p.loss}
                 </span>
-
               </td>
 
 
@@ -5053,10 +4963,6 @@ function getFilteredHistory(){
 }
 
 
-/* =========================================================
-   APPLY HISTORY FILTER
-========================================================= */
-
 function applyHistoryFilter(){
 
   filteredHistory =
@@ -5069,10 +4975,6 @@ function applyHistoryFilter(){
 
 }
 
-
-/* =========================================================
-   CLEAR HISTORY FILTER
-========================================================= */
 
 function clearHistoryFilter(){
 
@@ -5113,10 +5015,6 @@ function clearHistoryFilter(){
 
 }
 
-
-/* =========================================================
-   RENDER HISTORY
-========================================================= */
 
 function renderHistory(){
 
@@ -5324,11 +5222,13 @@ function renderHistoryList(arr){
                                   : "lossText"
                               }"
                             >
+
                               ${
                                 pos <= 2
                                   ? "WIN"
                                   : "LOSS"
                               }
+
                             </div>
 
 
@@ -5372,15 +5272,8 @@ function renderHistoryList(arr){
 
 
 /* =========================================================
-   PERFORMANCE SCORE
+   PERFORMANCE
 ========================================================= */
-
-/*
-  IMPORTANT:
-  এই function-এ সরাসরি return expression রাখা হয়েছে।
-  return-এর পরে নতুন line নেই।
-  তাই undefined হবে না।
-*/
 
 function bestPerformanceScore(p){
 
@@ -5416,17 +5309,6 @@ function bestPerformanceScore(p){
     (matches * ERROR_FINE);
 
 
-  /*
-    Score:
-    Win rate বেশি হলে ভালো
-    Loss rate বেশি হলে খারাপ
-    Fine বেশি হলে খারাপ
-
-    Minimum match factor:
-    ১ ম্যাচের player-কে ১০০% win দিয়ে
-    খুব বেশি এগিয়ে দেওয়া হবে না।
-  */
-
   const experience =
     Math.min(
       1,
@@ -5440,7 +5322,10 @@ function bestPerformanceScore(p){
       (1 - lossRate) * 20 +
       (1 - Math.min(1,fineRate)) * 10
     ) *
-    (0.70 + experience * 0.30);
+    (
+      0.70 +
+      experience * 0.30
+    );
 
 
   return Number.isFinite(score)
@@ -5449,10 +5334,6 @@ function bestPerformanceScore(p){
 
 }
 
-
-/* =========================================================
-   WORST PERFORMANCE SCORE
-========================================================= */
 
 function worstPerformanceScore(p){
 
@@ -5501,7 +5382,10 @@ function worstPerformanceScore(p){
       (1 - winRate) * 20 +
       Math.min(1,fineRate) * 10
     ) *
-    (0.70 + experience * 0.30);
+    (
+      0.70 +
+      experience * 0.30
+    );
 
 
   return Number.isFinite(score)
@@ -5510,10 +5394,6 @@ function worstPerformanceScore(p){
 
 }
 
-
-/* =========================================================
-   PERFORMANCE SCORE DISPLAY
-========================================================= */
 
 function performanceScoreText(score){
 
@@ -5532,7 +5412,7 @@ function performanceScoreText(score){
 
 
 /* =========================================================
-   BEST PLAYER CARD
+   BEST CARD
 ========================================================= */
 
 function createBestPerformanceCard(
@@ -5568,13 +5448,11 @@ function createBestPerformanceCard(
 
         <span>
 
-          ${p.win} Win
+          ${p.win}W
           •
-          ${p.loss} Loss
+          ${p.loss}L
           •
-          ${p.matches} Matches
-          •
-          ${money(p.fine)} Fine
+          ${p.matches}M
 
         </span>
 
@@ -5588,7 +5466,7 @@ function createBestPerformanceCard(
         </b>
 
         <span>
-          PERFORMANCE
+          SCORE
         </span>
 
       </div>
@@ -5601,7 +5479,7 @@ function createBestPerformanceCard(
 
 
 /* =========================================================
-   WORST PLAYER CARD
+   LOSER CARD
 ========================================================= */
 
 function createWorstPerformanceCard(
@@ -5637,13 +5515,11 @@ function createWorstPerformanceCard(
 
         <span>
 
-          ${p.win} Win
+          ${p.win}W
           •
-          ${p.loss} Loss
+          ${p.loss}L
           •
-          ${p.matches} Matches
-          •
-          ${money(p.fine)} Fine
+          ${p.matches}M
 
         </span>
 
@@ -5657,7 +5533,7 @@ function createWorstPerformanceCard(
         </b>
 
         <span>
-          ATTENTION
+          SCORE
         </span>
 
       </div>
@@ -5697,7 +5573,7 @@ function renderPerformance(){
     bestBox.innerHTML = `
 
       <div class="performanceEmpty">
-        এখনো কোনো player নেই।
+        কোনো player নেই
       </div>
 
     `;
@@ -5706,7 +5582,7 @@ function renderPerformance(){
     worstBox.innerHTML = `
 
       <div class="performanceEmpty">
-        এখনো কোনো player নেই।
+        কোনো player নেই
       </div>
 
     `;
@@ -5716,10 +5592,7 @@ function renderPerformance(){
   }
 
 
-  /*
-    Minimum matches first.
-    তারপর performance score.
-  */
+  /* BEST 3 */
 
   const best =
     summary
@@ -5727,18 +5600,16 @@ function renderPerformance(){
       .sort(
         function(a,b){
 
-          const scoreA =
-            bestPerformanceScore(a);
-
-          const scoreB =
-            bestPerformanceScore(b);
-
-
           return (
-            scoreB - scoreA ||
+            bestPerformanceScore(b) -
+            bestPerformanceScore(a) ||
+
             b.win - a.win ||
+
             a.loss - b.loss ||
+
             a.fine - b.fine ||
+
             b.matches - a.matches
           );
 
@@ -5747,24 +5618,24 @@ function renderPerformance(){
       .slice(0,3);
 
 
+  /* LOSER 3 */
+
   const worst =
     summary
       .slice()
       .sort(
         function(a,b){
 
-          const scoreA =
-            worstPerformanceScore(a);
-
-          const scoreB =
-            worstPerformanceScore(b);
-
-
           return (
-            scoreB - scoreA ||
+            worstPerformanceScore(b) -
+            worstPerformanceScore(a) ||
+
             b.loss - a.loss ||
+
             b.fine - a.fine ||
+
             a.win - b.win ||
+
             b.matches - a.matches
           );
 
@@ -5806,7 +5677,7 @@ function renderPerformance(){
 
 
 /* =========================================================
-   PLAYERS LIST
+   PLAYER LIST
 ========================================================= */
 
 function renderPlayersList(){
@@ -6160,7 +6031,7 @@ function profile(name){
 
 
 /* =========================================================
-   OPEN MODAL
+   MODAL
 ========================================================= */
 
 function openModal(){
@@ -6189,10 +6060,6 @@ function openModal(){
 
 }
 
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
 
 function closeModal(){
 
@@ -6508,7 +6375,7 @@ function openMatch(index){
 
 
 /* =========================================================
-   DELETE MATCH
+   DELETE
 ========================================================= */
 
 async function deleteMatch(index){
@@ -6717,20 +6584,28 @@ function renderAll(){
 
 
   if(matches){
+
     matches.textContent =
       data.length;
+
   }
 
 
-  const players =
+  /* IMPORTANT FIX:
+     players -> playersStat
+  */
+
+  const playersStat =
     document.getElementById(
-      "players"
+      "playersStat"
     );
 
 
-  if(players){
-    players.textContent =
+  if(playersStat){
+
+    playersStat.textContent =
       summary.length;
+
   }
 
 
@@ -6796,7 +6671,7 @@ function renderAll(){
 
 
 /* =========================================================
-   API LOAD
+   LOAD
 ========================================================= */
 
 async function load(){
@@ -7234,7 +7109,7 @@ async function saveMatch(){
 
 
 /* =========================================================
-   MODAL OUTSIDE CLICK
+   MODAL SETUP
 ========================================================= */
 
 function setupModal(){
@@ -7264,11 +7139,6 @@ function setupModal(){
   );
 
 
-  /*
-    Android/browser back button:
-    modal open থাকলে আগে modal close হবে।
-  */
-
   window.addEventListener(
     "keydown",
     function(e){
@@ -7277,7 +7147,9 @@ function setupModal(){
         e.key === "Escape" &&
         currentModalOpen
       ){
+
         closeModal();
+
       }
 
     }
@@ -7332,7 +7204,6 @@ function init(){
 ========================================================= */
 
 init();
-
 
 </script>
 
