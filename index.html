@@ -1329,7 +1329,7 @@ td{
 
 
 /* =========================================================
-   PLAYER PERFORMANCE
+   PERFORMANCE
 ========================================================= */
 
 .performanceHeader{
@@ -1368,7 +1368,7 @@ td{
 
 
 /* =========================================================
-   BEST / LOSER TWO COLUMN
+   BEST / WORST TWO COLUMN
 ========================================================= */
 
 .performanceColumns{
@@ -1564,6 +1564,220 @@ td{
 
 
 /* =========================================================
+   PERIOD RANKING
+========================================================= */
+
+.periodHeader{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:8px;
+
+  margin-bottom:10px;
+}
+
+.periodBadge{
+  padding:5px 8px;
+
+  border-radius:8px;
+
+  background:#ffffff08;
+
+  border:1px solid var(--line);
+
+  color:#94a3b8;
+
+  font-size:9px;
+
+  font-weight:800;
+}
+
+.periodColumns{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
+
+  align-items:start;
+}
+
+.periodColumn{
+  min-width:0;
+
+  border-radius:17px;
+
+  padding:10px;
+
+  border:1px solid var(--line);
+
+  background:#ffffff03;
+}
+
+.periodColumn.best{
+  border-color:#34d39925;
+
+  background:
+    linear-gradient(
+      180deg,
+      #34d3990c,
+      #ffffff02
+    );
+}
+
+.periodColumn.worst{
+  border-color:#fb718525;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fb71850c,
+      #ffffff02
+    );
+}
+
+.periodColumnTitle{
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  font-size:12px;
+
+  font-weight:900;
+
+  margin-bottom:9px;
+}
+
+.periodColumnTitle span{
+  font-size:18px;
+}
+
+.periodList{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:7px;
+}
+
+.periodCard{
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  padding:9px;
+
+  border-radius:13px;
+
+  border:1px solid var(--line);
+
+  background:#ffffff05;
+
+  min-width:0;
+}
+
+.periodRank{
+  width:29px;
+  height:29px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:9px;
+
+  background:#ffffff07;
+
+  font-size:15px;
+
+  flex-shrink:0;
+}
+
+.periodInfo{
+  flex:1;
+
+  min-width:0;
+}
+
+.periodInfo b{
+  display:block;
+
+  font-size:11px;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+}
+
+.periodInfo span{
+  display:block;
+
+  color:#94a3b8;
+
+  font-size:7px;
+
+  margin-top:3px;
+
+  line-height:1.5;
+}
+
+.periodScore{
+  min-width:35px;
+
+  text-align:right;
+}
+
+.periodScore b{
+  display:block;
+
+  font-size:13px;
+
+  font-weight:900;
+}
+
+.periodCard.best .periodScore b{
+  color:var(--green);
+}
+
+.periodCard.worst .periodScore b{
+  color:var(--red);
+}
+
+.periodScore span{
+  display:block;
+
+  color:#64748b;
+
+  font-size:6px;
+
+  margin-top:1px;
+}
+
+.periodEmpty{
+  padding:15px 4px;
+
+  text-align:center;
+
+  color:#94a3b8;
+
+  font-size:9px;
+
+  line-height:1.6;
+}
+
+
+/* =========================================================
    PLAYER LIST
 ========================================================= */
 
@@ -1675,7 +1889,8 @@ td{
       1fr 105px;
   }
 
-  .performanceColumns{
+  .performanceColumns,
+  .periodColumns{
     grid-template-columns:
       1fr 1fr;
   }
@@ -1684,45 +1899,81 @@ td{
 
 @media(max-width:420px){
 
-  .performanceColumns{
+  .performanceColumns,
+  .periodColumns{
     gap:7px;
   }
 
-  .performanceColumn{
+  .performanceColumn,
+  .periodColumn{
     padding:8px;
   }
 
-  .performanceCard{
+  .performanceCard,
+  .periodCard{
     padding:7px;
     gap:5px;
   }
 
-  .performanceRank{
+  .performanceRank,
+  .periodRank{
     width:27px;
     height:27px;
     font-size:14px;
   }
 
-  .performanceInfo b{
+  .performanceInfo b,
+  .periodInfo b{
     font-size:10px;
   }
 
-  .performanceInfo span{
+  .performanceInfo span,
+  .periodInfo span{
     font-size:6px;
   }
 
-  .performanceScore{
+  .performanceScore,
+  .periodScore{
     min-width:32px;
   }
 
-  .performanceScore b{
+  .performanceScore b,
+  .periodScore b{
     font-size:12px;
   }
 
-  .performanceColumnTitle{
+  .performanceColumnTitle,
+  .periodColumnTitle{
     font-size:11px;
   }
 
+}
+
+
+/* =========================================================
+   SMALL EXTRA
+========================================================= */
+
+.periodNote{
+  color:#64748b;
+
+  font-size:9px;
+
+  line-height:1.6;
+
+  margin-top:9px;
+
+  text-align:center;
+}
+
+.refreshText{
+  color:#64748b;
+
+  font-size:8px;
+
+  text-align:right;
+
+  margin-top:7px;
 }
 
 </style>
@@ -1853,27 +2104,63 @@ td{
   </div>
 
 
+  <!-- =======================================================
+       PERIOD RANKING
+  ======================================================= -->
+
   <div class="card">
 
-    <div class="sectionTitle">
+    <div class="periodHeader">
 
-      <h3 id="leagueTitle">
-        🕐 Last 24 Hours
-      </h3>
+      <div>
 
-      <span id="leagueCount"></span>
+        <h3
+          id="leagueTitle"
+          style="margin-bottom:3px"
+        >
+          🕐 Last 24 Hours
+        </h3>
+
+        <div
+          id="leaguePeriodText"
+          style="
+            color:#64748b;
+            font-size:9px;
+          "
+        >
+          গত ২৪ ঘণ্টার হিসাব
+        </div>
+
+      </div>
+
+      <span
+        id="leagueCount"
+        class="periodBadge"
+      >
+        0 matches
+      </span>
 
     </div>
 
-    <div id="leagueResult"></div>
+
+    <div
+      id="leagueResult"
+    ></div>
+
+
+    <div
+      id="leagueRefresh"
+      class="refreshText"
+    >
+      Auto update চলছে
+    </div>
 
   </div>
 
 
-  <!-- IMPORTANT:
-       এখানে id="players" ব্যবহার করা হয়নি।
-       আগে players page-এর ID-এর সাথে conflict হচ্ছিল।
-  -->
+  <!-- =======================================================
+       LEAGUE OVERVIEW
+  ======================================================= -->
 
   <div class="card">
 
@@ -1944,7 +2231,7 @@ td{
 
 
   <!-- =======================================================
-       HOME TOP 3
+       HOME OVERALL TOP 3
   ======================================================= -->
 
   <div class="card">
@@ -1952,7 +2239,7 @@ td{
     <div class="sectionTitle">
 
       <h3>
-        🏆 Top 3
+        🏆 Overall Top 3
       </h3>
 
       <span
@@ -1961,7 +2248,7 @@ td{
           color:#64748b;
         "
       >
-        Overall
+        All Time
       </span>
 
     </div>
@@ -1970,6 +2257,10 @@ td{
 
   </div>
 
+
+  <!-- =======================================================
+       TODAY'S MATCHES
+  ======================================================= -->
 
   <div class="card">
 
@@ -2100,7 +2391,7 @@ td{
   <div class="card">
 
     <h3>
-      🏆 Ranking
+      🏆 Overall Ranking
     </h3>
 
 
@@ -2305,7 +2596,6 @@ td{
   class="page"
 >
 
-
   <!-- =======================================================
        PLAYER PERFORMANCE
   ======================================================= -->
@@ -2324,8 +2614,6 @@ td{
 
     </div>
 
-
-    <!-- BEST 3 / LOSER 3 -->
 
     <div class="performanceColumns">
 
@@ -2355,7 +2643,7 @@ td{
       </div>
 
 
-      <!-- LOSER 3 -->
+      <!-- WORST 3 -->
 
       <div class="performanceColumn worstColumn">
 
@@ -2366,7 +2654,7 @@ td{
           </span>
 
           <div>
-            Losser 3
+            Worst 3
           </div>
 
         </div>
@@ -2464,6 +2752,12 @@ const ERROR_FINE = 10;
 
 const BD_TIMEZONE = "Asia/Dhaka";
 
+/*
+   AUTO REFRESH:
+   প্রতি 60 সেকেন্ডে Google Sheet থেকে নতুন data আসবে।
+*/
+const AUTO_REFRESH_MS = 60000;
+
 
 /* =========================================================
    GLOBAL
@@ -2525,9 +2819,6 @@ function money(value){
 
 /* =========================================================
    PAGE
-   IMPORTANT FIX:
-   document.getElementById("players")
-   এখন সরাসরি Players SECTION-ই পাবে।
 ========================================================= */
 
 function page(id,btn){
@@ -3123,6 +3414,7 @@ function normalizeData(arr){
 
 /* =========================================================
    LOCAL DATE TO UTC
+   Bangladesh = UTC+6
 ========================================================= */
 
 function localDateToUTC(
@@ -3788,7 +4080,7 @@ function updateNameList(){
 
 
 /* =========================================================
-   HOME TOP 3
+   HOME OVERALL TOP 3
 ========================================================= */
 
 function renderTop(){
@@ -3951,7 +4243,7 @@ function matchMoney(m){
 
 
 /* =========================================================
-   TODAY
+   TODAY MATCHES
 ========================================================= */
 
 function getTodayMatches(){
@@ -4142,6 +4434,11 @@ function getBDDateParts(){
 }
 
 
+/* =========================================================
+   WEEK START
+   WEEK = THURSDAY -> WEDNESDAY
+========================================================= */
+
 function getWeekStartBD(){
 
   const x =
@@ -4181,7 +4478,7 @@ function getWeekStartBD(){
 }
 
 
-function getWeekMatches(){
+function getWeekEndBD(){
 
   const start =
     getWeekStartBD();
@@ -4194,6 +4491,25 @@ function getWeekMatches(){
   end.setUTCDate(
     end.getUTCDate() + 7
   );
+
+
+  return end;
+
+}
+
+
+/* =========================================================
+   WEEK MATCHES
+========================================================= */
+
+function getWeekMatches(){
+
+  const start =
+    getWeekStartBD();
+
+
+  const end =
+    getWeekEndBD();
 
 
   return data.filter(
@@ -4218,6 +4534,10 @@ function getWeekMatches(){
 
 }
 
+
+/* =========================================================
+   MONTH MATCHES
+========================================================= */
 
 function getMonthMatches(){
 
@@ -4248,6 +4568,11 @@ function getMonthMatches(){
 }
 
 
+/* =========================================================
+   LAST 24 HOURS
+   ROLLING 24 HOURS
+========================================================= */
+
 function get24hMatches(){
 
   const now =
@@ -4257,7 +4582,7 @@ function get24hMatches(){
   const start =
     new Date(
       now.getTime() -
-      86400000
+      24 * 60 * 60 * 1000
     );
 
 
@@ -4281,44 +4606,408 @@ function get24hMatches(){
 
 
 /* =========================================================
-   LEAGUE
+   PERIOD STATS
 ========================================================= */
 
-function setLeague(
-  type,
-  btn
-){
+function createPeriodStats(arr){
 
-  currentLeague =
-    type;
+  const map = {};
 
 
-  document
-    .querySelectorAll(
-      ".leagueTabs button"
-    )
-    .forEach(
-      function(x){
-        x.classList.remove("active");
-      }
-    );
+  arr.forEach(
+    function(m){
+
+      m.players.forEach(
+        function(p){
+
+          const name =
+            String(
+              p.name || ""
+            ).trim();
 
 
-  if(btn){
-    btn.classList.add("active");
-  }
+          if(!name){
+            return;
+          }
 
 
-  renderLeague();
+          const key =
+            name.toLowerCase();
+
+
+          if(!map[key]){
+
+            map[key] = {
+
+              name:name,
+
+              matches:0,
+
+              win:0,
+
+              loss:0,
+
+              mistakes:0,
+
+              fine:0,
+
+              paid:0
+
+            };
+
+          }
+
+
+          const q =
+            map[key];
+
+
+          const pos =
+            Number(
+              p.pos || 0
+            );
+
+
+          const mistakes =
+            Math.max(
+              0,
+              Number(
+                p.mistakes || 0
+              )
+            );
+
+
+          const fine =
+            getPlayerFine(p);
+
+
+          q.matches++;
+
+          q.mistakes +=
+            mistakes;
+
+          q.fine +=
+            fine;
+
+          q.paid +=
+            fine;
+
+
+          if(pos <= 2){
+
+            q.win++;
+
+          }else{
+
+            q.loss++;
+
+            q.paid +=
+              LOSS_FEE;
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+  return Object.values(map);
 
 }
 
+
+/* =========================================================
+   BEST SCORE
+   100 = strongest performance
+========================================================= */
+
+function bestPerformanceScore(p){
+
+  const matches =
+    Math.max(
+      1,
+      Number(p.matches || 0)
+    );
+
+
+  const wins =
+    Number(p.win || 0);
+
+
+  const losses =
+    Number(p.loss || 0);
+
+
+  const mistakes =
+    Number(p.mistakes || 0);
+
+
+  const winRate =
+    wins / matches;
+
+
+  const lossRate =
+    losses / matches;
+
+
+  const mistakeRate =
+    mistakes / matches;
+
+
+  /*
+     Best score:
+
+     Win Rate      = 60%
+     Low Loss Rate = 25%
+     Low Mistakes  = 15%
+
+     3 mistakes per match বা তার বেশি
+     হলে mistake component = 0.
+  */
+
+  const score =
+    (
+      winRate * 60 +
+      (1 - lossRate) * 25 +
+      (1 - Math.min(1,mistakeRate / 3)) * 15
+    );
+
+
+  return Number.isFinite(score)
+    ? score
+    : 0;
+
+}
+
+
+/* =========================================================
+   WORST SCORE
+   100 = worst performance
+========================================================= */
+
+function worstPerformanceScore(p){
+
+  const matches =
+    Math.max(
+      1,
+      Number(p.matches || 0)
+    );
+
+
+  const wins =
+    Number(p.win || 0);
+
+
+  const losses =
+    Number(p.loss || 0);
+
+
+  const mistakes =
+    Number(p.mistakes || 0);
+
+
+  const winRate =
+    wins / matches;
+
+
+  const lossRate =
+    losses / matches;
+
+
+  const mistakeRate =
+    mistakes / matches;
+
+
+  /*
+     Worst score:
+
+     Loss Rate      = 60%
+     Low Win Rate   = 25%
+     High Mistakes  = 15%
+  */
+
+  const score =
+    (
+      lossRate * 60 +
+      (1 - winRate) * 25 +
+      Math.min(1,mistakeRate / 3) * 15
+    );
+
+
+  return Number.isFinite(score)
+    ? score
+    : 0;
+
+}
+
+
+/* =========================================================
+   SORT BEST
+========================================================= */
+
+function sortBestPlayers(arr){
+
+  return arr
+    .slice()
+    .sort(
+      function(a,b){
+
+        return (
+          bestPerformanceScore(b) -
+          bestPerformanceScore(a) ||
+
+          b.win - a.win ||
+
+          a.loss - b.loss ||
+
+          a.mistakes - b.mistakes ||
+
+          b.matches - a.matches
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   SORT WORST
+========================================================= */
+
+function sortWorstPlayers(arr){
+
+  return arr
+    .slice()
+    .sort(
+      function(a,b){
+
+        return (
+          worstPerformanceScore(b) -
+          worstPerformanceScore(a) ||
+
+          b.loss - a.loss ||
+
+          b.mistakes - a.mistakes ||
+
+          a.win - b.win ||
+
+          b.matches - a.matches
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   PERIOD CARD
+========================================================= */
+
+function createPeriodCard(
+  p,
+  index,
+  type
+){
+
+  const isBest =
+    type === "best";
+
+
+  const score =
+    isBest
+      ? bestPerformanceScore(p)
+      : worstPerformanceScore(p);
+
+
+  const medals = [
+    "🥇",
+    "🥈",
+    "🥉"
+  ];
+
+
+  const badIcons = [
+    "🔴",
+    "🟠",
+    "🟡"
+  ];
+
+
+  const icon =
+    isBest
+      ? medals[index]
+      : badIcons[index];
+
+
+  return `
+
+    <div
+      class="
+        periodCard
+        ${isBest ? "best" : "worst"}
+      "
+    >
+
+      <div class="periodRank">
+        ${icon}
+      </div>
+
+
+      <div class="periodInfo">
+
+        <b>
+          ${esc(p.name)}
+        </b>
+
+        <span>
+
+          ${p.win} Win
+          •
+          ${p.loss} Loss
+          •
+          ${p.mistakes} ভুল
+          •
+          ${p.matches} Match
+
+        </span>
+
+      </div>
+
+
+      <div class="periodScore">
+
+        <b>
+          ${score.toFixed(0)}
+        </b>
+
+        <span>
+          SCORE
+        </span>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   PERIOD RANKING RENDER
+========================================================= */
 
 function renderLeague(){
 
   let arr = [];
 
   let title = "";
+
+  let periodText = "";
 
 
   if(
@@ -4331,6 +5020,9 @@ function renderLeague(){
     title =
       "🕐 Last 24 Hours";
 
+    periodText =
+      "গত ২৪ ঘণ্টার rolling হিসাব";
+
   }else if(
     currentLeague === "week"
   ){
@@ -4339,7 +5031,10 @@ function renderLeague(){
       getWeekMatches();
 
     title =
-      "📅 Weekly Result — Thu to Wed";
+      "📅 Weekly Ranking";
+
+    periodText =
+      "Thursday → Wednesday";
 
   }else{
 
@@ -4347,21 +5042,26 @@ function renderLeague(){
       getMonthMatches();
 
     title =
-      "📆 Monthly Result";
+      "📆 Monthly Ranking";
+
+    periodText =
+      "এই মাসের হিসাব";
 
   }
 
 
-  arr.sort(
-    function(a,b){
+  const stats =
+    createPeriodStats(arr);
 
-      return (
-        (matchDate(b)?.getTime() || 0) -
-        (matchDate(a)?.getTime() || 0)
-      );
 
-    }
-  );
+  const best =
+    sortBestPlayers(stats)
+      .slice(0,3);
+
+
+  const worst =
+    sortWorstPlayers(stats)
+      .slice(0,3);
 
 
   const titleEl =
@@ -4373,6 +5073,18 @@ function renderLeague(){
   if(titleEl){
     titleEl.textContent =
       title;
+  }
+
+
+  const periodEl =
+    document.getElementById(
+      "leaguePeriodText"
+    );
+
+
+  if(periodEl){
+    periodEl.textContent =
+      periodText;
   }
 
 
@@ -4407,12 +5119,19 @@ function renderLeague(){
   }
 
 
-  if(!arr.length){
+  if(!stats.length){
 
     box.innerHTML = `
 
-      <div class="empty">
-        ⏳ এই সময়ে কোনো ম্যাচ হয়নি।
+      <div class="periodEmpty">
+
+        ⏳ এই সময়ের মধ্যে কোনো ম্যাচ হয়নি।
+
+        <br>
+
+        নতুন ম্যাচ যোগ হলে ranking
+        automatically তৈরি হবে।
+
       </div>
 
     `;
@@ -4422,261 +5141,132 @@ function renderLeague(){
   }
 
 
-  const players = {};
+  let html = `
+
+    <div class="periodColumns">
+
+      <!-- BEST 3 -->
+
+      <div class="periodColumn best">
+
+        <div class="periodColumnTitle">
+
+          <span>
+            🏆
+          </span>
+
+          <div>
+            Best 3
+          </div>
+
+        </div>
+
+        <div class="periodList">
+
+  `;
 
 
-  arr.forEach(
-    function(m){
-
-      m.players.forEach(
-        function(p){
-
-          const key =
-            p.name.toLowerCase();
-
-
-          if(!players[key]){
-
-            players[key] = {
-
-              name:p.name,
-
-              win:0,
-
-              loss:0,
-
-              fine:0,
-
-              paid:0,
-
-              matches:0
-
-            };
-
-          }
-
-
-          const q =
-            players[key];
-
-
-          q.matches++;
-
-
-          const fine =
-            getPlayerFine(p);
-
-
-          q.fine +=
-            fine;
-
-
-          q.paid +=
-            fine;
-
-
-          if(
-            Number(p.pos) <= 2
-          ){
-
-            q.win++;
-
-          }else{
-
-            q.loss++;
-
-            q.paid +=
-              LOSS_FEE;
-
-          }
-
-        }
-      );
-
-    }
-  );
-
-
-  const ranked =
-    Object.values(players)
-      .sort(
-        function(a,b){
-
-          return (
-            b.win - a.win ||
-            a.loss - b.loss ||
-            a.fine - b.fine ||
-            b.matches - a.matches
-          );
-
-        }
-      );
-
-
-  const winner =
-    ranked[0];
-
-
-  let html = "";
-
-
-  if(winner){
+  if(!best.length){
 
     html += `
 
-      <div
-        style="
-          padding:15px;
-          border-radius:17px;
-          background:
-            linear-gradient(
-              135deg,
-              #312e8155,
-              #4c1d9555
-            );
-          border:1px solid #ffffff14;
-        "
-      >
-
-        <div class="leagueLabel">
-          🏆 CURRENT LEADER
-        </div>
-
-        <div class="leagueWinner">
-          ${esc(winner.name)}
-        </div>
-
-        <div class="leagueSub">
-
-          ${winner.win} Win
-          •
-          ${winner.loss} Loss
-          •
-          ${money(winner.fine)} Fine
-
-        </div>
-
-
-        <div class="moneyBox">
-
-          <div class="moneyMini">
-
-            <b>
-              ${money(winner.paid)}
-            </b>
-
-            <span>
-              Total Paid
-            </span>
-
-          </div>
-
-
-          <div class="moneyMini">
-
-            <b>
-              ${winner.matches}
-            </b>
-
-            <span>
-              Matches
-            </span>
-
-          </div>
-
-        </div>
-
+      <div class="periodEmpty">
+        কোনো player নেই
       </div>
 
     `;
+
+  }else{
+
+    html +=
+      best
+        .map(
+          function(p,i){
+
+            return createPeriodCard(
+              p,
+              i,
+              "best"
+            );
+
+          }
+        )
+        .join("");
 
   }
 
 
   html += `
 
-    <div style="margin-top:12px">
+        </div>
 
-      ${
-        arr
-          .slice(0,5)
-          .map(
-            function(m){
-
-              return `
-
-                <div
-                  class="matchCard"
-                  onclick="openMatch(${data.indexOf(m)})"
-                >
-
-                  <div class="matchTop">
-
-                    <span class="matchDate">
-
-                      ${formatDate(
-                        matchDate(m)
-                      )}
-
-                      •
-
-                      ${formatTime(m.time)}
-
-                    </span>
+      </div>
 
 
-                    <span class="matchMoney">
-                      ${money(
-                        matchMoney(m)
-                      )}
-                    </span>
+      <!-- WORST 3 -->
 
-                  </div>
+      <div class="periodColumn worst">
+
+        <div class="periodColumnTitle">
+
+          <span>
+            ⚠️
+          </span>
+
+          <div>
+            Worst 3
+          </div>
+
+        </div>
+
+        <div class="periodList">
+
+  `;
 
 
-                  <div class="matchPlayers">
+  if(!worst.length){
 
-                    ${
-                      m.players
-                        .map(
-                          function(p){
+    html += `
 
-                            return `
+      <div class="periodEmpty">
+        কোনো player নেই
+      </div>
 
-                              ${
-                                Number(p.pos) <= 2
-                                  ? "🏆"
-                                  : "❌"
-                              }
+    `;
 
-                              ${esc(p.name)}
+  }else{
 
-                              —
+    html +=
+      worst
+        .map(
+          function(p,i){
 
-                              ${
-                                Number(p.pos) <= 2
-                                  ? "Win"
-                                  : "Loss"
-                              }
+            return createPeriodCard(
+              p,
+              i,
+              "worst"
+            );
 
-                            `;
+          }
+        )
+        .join("");
 
-                          }
-                        )
-                        .join("<br>")
-                    }
+  }
 
-                  </div>
 
-                </div>
+  html += `
 
-              `;
+        </div>
 
-            }
-          )
-          .join("")
+      </div>
 
-      }
+    </div>
+
+
+    <div class="periodNote">
+
+      🟢 Best Score যত বেশি, performance তত ভালো।
+      🔴 Worst Score যত বেশি, performance তত খারাপ।
 
     </div>
 
@@ -4685,6 +5275,40 @@ function renderLeague(){
 
   box.innerHTML =
     html;
+
+}
+
+
+/* =========================================================
+   LEAGUE TAB
+========================================================= */
+
+function setLeague(
+  type,
+  btn
+){
+
+  currentLeague =
+    type;
+
+
+  document
+    .querySelectorAll(
+      ".leagueTabs button"
+    )
+    .forEach(
+      function(x){
+        x.classList.remove("active");
+      }
+    );
+
+
+  if(btn){
+    btn.classList.add("active");
+  }
+
+
+  renderLeague();
 
 }
 
@@ -5272,128 +5896,8 @@ function renderHistoryList(arr){
 
 
 /* =========================================================
-   PERFORMANCE
+   OVERALL PERFORMANCE SCORE
 ========================================================= */
-
-function bestPerformanceScore(p){
-
-  const matches =
-    Math.max(
-      1,
-      Number(p.matches || 0)
-    );
-
-
-  const wins =
-    Number(p.win || 0);
-
-
-  const losses =
-    Number(p.loss || 0);
-
-
-  const fine =
-    Number(p.fine || 0);
-
-
-  const winRate =
-    wins / matches;
-
-
-  const lossRate =
-    losses / matches;
-
-
-  const fineRate =
-    fine /
-    (matches * ERROR_FINE);
-
-
-  const experience =
-    Math.min(
-      1,
-      matches / 5
-    );
-
-
-  const score =
-    (
-      winRate * 70 +
-      (1 - lossRate) * 20 +
-      (1 - Math.min(1,fineRate)) * 10
-    ) *
-    (
-      0.70 +
-      experience * 0.30
-    );
-
-
-  return Number.isFinite(score)
-    ? score
-    : 0;
-
-}
-
-
-function worstPerformanceScore(p){
-
-  const matches =
-    Math.max(
-      1,
-      Number(p.matches || 0)
-    );
-
-
-  const wins =
-    Number(p.win || 0);
-
-
-  const losses =
-    Number(p.loss || 0);
-
-
-  const fine =
-    Number(p.fine || 0);
-
-
-  const winRate =
-    wins / matches;
-
-
-  const lossRate =
-    losses / matches;
-
-
-  const fineRate =
-    fine /
-    (matches * ERROR_FINE);
-
-
-  const experience =
-    Math.min(
-      1,
-      matches / 5
-    );
-
-
-  const score =
-    (
-      lossRate * 70 +
-      (1 - winRate) * 20 +
-      Math.min(1,fineRate) * 10
-    ) *
-    (
-      0.70 +
-      experience * 0.30
-    );
-
-
-  return Number.isFinite(score)
-    ? score
-    : 0;
-
-}
-
 
 function performanceScoreText(score){
 
@@ -5453,6 +5957,8 @@ function createBestPerformanceCard(
           ${p.loss}L
           •
           ${p.matches}M
+          •
+          ${p.mistakes} ভুল
 
         </span>
 
@@ -5479,7 +5985,7 @@ function createBestPerformanceCard(
 
 
 /* =========================================================
-   LOSER CARD
+   WORST CARD
 ========================================================= */
 
 function createWorstPerformanceCard(
@@ -5520,6 +6026,8 @@ function createWorstPerformanceCard(
           ${p.loss}L
           •
           ${p.matches}M
+          •
+          ${p.mistakes} ভুল
 
         </span>
 
@@ -5546,7 +6054,7 @@ function createWorstPerformanceCard(
 
 
 /* =========================================================
-   RENDER PERFORMANCE
+   RENDER OVERALL PERFORMANCE
 ========================================================= */
 
 function renderPerformance(){
@@ -5592,55 +6100,13 @@ function renderPerformance(){
   }
 
 
-  /* BEST 3 */
-
   const best =
-    summary
-      .slice()
-      .sort(
-        function(a,b){
-
-          return (
-            bestPerformanceScore(b) -
-            bestPerformanceScore(a) ||
-
-            b.win - a.win ||
-
-            a.loss - b.loss ||
-
-            a.fine - b.fine ||
-
-            b.matches - a.matches
-          );
-
-        }
-      )
+    sortBestPlayers(summary)
       .slice(0,3);
 
 
-  /* LOSER 3 */
-
   const worst =
-    summary
-      .slice()
-      .sort(
-        function(a,b){
-
-          return (
-            worstPerformanceScore(b) -
-            worstPerformanceScore(a) ||
-
-            b.loss - a.loss ||
-
-            b.fine - a.fine ||
-
-            a.win - b.win ||
-
-            b.matches - a.matches
-          );
-
-        }
-      )
+    sortWorstPlayers(summary)
       .slice(0,3);
 
 
@@ -6591,10 +7057,6 @@ function renderAll(){
   }
 
 
-  /* IMPORTANT FIX:
-     players -> playersStat
-  */
-
   const playersStat =
     document.getElementById(
       "playersStat"
@@ -7159,6 +7621,47 @@ function setupModal(){
 
 
 /* =========================================================
+   AUTO REFRESH
+========================================================= */
+
+function startAutoRefresh(){
+
+  /*
+     Google Sheet / API থেকে নতুন ম্যাচ
+     প্রতি ১ মিনিটে আনবে।
+  */
+
+  setInterval(
+    async function(){
+
+      await load();
+
+    },
+    AUTO_REFRESH_MS
+  );
+
+
+  /*
+     24 HOURS-এর rolling boundary
+     এবং week/month boundary যেন
+     নতুন data ছাড়াও automatically বদলায়।
+  */
+
+  setInterval(
+    function(){
+
+      renderLeague();
+
+      renderTodayMatches();
+
+    },
+    30000
+  );
+
+}
+
+
+/* =========================================================
    INIT
 ========================================================= */
 
@@ -7195,6 +7698,8 @@ function init(){
   renderAll();
 
   load();
+
+  startAutoRefresh();
 
 }
 
